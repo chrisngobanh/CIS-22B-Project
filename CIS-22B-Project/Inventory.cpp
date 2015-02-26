@@ -3,7 +3,6 @@
 #include <iostream>
 using namespace std;
 
-
 Inventory::Inventory(unsigned int isbn, string title, string author, string publisher, unsigned int quantity, double wholesale)
 {
 	sISBN = isbn;
@@ -19,12 +18,12 @@ void Inventory::setPrice(double retail)
 	sRetail = retail;
 }
 
-void Inventory::addStock(unsigned int addition = 1)
+void Inventory::addStock(unsigned int addition)
 {
 	sQuantity += addition;
 }
 
-void Inventory::subStock(unsigned int subtraction = 1)
+void Inventory::subStock(unsigned int subtraction)
 {
 	sQuantity -= subtraction;
 }
@@ -38,6 +37,8 @@ void Inventory::inventoryMenu()
 	bool validFunction;
 	do
 	{
+		system("CLS");
+
 		cout << "Serendipity Booksellers Inventory Database" << endl;
 
 		cout << "1. Look Up a Book" << endl;
@@ -97,5 +98,5 @@ void Inventory::inventoryMenu()
 
 
 		}
-	} //while (inventoryChoice != 'E' && Function != 'e');
+	} while (inventoryChoice != 5);
 }
