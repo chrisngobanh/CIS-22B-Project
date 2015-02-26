@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 
 class Inventory
@@ -15,5 +14,7 @@ public:
 	void setPrice(double retail);
 	void addStock(unsigned int addition = 1);
 	void subStock(unsigned int subtraction = 1);
+	void inventoryMenu();
 	~Inventory();
+	
 };
