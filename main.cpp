@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 
-	int choice;
+	char choice;
 	while (choice != 4)
 	{
 		cout << "Serendipity Booksellers\n";
@@ -25,15 +25,20 @@ int main()
 			cout << "Enter 1 - 4: ";
 			cin >> choice;
 		}
-
-		if (choice == 1)
-		//open cashier screen
-		else if (choice == 2)
-		//open inventory database screen
-		else if (choice == 3)
-		//open report screen
-		else if (choice == 4)
-		return 0;
+		switch (choice)
+		{
+		case 1:
+			//open cashier module
+			break;
+		case 2:
+			//open inventory module
+			break;
+		case 3:
+			//open report module
+			break;
+		case 4:
+			break;
+		}
 	}
 
 	return 0;
