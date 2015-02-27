@@ -7,7 +7,7 @@ information for the books being purchased and the program calculates the sales t
 the total price.In addition, the books being purchased are automatically subtracted from
 the Inventory Database.*/
 
-
+//not done.
 
 class Cashier
 {
@@ -16,7 +16,10 @@ private:
 	double bookPrice;
 	int quantity;
 	const double taxrate = .0875;
+
 public:
 	void menu();
-	void subtractBook(string bookName);
+	void addBook(char book[]);
+//	void Checkout(array or vector???? of books)
+
 };

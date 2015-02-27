@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Z:\Git\workspace\CIS-22B-Project\CIS-22B-Project;C:\Users\Brandon\Documents\Git\workspace\CIS-22B-Project\CIS-22B-Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Andrew\Documents\Git\workspace\CIS-22B-Project\CIS-22B-Project;Z:\Git\workspace\CIS-22B-Project\CIS-22B-Project;C:\Users\Brandon\Documents\Git\workspace\CIS-22B-Project\CIS-22B-Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
