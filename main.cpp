@@ -40,11 +40,11 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			cashierMenu();
+			cashier.menu();
 			//open cashier module
 			break;
 		case 2:
-			inventoryMenu();
+			//inventory.inventoryMenu();
 			//open inventory module
 			break;
 		case 3:

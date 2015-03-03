@@ -20,7 +20,9 @@ void Inventory::subStock(Book target, unsigned int subtraction)
 void inventoryMenu()
 {
 	int inventoryChoice = 0;
-	bool validFunction;
+//	bool validFunction;
+
+	Inventory inventory;
 	do
 	{
 		system("CLS");
@@ -45,20 +47,23 @@ void inventoryMenu()
 		{
 
 		case 1:;
+			cout << "How would you like to look up a book?" << endl;
 
 
 			break;
 
 
 		case 2:;
+		{
+	//		inventory.addBook();
 
-
-
+		}
 
 			break;
 
 
 		case 3:;
+
 
 
 
@@ -87,6 +92,29 @@ void inventoryMenu()
 	} while (inventoryChoice != 5);
 }
 
-Inventory::~Inventory()
+
+void Inventory :: addBook()
 {
+	string isbn, title, author, publisher, dateAdded;
+	int quantity = 0;
+	double wholesaleCost = 0, retailPrice = 0;
+
+	cout << "Please enter the following infornamtion." << endl;
+	cout << "ISBN:" << endl;
+	cin >> isbn;
+	cout << "Title:" << endl;
+	cin >> title;
+	cout << "Author:" << endl;
+	cin >> author;
+	cout << "Publisher:" << endl;
+	cin >> publisher;
+	cout << "Date Added:" << endl;
+	cin >> dateAdded;
+	cout << "Quantity-On-Hand:" << endl;
+	cin >> quantity;
+	cout << "Wholesale Cost:" << endl;
+	cin >> wholesaleCost;
+	cout << "Retail Price:" << endl;
+	cin >> retailPrice;
+
 }

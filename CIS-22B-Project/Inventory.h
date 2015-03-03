@@ -14,7 +14,11 @@ public:
 	void addStock(Book target, unsigned int addition = 1);
 	void subStock(Book target, unsigned int subtraction = 1);
 	void inventoryMenu();
-	
-	~Inventory();
+	void lookUpBook();
+	void addBook();
+	void editBook();
+	void deleteBook();
+
+	~Inventory(){}
 	
 };

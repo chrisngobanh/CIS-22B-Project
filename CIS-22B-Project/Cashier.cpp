@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Cashier::cashierMenu()		//Not done yet, still need working Inventory Module before we can search for a book/remove book from the inventory file.
+void Cashier::menu()		//Not done yet, still need working Inventory Module before we can search for a book/remove book from the inventory file.
 {
 	system("CLS");
 

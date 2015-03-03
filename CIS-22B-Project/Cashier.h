@@ -18,7 +18,7 @@ private:
 	const double taxrate = .0875;
 
 public:
-	void cashierMenu();
+	void menu();
 	void addBook(char book[]);
 //	void Checkout(array or vector???? of books)
 
