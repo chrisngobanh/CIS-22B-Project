@@ -16,3 +16,6 @@
 * git add --all // Stages all your files to commit
 * git commit -m "(git message in here)" // Commit your staged files to your local repo
 * git push origin master // Push your local commits to the remote repo
+* git stash // Stash your changes
+* git stash apply // Apply your stashed changes
+
