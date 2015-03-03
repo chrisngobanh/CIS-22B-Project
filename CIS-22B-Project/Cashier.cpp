@@ -1,14 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Cashier.h"
-#include<iostream>
+#include"Cashier.h"
 #include<iomanip>
-#include<string>
 #include<cstring>
-#include "time.h"
 
 using namespace std;
 
-void Cashier::menu()		//Not done yet, still need working Inventory Module before we can search for a book/remove book from the inventory file.
+void Cashier::cashierMenu()		//Not done yet, still need working Inventory Module before we can search for a book/remove book from the inventory file.
 {
 	system("CLS");
 
@@ -38,11 +35,12 @@ void Cashier::menu()		//Not done yet, still need working Inventory Module before
 			cout << "\nPlease enter the title of the book: ";
 			cin.ignore();
 			cin.getline(title, 100);
-//			addBook(title);
+			//			addBook(title);
 		}
 	}
 	//Checkout(array of books added to by addBook function above);
 }
+
 /*
 void Cashier::addBook(char title[])
 {

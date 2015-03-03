@@ -1,37 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Inventory.h"
-#include <iostream>
 using namespace std;
 
-Inventory::Inventory(unsigned int isbn, string title, string author, string publisher, unsigned int quantity, double wholesale)
+void Inventory::setPrice(Book target, double retail)
 {
-	sISBN = isbn;
-	sTitle = title;
-	sAuthor = author;
-	sPublisher = publisher;
-	sQuantity = quantity;
-	sWholesale = wholesale;
+	target.setPrice(retail);
 }
 
-void Inventory::setPrice(double retail)
+void Inventory::addStock(Book target, unsigned int addition)
 {
-	sRetail = retail;
+	target.addStock(addition);
 }
 
-void Inventory::addStock(unsigned int addition)
+void Inventory::subStock(Book target, unsigned int subtraction)
 {
-	sQuantity += addition;
+	target.subStock(subtraction);
 }
 
-void Inventory::subStock(unsigned int subtraction)
-{
-	sQuantity -= subtraction;
-}
-
-Inventory::~Inventory()
-{
-}
-void Inventory::inventoryMenu()
+void inventoryMenu()
 {
 	int inventoryChoice = 0;
 	bool validFunction;
@@ -99,4 +85,8 @@ void Inventory::inventoryMenu()
 
 		}
 	} while (inventoryChoice != 5);
+}
+
+Inventory::~Inventory()
+{
 }
