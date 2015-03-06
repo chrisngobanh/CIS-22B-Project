@@ -1,8 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "Inventory.h"
 #include "Book.h"
 #include <vector>
 #include <fstream>
+
 using namespace std;
 
 void Inventory::setPrice(Book target, double retail)
@@ -51,8 +53,16 @@ void Inventory::inventoryMenu()
 		{
 
 		case 1:;
+			int choice;
+			char title[100];
 			cout << "How would you like to look up a book?" << endl;
-			
+			cout << "1. Title" << endl;
+			cout << "2. ISBN" << endl;
+			cout << "Enter your Choice: " << endl << endl;
+			cout << "Title: ";
+			cin.ignore();
+			cin.getline(title, 100);
+			lookUpBook(title);
 			break;
 
 
@@ -94,14 +104,39 @@ void Inventory::inventoryMenu()
 		}
 	} while (inventoryChoice != 5);
 }
-/*
-void Inventory::lookUpBook()
+
+void Inventory::sortByName(vector<Book>& booklist)
 {
-	char name[100];
-	cout << "Enter name of book: ";
-	cin.getline(name, 100);
+	
+	for (int i = 0; i < booklist.size(); i++){
+		for (int j = i+1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getTitle() > booklist[j].getTitle()){
+				Book temp = booklist[i];
+				booklist[i] = booklist[j];
+				booklist[j] = temp;
+			}
+		}
+	}
 }
-*/
+
+void Inventory::lookUpBook(char title[])
+{
+	vector<Book> booklist =	readList();
+
+	//sortByName(booklist);
+
+	cout << "Search results:" << endl << endl;
+
+	//vector<int> foundBooks;
+	for (int i = 0; i < booklist.size(); i++){
+		if (title == booklist[i].getTitle()){
+			//foundBooks.push_back(i);
+			booklist[i].print();
+			cout << endl;
+		}
+	}
+}
 
 vector<Book> Inventory::readList()
 {
@@ -123,19 +158,13 @@ vector<Book> Inventory::readList()
 			exit(-1);
 		}
 
-		while (!ifs.eof())
+		for (int i = 0; i < numBooks; i++)
 		{
 			Book newbook;
 			ifs.read(reinterpret_cast<char *>(&newbook), sizeof(newbook));
 			booklist.push_back(newbook);
 
 		}
-		for (int i = 0; i < numBooks; i++)
-		{
-			booklist[i].print();
-			cout << endl;
-		}
-		system("pause");
 	}
 	ifs.close();
 	return booklist;

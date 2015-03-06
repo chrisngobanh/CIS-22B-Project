@@ -17,6 +17,7 @@ private:
 public:
 	Book(){}
 	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale);
+	string getTitle();
 	void setPrice(double retail);
 	void addStock(unsigned int addition = 1);
 	void subStock(unsigned int subtraction = 1);

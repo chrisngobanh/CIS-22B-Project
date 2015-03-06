@@ -42,6 +42,11 @@ void Book::print()
 	cout << sWholesale << endl;
 }
 
+string Book::getTitle()
+{
+	return sTitle;
+}
+
 Book::~Book()
 {
 }
