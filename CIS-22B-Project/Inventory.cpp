@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Inventory.h"
+#include "Book.h"
 using namespace std;
 
 void Inventory::setPrice(Book target, double retail)
@@ -17,7 +18,7 @@ void Inventory::subStock(Book target, unsigned int subtraction)
 	target.subStock(subtraction);
 }
 
-void inventoryMenu()
+void Inventory::inventoryMenu()
 {
 	int inventoryChoice = 0;
 //	bool validFunction;
@@ -38,6 +39,7 @@ void inventoryMenu()
 		cout << "4. Delete a Book" << endl;
 
 		cout << "5. Return to the Main Menu" << endl << endl;
+
 		cout << "Enter your Choice: " << endl << endl;
 
 		cin >> inventoryChoice;
@@ -49,13 +51,12 @@ void inventoryMenu()
 		case 1:;
 			cout << "How would you like to look up a book?" << endl;
 
-
 			break;
 
 
 		case 2:;
 		{
-	//		inventory.addBook();
+			inventory.addBook();
 
 		}
 
@@ -95,8 +96,9 @@ void inventoryMenu()
 
 void Inventory :: addBook()
 {
-	string isbn, title, author, publisher, dateAdded;
-	int quantity = 0;
+	unsigned int isbn, quantity;
+	char title[100], author[100], publisher[100];
+	string dateAdded;
 	double wholesaleCost = 0, retailPrice = 0;
 
 	cout << "Please enter the following infornamtion." << endl;
@@ -116,5 +118,5 @@ void Inventory :: addBook()
 	cin >> wholesaleCost;
 	cout << "Retail Price:" << endl;
 	cin >> retailPrice;
-
+	Book book(isbn, title, author, publisher, quantity, wholesaleCost);
 }

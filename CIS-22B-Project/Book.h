@@ -1,25 +1,28 @@
+#ifndef BOOK_H
+#define BOOK_H
 #include <string>
 #include <iostream>
-
+#include <vector>
 using namespace std;
 class Book
 {
 private:
 	unsigned int sISBN;
-	string sTitle;
-	string sAuthor;
-	string sPublisher;
+	char sTitle[100];
+	char sAuthor[100];
+	char sPublisher[100];
 	unsigned int sDate, sQuantity;
 	double sWholesale, sRetail;
 
 public:
 	Book(){}
-	Book(unsigned int isbn, string title, string author, string publisher, unsigned int quantity, double wholesale);
+	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale);
 	void setPrice(double retail);
 	void addStock(unsigned int addition = 1);
 	void subStock(unsigned int subtraction = 1);
-	void inventoryMenu();
-
+	vector<Book> readList();
+	void writeList(vector<Book>);
+	void print(Book);
 	~Book();
-
 };
+#endif

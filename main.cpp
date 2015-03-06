@@ -3,6 +3,8 @@
 #include<iostream>
 #include"CIS-22B-Project\Cashier.h"
 #include"CIS-22B-Project\Inventory.h"
+#include"CIS-22B-Project\Book.h"
+#include"CIS-22B-Project\Reports.h"
 #include<string>
 #include<fstream>
 #include<time.h>
@@ -44,7 +46,7 @@ int main()
 			//open cashier module
 			break;
 		case 2:
-			//inventory.inventoryMenu();
+			inventory.inventoryMenu();
 			//open inventory module
 			break;
 		case 3:

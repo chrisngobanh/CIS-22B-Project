@@ -1,3 +1,5 @@
+#ifndef CASHIER_H
+#define CASHIER_H
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
@@ -23,3 +25,4 @@ public:
 //	void Checkout(array or vector???? of books)
 
 };
+#endif

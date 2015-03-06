@@ -1,3 +1,5 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
 #include <string>
 #include <iostream>
 #include "Book.h"
@@ -22,3 +24,4 @@ public:
 	~Inventory(){}
 	
 };
+#endif
