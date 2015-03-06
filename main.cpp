@@ -14,6 +14,7 @@ int main()
 {
 	Cashier cashier;
 	Inventory inventory;
+	Report report;
 	int choice=0;
 	fstream bookList;
 
@@ -43,6 +44,7 @@ int main()
 		{
 		case 1:
 			cashier.menu();
+
 			//open cashier module
 			break;
 		case 2:
@@ -50,6 +52,7 @@ int main()
 			//open inventory module
 			break;
 		case 3:
+			report.menu();
 			//open report module
 			break;
 		case 4:
