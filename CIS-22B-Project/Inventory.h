@@ -20,6 +20,8 @@ public:
 	void addBook();
 	void editBook();
 	void deleteBook();
+	vector<Book> readList();
+	void writeList(vector<Book>);
 
 	~Inventory(){}
 	

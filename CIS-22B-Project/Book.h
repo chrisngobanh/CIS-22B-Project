@@ -20,9 +20,7 @@ public:
 	void setPrice(double retail);
 	void addStock(unsigned int addition = 1);
 	void subStock(unsigned int subtraction = 1);
-	vector<Book> readList();
-	void writeList(vector<Book>);
-	void print(Book);
+	void print();
 	~Book();
 };
 #endif
