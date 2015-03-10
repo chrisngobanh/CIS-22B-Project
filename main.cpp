@@ -43,12 +43,22 @@ int main()
 		cout << "4. Exit\n\n";
 		cout << "Enter your choice: ";
 		cin >> choice;
+		if (!cin){
+			cin.clear();
+			choice = 0;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 
 
 		while (choice < 1 || choice > 4)
 		{
 			cout << "Enter 1 - 4: ";
 			cin >> choice;
+			if (!cin){
+				cin.clear();
+				choice = 0;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
 		}
 		
 		switch (choice)

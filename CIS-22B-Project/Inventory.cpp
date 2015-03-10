@@ -48,6 +48,11 @@ void Inventory::inventoryMenu()
 		cout << "Enter your Choice: " << endl << endl;
 
 		cin >> inventoryChoice;
+		if (!cin){
+			cin.clear();
+			inventoryChoice = 0;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 
 
 		switch (inventoryChoice)
