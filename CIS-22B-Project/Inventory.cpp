@@ -45,7 +45,7 @@ void Inventory::inventoryMenu()
 
 		cout << "5. Return to the Main Menu" << endl << endl;
 
-		cout << "Enter your Choice: " << endl << endl;
+		cout << "Enter your Choice: ";
 
 		cin >> inventoryChoice;
 
@@ -53,30 +53,43 @@ void Inventory::inventoryMenu()
 		switch (inventoryChoice)
 		{
 
-		case 1:;
+		case 1:
 			int choice;
 			char title[100];
+			unsigned int isbn;
+
 			cout << "How would you like to look up a book?" << endl;
 			cout << "1. Title" << endl;
 			cout << "2. ISBN" << endl;
-			cout << "Enter your Choice: " << endl << endl;
-			cout << "Title: ";
-			cin.ignore();
-			cin.getline(title, 100);
-			lookUpBook(title);
+			cout << "Enter your Choice: ";
+			cin >> choice;
+
+			switch (choice)
+			{
+			case 1:
+				cout << "Title: ";
+				cin.ignore();
+				cin.getline(title, 100);
+				lookUpBook(title);
+			case 2:
+				cout << "ISBN: ";
+				cin >> isbn;
+				lookUpBookISBN(isbn);
+			default: 
+				break;
+			}
+
 			break;
 
-
-		case 2:;
+		case 2:
 		{
 			inventory.addBook();
-
 		}
 
 			break;
 
 
-		case 3:;
+		case 3:
 
 
 
@@ -84,7 +97,7 @@ void Inventory::inventoryMenu()
 			break;
 
 
-		case 4:;
+		case 4:
 
 
 
@@ -133,6 +146,20 @@ void Inventory::lookUpBook(char title[])
 	for (int i = 0; i < booklist.size(); i++){
 		if (title == booklist[i].getTitle()){
 			//foundBooks.push_back(i);
+			booklist[i].print();
+			cout << endl;
+		}
+	}
+}
+
+void Inventory::lookUpBookISBN(unsigned int isbn)
+{
+	vector<Book> booklist = readList();
+
+	cout << "Search results:" << endl << endl;
+
+	for (int i = 0; i < booklist.size(); i++){
+		if (isbn == booklist[i].getISBN()){
 			booklist[i].print();
 			cout << endl;
 		}

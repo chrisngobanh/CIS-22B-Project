@@ -51,6 +51,11 @@ string Book::getTitle()
 	return sTitle;
 }
 
+unsigned int Book::getISBN()
+{
+	return sISBN;
+}
+
 Book::~Book()
 {
 }

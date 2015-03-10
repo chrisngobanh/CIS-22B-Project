@@ -14,6 +14,7 @@ public:
 	void addStock(Book target, unsigned int addition = 1);
 	void subStock(Book target, unsigned int subtraction = 1);
 	void inventoryMenu();
+	void lookUpBookISBN(unsigned int);
 	void lookUpBook(char[]);
 	void addBook();
 	void editBook();
