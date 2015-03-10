@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Book::Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale)
+Book::Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, char date[])
 {
 	sISBN = isbn;
 	for (int i = 0; i < 100; i++)
@@ -12,7 +12,9 @@ Book::Book(unsigned int isbn, char title[], char author[], char publisher[], uns
 		sTitle[i] = title[i];
 		sAuthor[i] = author[i];
 		sPublisher[i] = publisher[i];
+		dateAdded[i] = date[i];
 	}
+	sRetail = retail;
 	sQuantity = quantity;
 	sWholesale = wholesale;
 }
@@ -34,12 +36,13 @@ void Book::subStock(unsigned int subtraction)
 
 void Book::print()
 {
-	cout << sISBN << endl;
-	cout << sTitle << endl;
-	cout << sAuthor << endl;
-	cout << sPublisher << endl;
-	cout << sQuantity << endl;
-	cout << sWholesale << endl;
+	cout << "ISBN: " << sISBN << endl;
+	cout << "Title: " << sTitle << endl;
+	cout << "Author: " << sAuthor << endl;
+	cout << "Publisher: " << sPublisher << endl;
+	cout << "Quantity: " << sQuantity << endl;
+	cout << "Wholesale Price: " << sWholesale << endl;
+	cout << "Retail Price: " << sRetail << endl;
 }
 
 string Book::getTitle()

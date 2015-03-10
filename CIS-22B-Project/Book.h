@@ -11,12 +11,13 @@ private:
 	char sTitle[100];
 	char sAuthor[100];
 	char sPublisher[100];
+	char dateAdded[100];
 	unsigned int sDate, sQuantity;
 	double sWholesale, sRetail;
 
 public:
 	Book(){}
-	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale);
+	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, char date[]);
 	string getTitle();
 	void setPrice(double retail);
 	void addStock(unsigned int addition = 1);

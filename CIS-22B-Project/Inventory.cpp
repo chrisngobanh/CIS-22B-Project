@@ -4,6 +4,7 @@
 #include "Book.h"
 #include <vector>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -153,7 +154,7 @@ vector<Book> Inventory::readList()
 
 		if (a == nullptr)
 		{
-			cout << "Memory could not be allocated, Exiting program ..." << endl << endl;
+			cout << "Memory could not be allocated..." << endl << endl;
 			system("pause");
 			exit(-1);
 		}
@@ -188,7 +189,14 @@ void Inventory :: addBook()
 	unsigned int isbn, quantity;
 	char title[100], author[100], publisher[100], dateAdded[100];
 	double wholesaleCost = 0;
-	//double retailPrice = 0;
+	double retailPrice = 0;
+
+	time_t rawtime;
+	struct tm * timeinfo;
+	char date[100] = "";
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	strftime(date, 100, "%m/%d/%y", timeinfo);
 
 	cout << "Please enter the following infornamtion." << endl;
 	cout << "ISBN:" << endl;
@@ -200,22 +208,17 @@ void Inventory :: addBook()
 	cin.getline(author, 100);
 	cout << "Publisher:" << endl;
 	cin.getline(publisher, 100);
-	/*
-	cout << "Date Added:" << endl;
-	cin.getline(dateAdded, 100);
-	*/
 	cout << "Quantity-On-Hand:" << endl;
 	cin >> quantity;
 	cout << "Wholesale Cost:" << endl;
 	cin >> wholesaleCost;
-	/*
 	cout << "Retail Price:" << endl;
-	cin >> retailPrice;*/
+	cin >> retailPrice;
 	cout << endl;
 
 
 
-	Book book(isbn, title, author, publisher, quantity, wholesaleCost);
+	Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, dateAdded);
 	
 	vector<Book> booklist = readList();
 

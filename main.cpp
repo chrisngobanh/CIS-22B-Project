@@ -7,7 +7,7 @@
 #include"CIS-22B-Project\Reports.h"
 #include<string>
 #include<fstream>
-#include<time.h>
+#include<ctime>
 using namespace std;
 
 int main()
@@ -17,6 +17,14 @@ int main()
 	Report report;
 	int choice=0;
 	fstream bookList;
+	time_t rawtime;
+	struct tm * timeinfo;
+	char current[80] = "";
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(current, 80, "%m/%d/%y %I:%M%p", timeinfo);
 
 	bookList.open("booklist.txt", ios::in);
 	bookList.open("booklist.txt", ios::out);
@@ -24,6 +32,9 @@ int main()
 	while (choice != 4)
 	{
 		system("CLS");
+
+		for (int i = 0; i < 80; i++)
+			cout << current[i];
 		cout << "Serendipity Booksellers\n";
 		cout << "Main Menu\n\n";
 		cout << "1. Cashier Module\n";
