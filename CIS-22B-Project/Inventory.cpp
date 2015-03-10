@@ -187,16 +187,16 @@ void Inventory::writeList(vector<Book> list)
 void Inventory :: addBook()
 {
 	unsigned int isbn, quantity;
-	char title[100], author[100], publisher[100], dateAdded[100];
+	char title[100], author[100], publisher[100], dateAdded[100] = "";
 	double wholesaleCost = 0;
 	double retailPrice = 0;
 
 	time_t rawtime;
 	struct tm * timeinfo;
-	char date[100] = "";
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	strftime(date, 100, "%m/%d/%y", timeinfo);
+	strftime(dateAdded, 100, "%m/%d/%y", timeinfo);
+	cout << dateAdded;
 
 	cout << "Please enter the following infornamtion." << endl;
 	cout << "ISBN:" << endl;

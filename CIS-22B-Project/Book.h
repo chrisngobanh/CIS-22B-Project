@@ -11,8 +11,8 @@ private:
 	char sTitle[100];
 	char sAuthor[100];
 	char sPublisher[100];
-	char dateAdded[100];
-	unsigned int sDate, sQuantity;
+	char sDate[100];
+	unsigned int sQuantity;
 	double sWholesale, sRetail;
 
 public:

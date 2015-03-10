@@ -12,7 +12,7 @@ Book::Book(unsigned int isbn, char title[], char author[], char publisher[], uns
 		sTitle[i] = title[i];
 		sAuthor[i] = author[i];
 		sPublisher[i] = publisher[i];
-		dateAdded[i] = date[i];
+		sDate[i] = date[i];
 	}
 	sRetail = retail;
 	sQuantity = quantity;
@@ -43,6 +43,7 @@ void Book::print()
 	cout << "Quantity: " << sQuantity << endl;
 	cout << "Wholesale Price: " << sWholesale << endl;
 	cout << "Retail Price: " << sRetail << endl;
+	cout << "Date Added: " << sDate << endl;
 }
 
 string Book::getTitle()
