@@ -41,8 +41,8 @@ void Book::print()
 	cout << "Author: " << sAuthor << endl;
 	cout << "Publisher: " << sPublisher << endl;
 	cout << "Quantity: " << sQuantity << endl;
-	cout << "Wholesale Price: " << sWholesale << endl;
-	cout << "Retail Price: " << sRetail << endl;
+	cout << "Wholesale Price: $" << sWholesale << endl;
+	cout << "Retail Price: $" << sRetail << endl;
 	cout << "Date Added: " << sDate << endl;
 }
 

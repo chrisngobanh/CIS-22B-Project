@@ -124,24 +124,6 @@ void Inventory::inventoryMenu()
 	} while (inventoryChoice != 5);
 }
 
-void Inventory::sortByName(vector<Book>& booklist)
-{
-	
-	for (int i = 0; i < booklist.size(); i++){
-		for (int j = i+1; j < booklist.size(); j++)
-		{
-			if (booklist[i].getTitle() > booklist[j].getTitle()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
-			}
-		}
-	}
-}
-
 void Inventory::lookUpBook(char title[])
 {
 	vector<Book> booklist =	readList();
@@ -232,7 +214,7 @@ void Inventory :: addBook()
 	timeinfo = localtime(&rawtime);
 	strftime(dateAdded, 100, "%m/%d/%y", timeinfo);
 	cout << dateAdded;
-
+	
 	cout << "Please enter the following infornamtion." << endl;
 	cout << "ISBN:" << endl;
 	cin >> isbn;

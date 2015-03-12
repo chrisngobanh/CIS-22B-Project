@@ -28,35 +28,10 @@ void Report::menu()
 		cin >> choice;
 		cout << endl;
 
-		int numBooks;
-		vector<Book> booklist;
-		vector<Book> *a;
-		ifstream ifs("bookList.txt", ios::in | ios::binary);
+		vector<Book> booklist = readList();
+		sortByName(booklist);
 
-		if (ifs)
-		{
-			ifs.read(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
-
-			a = new vector<Book>;
-
-			if (a == nullptr)
-			{
-				cout << "Memory could not be allocated..." << endl << endl;
-				system("pause");
-				exit(-1);
-			}
-
-			for (int i = 0; i < numBooks; i++)
-			{
-				Book newbook;
-				ifs.read(reinterpret_cast<char *>(&newbook), sizeof(newbook));
-				booklist.push_back(newbook);
-
-			}
-		}
-		ifs.close();
 		
-
 		switch (choice)
 		{
 
@@ -64,12 +39,7 @@ void Report::menu()
 		{
 				  cout << "Inventory Listing" << endl << endl;
 
-				  for (unsigned int i = 0; i < booklist.size(); i++)
-				  {
-
-					  booklist[i].print();
-					  cout << "----------------------------------------------" << endl << endl;
-				  }
+				  printList(booklist);
 				  break;
 		}
 
@@ -88,7 +58,7 @@ void Report::menu()
 				cout << "----------------------------------------------" << endl << endl;
 				total += (booklist[i].getWholesale() * booklist[i].getQuantity());
 			}
-			cout << "Total: " << total << endl << endl;
+			cout << "Total: $" << total << endl << endl;
 
 			break;
 	//		inventory.addBook();
@@ -111,7 +81,7 @@ void Report::menu()
 					  cout << "----------------------------------------------" << endl << endl;
 					  total += (booklist[i].getRetail() * booklist[i].getQuantity());
 				  }
-				  cout << "Total: " << total << endl << endl;
+				  cout << "Total: $" << total << endl << endl;
 
 				  break;
 
@@ -120,18 +90,22 @@ void Report::menu()
 
 			cout << "Listing by Quantity" << endl << endl;
 
+			sortByQuantity(booklist);
 
+			printList(booklist);
 
 			break;
 
 
 		case 5:
-			cout << "Listing by cost" << endl << endl;
+			cout << "Listing by Cost" << endl << endl;
 
+			sortByCost(booklist);
+			printList(booklist);
 			break;
 
 		case 6:
-			cout << "Listing by age" << endl << endl;
+			cout << "Listing by Age" << endl << endl;
 
 			break;
 		case 7:
@@ -144,5 +118,71 @@ void Report::menu()
 
 		}
 	}// while (choice != 5);
-	}
+}
 	
+
+void Report::sortByName(vector<Book>& booklist)
+{
+
+	for (int i = 0; i < booklist.size(); i++){
+		for (int j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getTitle() > booklist[j].getTitle()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Report::sortByQuantity(vector<Book>& booklist)
+{
+
+	for (int i = 0; i < booklist.size(); i++){
+		for (int j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getQuantity() > booklist[j].getQuantity()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Report::sortByCost(vector<Book>& booklist)
+{
+
+	for (int i = 0; i < booklist.size(); i++){
+		for (int j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getRetail() > booklist[j].getRetail()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Report::printList(vector<Book>& booklist)
+{
+
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+
+		booklist[i].print();
+		cout << "----------------------------------------------" << endl << endl;
+	}
+
+}
