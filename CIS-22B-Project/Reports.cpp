@@ -2,6 +2,7 @@
 
 #include "Reports.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -27,39 +28,95 @@ void Report::menu()
 		cin >> choice;
 		cout << endl;
 
-		
+		int numBooks;
+		vector<Book> booklist;
+		vector<Book> *a;
+		ifstream ifs("bookList.txt", ios::in | ios::binary);
+
+		if (ifs)
+		{
+			ifs.read(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
+
+			a = new vector<Book>;
+
+			if (a == nullptr)
+			{
+				cout << "Memory could not be allocated..." << endl << endl;
+				system("pause");
+				exit(-1);
+			}
+
+			for (int i = 0; i < numBooks; i++)
+			{
+				Book newbook;
+				ifs.read(reinterpret_cast<char *>(&newbook), sizeof(newbook));
+				booklist.push_back(newbook);
+
+			}
+		}
+		ifs.close();
 		
 
 		switch (choice)
 		{
 
-		case 1:;
-			cout << "Inventory Listing" << endl << endl;
+		case 1:
+		{
+				  cout << "Inventory Listing" << endl << endl;
+
+				  for (unsigned int i = 0; i < booklist.size(); i++)
+				  {
+
+					  booklist[i].print();
+					  cout << "----------------------------------------------" << endl << endl;
+				  }
+				  break;
+		}
+
+		case 2:
+		{						
+			cout << "Inventory Wholesale Listing" << endl << endl;
+
+			double total = 0;
+
+			for (unsigned int i = 0; i < booklist.size(); i++)
+			{
+
+				cout << "Title: " << booklist[i].getTitle() << endl;
+				cout << "Quantity: " << booklist[i].getQuantity() << endl;
+				cout << "Wholesale Price: " << booklist[i].getWholesale() << endl;
+				cout << "----------------------------------------------" << endl << endl;
+				total += (booklist[i].getWholesale() * booklist[i].getQuantity());
+			}
+			cout << "Total: " << total << endl << endl;
 
 			break;
-
-
-		case 2:;
-		{						
-				   cout << "Inventory Wholesale Listing" << endl << endl;
-
 	//		inventory.addBook();
 
 		}
 
-			break;
 
+		case 3:
+		{
+				  cout << "Inventory Retail Listing" << endl << endl;
 
-		case 3:;
+				  double total = 0;
 
-			cout << "Inventory Retail Listing" << endl << endl;
+				  for (unsigned int i = 0; i < booklist.size(); i++)
+				  {
 
+					  cout << "Title: " << booklist[i].getTitle() << endl;
+					  cout << "Quantity: " << booklist[i].getQuantity() << endl;
+					  cout << "Retail Price: " << booklist[i].getRetail() << endl;
+					  cout << "----------------------------------------------" << endl << endl;
+					  total += (booklist[i].getRetail() * booklist[i].getQuantity());
+				  }
+				  cout << "Total: " << total << endl << endl;
 
+				  break;
 
-			break;
-
-
-		case 4:;
+		}
+		case 4:
 
 			cout << "Listing by Quantity" << endl << endl;
 

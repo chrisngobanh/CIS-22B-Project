@@ -56,6 +56,21 @@ unsigned int Book::getISBN()
 	return sISBN;
 }
 
+unsigned int Book::getQuantity()
+{
+	return sQuantity;
+}
+
+double Book::getWholesale()
+{
+	return sWholesale;
+}
+
+double Book::getRetail()
+{
+	return sRetail;
+}
+
 Book::~Book()
 {
 }
