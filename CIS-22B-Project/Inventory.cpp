@@ -131,9 +131,12 @@ void Inventory::sortByName(vector<Book>& booklist)
 		for (int j = i+1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getTitle() > booklist[j].getTitle()){
-				Book temp = booklist[i];
-				booklist[i] = booklist[j];
-				booklist[j] = temp;
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
 			}
 		}
 	}
