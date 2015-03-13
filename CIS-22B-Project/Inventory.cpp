@@ -26,12 +26,13 @@ void Inventory::subStock(Book target, unsigned int subtraction)
 void Inventory::inventoryMenu()
 {
 	int inventoryChoice = 0;
+	Book i, t;
 //	bool validFunction;
 
 	Inventory inventory;
 	do
 	{
-		//system("CLS");
+		system("CLS");
 
 		cout << "Serendipity Booksellers Inventory Database" << endl;
 
@@ -75,11 +76,15 @@ void Inventory::inventoryMenu()
 				cout << "Title: ";
 				cin.ignore();
 				cin.getline(title, 100);
-				lookUpBook(title);
+
+				t = lookUpBook(title);
+				break;
 			case 2:
 				cout << "ISBN: ";
 				cin >> isbn;
-				lookUpBookISBN(isbn);
+				
+				i = lookUpBookISBN(isbn);
+				break;
 			default: 
 				break;
 			}
@@ -98,13 +103,10 @@ void Inventory::inventoryMenu()
 
 
 
-
 			break;
 
 
 		case 4:
-
-
 
 
 
@@ -114,17 +116,30 @@ void Inventory::inventoryMenu()
 		case 5:
 
 
+
 			break;
 
 		default: cout << "You did not enter a valid option 1, 2, 3, 4, 5. Please try again." << endl;
-
-
-
 		}
+
 	} while (inventoryChoice != 5);
 }
 
-void Inventory::lookUpBook(char title[])
+void Inventory::sortByName(vector<Book>& booklist)
+{
+	for (unsigned int i = 0; i < booklist.size(); i++){
+		for (unsigned int j = i+1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getTitle() > booklist[j].getTitle()){
+				Book temp = booklist[i];
+				booklist[i] = booklist[j];
+				booklist[j] = temp;
+			}
+		}
+	}
+}
+
+Book Inventory::lookUpBook(char title[])
 {
 	vector<Book> booklist =	readList();
 
@@ -133,25 +148,31 @@ void Inventory::lookUpBook(char title[])
 	cout << "Search results:" << endl << endl;
 
 	//vector<int> foundBooks;
-	for (int i = 0; i < booklist.size(); i++){
-		if (title == booklist[i].getTitle()){
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (title == booklist[i].getTitle())
+		{
 			//foundBooks.push_back(i);
 			booklist[i].print();
 			cout << endl;
+			return booklist[i];
 		}
 	}
 }
 
-void Inventory::lookUpBookISBN(unsigned int isbn)
+Book Inventory::lookUpBookISBN(unsigned int isbn)
 {
 	vector<Book> booklist = readList();
 
 	cout << "Search results:" << endl << endl;
 
-	for (int i = 0; i < booklist.size(); i++){
-		if (isbn == booklist[i].getISBN()){
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (isbn == booklist[i].getISBN())
+		{
 			booklist[i].print();
 			cout << endl;
+			return booklist[i];
 		}
 	}
 }

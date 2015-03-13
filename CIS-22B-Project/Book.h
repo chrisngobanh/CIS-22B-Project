@@ -24,6 +24,7 @@ public:
 	double getWholesale();
 	double getRetail();
 	void setPrice(double retail);
+	void setStock(unsigned int);
 	void addStock(unsigned int addition = 1);
 	void subStock(unsigned int subtraction = 1);
 	void print();

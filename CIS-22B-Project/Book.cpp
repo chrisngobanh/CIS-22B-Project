@@ -46,6 +46,11 @@ void Book::print()
 	cout << "Date Added: " << sDate << endl;
 }
 
+void Book::setStock(unsigned int num)
+{
+	sQuantity = num;
+}
+
 string Book::getTitle()
 {
 	return sTitle;

@@ -1,29 +1,44 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"Cashier.h"
-#include<iomanip>
-#include<cstring>
+#include <iomanip>
+#include <cstring>
+#include <vector>
+#include "Inventory.h"
+#include "Book.h"
 
 using namespace std;
 
-void Cashier::menu()		//Not done yet, still need working Inventory Module before we can search for a book/remove book from the inventory file.
+void Cashier::menu()
 {
-	system("CLS");
 
-	//declare array/vector of book objects to add to w/ addBook function
+	bool found = false;
+	Book book;
+	Inventory inventory;
+	vector<Book> booklist = inventory.readList(), temp;
 	int choice = 0;
 	char title[100];
-	char date[9];
-
-	_strdate(date);
 
 	while (choice != 2)
 	{
+		system("CLS");
+
+		found = false;
+
+		time_t rawtime;
+		struct tm * timeinfo;
+		char current[80] = "";
+
+		time(&rawtime);
+		timeinfo = localtime(&rawtime);
+		strftime(current, 80, "%m/%d/%y %I:%M%p", timeinfo);
+
+		for (int i = 0; i < 80; i++)
+			cout << current[i];
 		cout << "Serendipity Booksellers\n";
 		cout << "1. Add a book to the sale\n";
 		cout << "2. Proceed to checkout\n";
 		cout << "Enter your choice: ";
 		cin >> choice;
-
 		while (choice < 1 || choice > 2)
 		{
 			cout << "Please enter 1 or 2: ";
@@ -35,28 +50,83 @@ void Cashier::menu()		//Not done yet, still need working Inventory Module before
 			cout << "\nPlease enter the title of the book: ";
 			cin.ignore();
 			cin.getline(title, 100);
-			//			addBook(title);
+
+			for (unsigned int i = 0; i < booklist.size(); i++)
+			{
+				if (title == booklist[i].getTitle())
+				{
+					found = true;
+					book = booklist[i];
+				}
+			}
+
+			while (found != true)
+			{
+				cout << "Book not found. Please enter another title: \n";
+
+				cin.getline(title, 100);
+
+				for (unsigned int i = 0; i < booklist.size(); i++)
+				{
+					if (title == booklist[i].getTitle())
+					{
+						found = true;
+						book = booklist[i];
+					}
+				}
+			}
+
+			temp = addToSale(book, temp);
 		}
 	}
-	//Checkout(array of books added to by addBook function above);
+//	Checkout(booklist);
 }
 
-/*
-void Cashier::addBook(char title[])
+
+vector<Book> Cashier::addToSale(Book book, vector<Book> temp)
 {
-	
-	for (int i = 0; i < strlen(title); i++);
+	Inventory inventory;
+	vector<Book> booklist = inventory.readList();
+	unsigned int number, quantity;
+
+	cout << "How many of '" << book.getTitle() << "' would you like to add?\n";
+	cin >> number;
+
+	quantity = book.getQuantity();	//something wrong here
+
+	if (quantity == 0)
 	{
+		cout << "There are no more '" << book.getTitle() << "' left in the inventory.\n";
+		return temp;
 	}
 
-		need to be able to compare with each element of booklist array, don't have booklist in array form yet
-		IF we find the book in the file, then might still need to check the quantity of that book? If quantity can be 0 without deleting the book's entry in the file?
-		need to ask how many of the book the customer wants to purchase
-		if we don't have that many ask again
-		remove that many of the book from the book obj, possibly delete that obj from the array if quant goes to 0?
-		rewrite file after done editing the booklist array
-		add book's info to another array of book objects which is sent to checkout eventually
-	
+	else
+	{
+		while (number > quantity)
+		{
+			cout << "There are less than " << number << " of '" << book.getTitle() << "' available in the inventory. \nPlease enter a different number: ";
+			cin >> number;
+		}
+
+		for (unsigned int i = 0; i < booklist.size(); i++)
+		{
+			if (book.getTitle() == booklist[i].getTitle())
+			{
+				booklist[i].subStock(number);
+			}
+		}
+
+		book.subStock(number);
+		inventory.writeList(booklist);
+
+		book.setStock(number);
+		temp.push_back(book);
+
+		return temp;
+	}
+}
+
+/*	
 }
 
 void Cashier::Checkout(array of books from addBook);
@@ -69,5 +139,4 @@ void Cashier::Checkout(array of books from addBook);
 	loop here to write the books out w/ same formatting, while looping should be adding prices to total
 	display total at bottom, use the sales tax from the Cashier class to calculate tax and final price
 	cout << "Thank you for shopping at Serendipity!";
-
 */

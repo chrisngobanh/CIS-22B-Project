@@ -124,8 +124,8 @@ void Report::menu()
 void Report::sortByName(vector<Book>& booklist)
 {
 
-	for (int i = 0; i < booklist.size(); i++){
-		for (int j = i + 1; j < booklist.size(); j++)
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getTitle() > booklist[j].getTitle()){
 				Book temp1 = booklist[j], temp2 = booklist[i];
@@ -142,8 +142,8 @@ void Report::sortByName(vector<Book>& booklist)
 void Report::sortByQuantity(vector<Book>& booklist)
 {
 
-	for (int i = 0; i < booklist.size(); i++){
-		for (int j = i + 1; j < booklist.size(); j++)
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getQuantity() > booklist[j].getQuantity()){
 				Book temp1 = booklist[j], temp2 = booklist[i];
@@ -160,8 +160,8 @@ void Report::sortByQuantity(vector<Book>& booklist)
 void Report::sortByCost(vector<Book>& booklist)
 {
 
-	for (int i = 0; i < booklist.size(); i++){
-		for (int j = i + 1; j < booklist.size(); j++)
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getRetail() > booklist[j].getRetail()){
 				Book temp1 = booklist[j], temp2 = booklist[i];
