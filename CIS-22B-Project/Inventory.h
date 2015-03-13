@@ -17,14 +17,14 @@ public:
 	Book lookUpBookISBN(unsigned int);
 	Book lookUpBook(char[]);
 	void addBook();
-	void editBook();
+	void editBook(char[]);
 	void deleteBook();
 	vector<Book> readList();
 	void writeList(vector<Book>);
 	void sortByName(vector<Book>&);
 
 	~Inventory(){}
-	
+
 
 };
 #endif

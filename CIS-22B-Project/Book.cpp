@@ -45,6 +45,10 @@ void Book::print()
 	cout << "Retail Price: $" << sRetail << endl;
 	cout << "Date Added: " << sDate << endl;
 }
+void Book::setISBN(unsigned int s)
+{
+	sISBN = s;
+}
 
 void Book::setStock(unsigned int num)
 {

@@ -23,6 +23,7 @@ public:
 	unsigned int getQuantity();
 	double getWholesale();
 	double getRetail();
+	void setISBN(unsigned int);
 	void setPrice(double retail);
 	void setStock(unsigned int);
 	void addStock(unsigned int addition = 1);
