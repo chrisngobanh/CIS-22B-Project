@@ -19,7 +19,7 @@ private:
 public:
 	void menu();
 	
-	vector<Book> addToSale(Book, vector<Book>);
+	vector<Book> addToSale(char[], vector<Book>, unsigned int);
 //	void Checkout(vector<Book>)
 
 };

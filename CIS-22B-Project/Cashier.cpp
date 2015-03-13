@@ -14,8 +14,8 @@ void Cashier::menu()
 	bool found = false;
 	Book book;
 	Inventory inventory;
-	vector<Book> booklist = inventory.readList(), temp;
-	int choice = 0;
+	vector<Book> booklist = inventory.readList(), salelist;
+	int choice = 0, n = 0;
 	char title[100];
 
 	while (choice != 2)
@@ -56,7 +56,7 @@ void Cashier::menu()
 				if (title == booklist[i].getTitle())
 				{
 					found = true;
-					book = booklist[i];
+					salelist = addToSale(title, salelist, n);
 				}
 			}
 
@@ -71,65 +71,66 @@ void Cashier::menu()
 					if (title == booklist[i].getTitle())
 					{
 						found = true;
-						book = booklist[i];
+						salelist = addToSale(title, salelist, n);
 					}
 				}
 			}
-
-			temp = addToSale(book, temp);
 		}
 	}
-//	Checkout(booklist);
+//	Checkout(temp);
 }
 
 
-vector<Book> Cashier::addToSale(Book book, vector<Book> temp)
+vector<Book> Cashier::addToSale(char title[], vector<Book> salelist, unsigned int n)
 {
 	Inventory inventory;
 	vector<Book> booklist = inventory.readList();
-	unsigned int number, quantity;
+	unsigned int number = 0, quantity = 0;
 
-	cout << "How many of '" << book.getTitle() << "' would you like to add?\n";
-	cin >> number;
-
-	quantity = book.getQuantity();	//something wrong here
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (title == booklist[i].getTitle())
+		{
+			quantity = booklist[i].getQuantity();
+		}
+	}
 
 	if (quantity == 0)
 	{
-		cout << "There are no more '" << book.getTitle() << "' left in the inventory.\n";
-		return temp;
+		cout << "There are no more '" << title << "' left in the inventory.\n";
+		system("pause");
+		return salelist;
 	}
 
-	else
+	cout << "How many of '" << title << "' would you like to add?\n";
+	cin >> number;
+
+
+
+
+	while (number > quantity)
 	{
-		while (number > quantity)
-		{
-			cout << "There are less than " << number << " of '" << book.getTitle() << "' available in the inventory. \nPlease enter a different number: ";
-			cin >> number;
-		}
-
-		for (unsigned int i = 0; i < booklist.size(); i++)
-		{
-			if (book.getTitle() == booklist[i].getTitle())
-			{
-				booklist[i].subStock(number);
-			}
-		}
-
-		book.subStock(number);
-		inventory.writeList(booklist);
-
-		book.setStock(number);
-		temp.push_back(book);
-
-		return temp;
+		cout << "There are less than " << number << " of '" << title << "' available in the inventory. \nPlease enter a different number: ";
+		cin >> number;
 	}
+
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (title == booklist[i].getTitle())
+		{
+			booklist[i].setStock(number);
+			salelist.push_back(booklist[i]);
+		}
+	}
+
+	inventory.writeList(booklist);
+	return salelist;
 }
 
 /*	
 }
 
-void Cashier::Checkout(array of books from addBook);
+void Cashier::Checkout(vector<Book> salelist);
 
 
 	cout << "Serendipity Booksellers\n";
