@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Inventory.h"
 #include "Book.h"
 using namespace std;
