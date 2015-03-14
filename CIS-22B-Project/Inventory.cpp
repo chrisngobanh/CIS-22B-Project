@@ -746,7 +746,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.getline(publisher, 100);
 			bookList[location].setPublisher(publisher);
 			writeList(bookList);
-			cout << endl << "Author has been successfully edited. New book information:" << endl << endl;
+			cout << endl << "Publisher has been successfully edited. New book information:" << endl << endl;
 			bookList[location].print();
 			cout << endl;
 			break;
@@ -759,7 +759,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.clear();
 			bookList[location].setQuantity(quantity);
 			writeList(bookList);
-			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
+			cout << endl << "Quantity-on-hand has been successfully edited. New book information:" << endl << endl;
 			bookList[location].print();
 			cout << endl;
 			break;
@@ -772,7 +772,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.clear();
 			bookList[location].setRetail(retail);
 			writeList(bookList);
-			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
+			cout << endl << "Retail price has been successfully edited. New book information:" << endl << endl;
 			bookList[location].print();
 			cout << endl;
 			break;
