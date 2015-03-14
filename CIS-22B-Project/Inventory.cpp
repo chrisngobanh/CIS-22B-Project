@@ -9,21 +9,6 @@
 
 using namespace std;
 
-void Inventory::setPrice(Book target, double retail)
-{
-	target.setPrice(retail);
-}
-
-void Inventory::addStock(Book target, unsigned int addition)
-{
-	target.addStock(addition);
-}
-
-void Inventory::subStock(Book target, unsigned int subtraction)
-{
-	target.subStock(subtraction);
-}
-
 void Inventory::inventoryMenu()
 {
 	int inventoryChoice = 0;
@@ -35,156 +20,527 @@ void Inventory::inventoryMenu()
 	{
 		system("CLS");
 
-		cout << "Serendipity Booksellers Inventory Database" << endl;
+		vector<Book> booklist = readList();
 
+		cout << "Serendipity Booksellers" << endl << "Inventory Database" << endl;
 		cout << "1. Look Up a Book" << endl;
-
 		cout << "2. Add a Book" << endl;
-
 		cout << "3. Edit a Book's Record" << endl;
-
 		cout << "4. Delete a Book" << endl;
-
-		cout << "5. Return to the Main Menu" << endl << endl;
-
+		cout << "5. Return to the Main Menu" << endl;
 		cout << "Enter your Choice: ";
-
 		cin >> inventoryChoice;
 		if (!cin){
 			cin.clear();
 			inventoryChoice = 0;
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
+		cout << endl;
 
-
-		switch (inventoryChoice)
-		{
-
+		switch (inventoryChoice){
 		case 1:
+		{
 			int choice;
-			char title[100];
-			unsigned int isbn;
 			do{
-				cout << "How would you like to look up a book?" << endl;
-				cout << "1. Title" << endl;
-				cout << "2. ISBN" << endl;
-				cout << "3. Return to the Inventory Menu." << endl;
+				system("CLS");
+				cout << "Serendipity Booksellers" << endl << "How would you like to look up a book?" << endl;
+				cout << "1. ISBN" << endl;
+				cout << "2. Title" << endl;
+				cout << "3. Author" << endl;
+				cout << "4. Publisher" << endl;
+				cout << "5. Return to the Inventory Menu." << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
 				cout << endl;
 
-				switch (choice)
-				{
+				switch (choice){
 				case 1:
-					cout << "Title: ";
-					cin.ignore();
-					cin.getline(title, 100);
-
-					t = lookUpBook(title);
-					break;
-				case 2:
+				{
+					unsigned int isbn;
 					cout << "ISBN: ";
 					cin >> isbn;
-
-					i = lookUpBookISBN(isbn);
-					break;
-				default:
+					if (!cin){
+						cin.clear();
+						isbn = 0;
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
+					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+					if (searchResults.size() == 0){
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					else system("pause");
 					break;
 				}
-				switch (choice)
+				case 2:
 				{
-				case 1:
+					char title[100];
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
-					cout << "Search results:" << endl << endl;
-					lookUpBook(title);
+					vector<int> searchResults = lookUpBookTitle(title, booklist);
+					if (searchResults.size() == 0){
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					else system("pause");
 					break;
-				case 2:
-					cout << "ISBN: ";
-					cin >> isbn;
-					cout << "Search results:" << endl << endl;
-					lookUpBookISBN(isbn);
-					break;
+				}
 				case 3:
-					break;
-				default:
-					cout << "You did not enter a valid option(1, 2, or 3). Please try again." << endl;
+				{
+					char author[100];
+					cout << "Author: ";
+					cin.ignore();
+					cin.getline(author, 100);
+					vector<int> searchResults = lookUpBookAuthor(author, booklist);
+					if (searchResults.size() == 0){
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					else system("pause");
 					break;
 				}
-			} while (choice != 3);
-
+				case 4:
+				{
+					char publisher[100];
+					cout << "Publisher: ";
+					cin.ignore();
+					cin.getline(publisher, 100);
+					vector<int> searchResults= lookUpBookPublisher(publisher, booklist);
+					if (searchResults.size() == 0){
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					else system("pause");
+					break;
+				}
+				case 5:
+					break;
+				default:
+					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+					system("pause");
+					break;
+				}
+			} while (choice != 5);
 			break;
-
-		case 2:
-		{
-				  inventory.addBook();
 		}
 
+		case 2:
+			inventory.addBook(booklist);
 			break;
-
 
 		case 3:
 		{
-				  int choice;
-				  char title[100];
-				  unsigned int isbn;
-				  do{
-					  cout << "What book would you like to edit? Search the book by" << endl;
-					  cout << "1. 'Title'" << endl;
-					  cout << "2. 'ISBN'" << endl;
-					  cout << "(Enter '3' to return to the Inventory Menu." << endl;
-					  cout << "Enter your Choice: ";
-					  cin >> choice;
-					  cout << endl;
+			int choice;
+			bool validChoice = false;
+			do{
+				system("CLS");
+				cout << "Serendipity Booksellers" << endl << "What book would you like to edit? Search the book by" << endl;
+				cout << "1. ISBN" << endl;
+				cout << "2. Title" << endl;
+				cout << "3. Author" << endl;
+				cout << "4. Publisher" << endl;
+				cout << "5. Return to the Inventory Menu." << endl;
+				cout << "Enter your Choice: ";
+				cin >> choice;
+				cout << endl;
 
-					  switch (choice)
-					  {
-					  case 1:
-						  cout << "Title: ";
-						  cin.ignore();
-						  cin.getline(title, 100);
-						  cout << "Current information of the book:" << endl << endl;
-						  lookUpBook(title);
-						  editBook(title);
-						  break;
-					  case 2:
-						  cout << "ISBN: ";
-						  cin >> isbn;
-						  cout << "Current information of the book:" << endl << endl;
-						  lookUpBookISBN(isbn);
-						  editBook(title);
-						  break;
-					  case 3:
-						  break;
-					  default:
-						  cout << "You did not enter a valid option(1, 2, or 3). Please try again." << endl;
-						  break;
-					  }
-				  } while (choice != 3);
+				switch (choice){
+				case 1:
+				{
+					unsigned int isbn;
+					cout << "ISBN: ";
+					cin >> isbn;
+					if (!cin){
+						cin.clear();
+						isbn = 0;
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
 
-				  break;
+					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 2:
+				{
+					char title[100];
+					cout << "Title: ";
+					cin.ignore();
+					cin.getline(title, 100);
+					vector<int> searchResults = lookUpBookTitle(title, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 3:
+				{
+					char author[100];
+					cout << "Author: ";
+					cin.ignore();
+					cin.getline(author, 100);
+					vector<int> searchResults = lookUpBookAuthor(author, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0) searchResults[bookChoice - 1], booklist;
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 4:
+				{
+					char publisher[100];
+					cout << "Publisher: ";
+					cin.ignore();
+					cin.getline(publisher, 100);
+					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 5:
+					break;
+				default:
+					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+					system("pause");
+				}
+			} while (choice != 5);
+			break;
 		}
 
-
-			break;
-
-
 		case 4:
+		{
+			int choice;
+			bool validChoice = false;
+			do{
+				system("CLS");
+				cout << "Serendipity Booksellers" << endl << "What book would you like to delete? Search the book by" << endl;
+				cout << "1. ISBN" << endl;
+				cout << "2. Title" << endl;
+				cout << "3. Author" << endl;
+				cout << "4. Publisher" << endl;
+				cout << "5. Return to the Inventory Menu." << endl;
+				cout << "Enter your Choice: ";
+				cin >> choice;
+				cout << endl;
 
+				switch (choice){
+				case 1:
+				{
+					unsigned int isbn;
+					cout << "ISBN: ";
+					cin >> isbn;
+					if (!cin){
+						cin.clear();
+						isbn = 0;
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
 
+					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0){
+							cout << "Are you sure? This will completely remove the book from the inventory." << endl
+								<< "Deletion cannot be reversed!" << endl << "Enter 1 for yes, or 0 for no: ";
+							int confirmation;
+							validChoice = false;
+							while (validChoice != true){
+								cin >> confirmation;
+								if (!cin){
+									cin.clear();
+									confirmation = -1;
+									cin.ignore(numeric_limits<streamsize>::max(), '\n');
+								}
+								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								else validChoice = true;
+							}
+
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
+							writeList(booklist);
+							cout << endl << "Deletion complete." << endl;
+							system("pause");
+						}
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 2:
+				{
+					char title[100];
+					cout << "Title: ";
+					cin.ignore();
+					cin.getline(title, 100);
+					vector<int> searchResults = lookUpBookTitle(title, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0){
+							cout << "Are you sure? This will completely remove the book from the inventory." << endl
+								<< "Deletion cannot be reversed!" << endl << "Enter 1 for yes, or 0 for no: ";
+							int confirmation;
+							validChoice = false;
+							while (validChoice != true){
+								cin >> confirmation;
+								if (!cin){
+									cin.clear();
+									confirmation = -1;
+									cin.ignore(numeric_limits<streamsize>::max(), '\n');
+								}
+								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								else validChoice = true;
+							}
+
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
+							writeList(booklist);
+							cout << endl << "Deletion complete." << endl;
+							system("pause");
+						}
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 3:
+				{
+					char author[100];
+					cout << "Author: ";
+					cin.ignore();
+					cin.getline(author, 100);
+					vector<int> searchResults = lookUpBookAuthor(author, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0){
+							cout << "Are you sure? This will completely remove the book from the inventory." << endl
+								<< "Deletion cannot be reversed!" << endl << "Enter 1 for yes, or 0 for no: ";
+							int confirmation;
+							validChoice = false;
+							while (validChoice != true){
+								cin >> confirmation;
+								if (!cin){
+									cin.clear();
+									confirmation = -1;
+									cin.ignore(numeric_limits<streamsize>::max(), '\n');
+								}
+								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								else validChoice = true;
+							}
+
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
+							writeList(booklist);
+							cout << endl << "Deletion complete." << endl;
+							system("pause");
+						}
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 4:
+				{
+					char publisher[100];
+					cout << "Publisher: ";
+					cin.ignore();
+					cin.getline(publisher, 100);
+					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+					if (searchResults.size() != 0){
+						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
+
+						unsigned int bookChoice;
+						validChoice = false;
+						while (validChoice != true){
+							cin >> bookChoice;
+							if (!cin){
+								cin.clear();
+								bookChoice = searchResults.size() + 1;
+								cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							}
+							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
+							else validChoice = true;
+						}
+
+						cout << endl;
+						if (bookChoice != 0){
+							cout << "Are you sure? This will completely remove the book from the inventory." << endl
+								<< "Deletion cannot be reversed!" << endl << "Enter 1 for yes, or 0 for no: ";
+							int confirmation;
+							validChoice = false;
+							while (validChoice != true){
+								cin >> confirmation;
+								if (!cin){
+									cin.clear();
+									confirmation = -1;
+									cin.ignore(numeric_limits<streamsize>::max(), '\n');
+								}
+								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								else validChoice = true;
+							}
+
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
+							writeList(booklist);
+							cout << endl << "Deletion complete." << endl;
+							system("pause");
+						}
+						cout << endl;
+					}
+					else{
+						cout << "No books found using search criteria." << endl;
+						system("pause");
+					}
+					break;
+				}
+				case 5:
+					break;
+				default:
+					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+					system("pause");
+				}
+			} while (choice != 5);
 			break;
-
-
+		}
 		case 5:
-
-
-
 			break;
-
-		default: cout << "You did not enter a valid option 1, 2, 3, 4, 5. Please try again." << endl;
+		default:
+			cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+			system("pause");
 		}
 
 	} while (inventoryChoice != 5);
@@ -204,44 +560,231 @@ void Inventory::sortByName(vector<Book>& booklist)
 	}
 }
 
-Book Inventory::lookUpBook(char title[])
+vector<int> Inventory::lookUpBookISBN(unsigned int isbn, vector<Book>& booklist)
 {
-	vector<Book> booklist = readList();
-
-	//sortByName(booklist);
-
-	//vector<int> foundBooks;
-	for (unsigned int i = 0; i < booklist.size(); i++)
-	{
-		if (title == booklist[i].getTitle())
-		{
-			//foundBooks.push_back(i);
-			booklist[i].print();
-			cout << endl;
-			return booklist[i];
-		}
-	}
-}
-
-Book Inventory::lookUpBookISBN(unsigned int isbn)
-{
-	vector<Book> booklist = readList();
-
 	cout << "Search results:" << endl << endl;
 
+	vector<int> foundBooks;
+	int count = 0;
 	for (unsigned int i = 0; i < booklist.size(); i++)
 	{
 		if (isbn == booklist[i].getISBN())
 		{
-			for (int i = 0; i < booklist.size(); i++){
-				if (isbn == booklist[i].getISBN()){
-					booklist[i].print();
-					cout << endl;
-					return booklist[i];
-				}
-			}
+			foundBooks.push_back(i);
+			printf("%d.\n", ++count);
+			booklist[i].print();
+			cout << endl;
 		}
 	}
+
+	return foundBooks;
+}
+
+vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
+{
+	cout << "Search results:" << endl << endl;
+
+	vector<int> foundBooks;
+	int count = 0;
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (title == booklist[i].getTitle())
+		{
+			foundBooks.push_back(i);
+			printf("%d.\n", ++count);
+			booklist[i].print();
+			cout << endl;
+		}
+	}
+
+	return foundBooks;
+}
+
+vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
+{
+	cout << "Search results:" << endl << endl;
+
+	vector<int> foundBooks;
+	int count = 0;
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (author == booklist[i].getAuthor())
+		{
+			foundBooks.push_back(i);
+			printf("%d.\n", ++count);
+			booklist[i].print();
+			cout << endl;
+		}
+	}
+
+	return foundBooks;
+}
+
+vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& booklist)
+{
+	cout << "Search results:" << endl << endl;
+
+	vector<int> foundBooks;
+	int count = 0;
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (publisher == booklist[i].getPublisher())
+		{
+			foundBooks.push_back(i);
+			printf("%d.\n", ++count);
+			booklist[i].print();
+			cout << endl;
+		}
+	}
+
+	return foundBooks;
+}
+
+void Inventory::addBook(vector<Book>& booklist)
+{
+	system("CLS");
+	unsigned int isbn, quantity;
+	char title[100], author[100], publisher[100], dateAdded[100] = "";
+	double wholesaleCost = 0;
+	double retailPrice = 0;
+
+	time_t rawtime;
+	struct tm * timeinfo;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	strftime(dateAdded, 100, "%m/%d/%y", timeinfo);
+	//cout << dateAdded;
+
+	cout << "Serendipity Booksellers" << endl << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
+	cout << "ISBN: ";
+	cin >> isbn;
+	if (isbn != 0)
+	{
+		cout << "Title: ";
+		cin.ignore();
+		cin.getline(title, 100);
+		cout << "Author: ";
+		cin.getline(author, 100);
+		cout << "Publisher: ";
+		cin.getline(publisher, 100);
+		cout << "Quantity-On-Hand: ";
+		cin >> quantity;
+		cout << "Wholesale Cost: ";
+		cin >> wholesaleCost;
+		cout << "Retail Price: ";
+		cin >> retailPrice;
+		cout << endl;
+
+		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, dateAdded);
+
+		booklist.push_back(book);
+		writeList(booklist);
+		cout << "The book has been successfully added." << endl;
+		system("pause");
+	}
+}
+
+void Inventory::editBook(int location, vector<Book>& bookList)
+{
+	int choice;
+	do{
+		cout << "Serendipity Booksellers" << endl << "Which information would you like to edit?" << endl;
+		cout << "1. ISBN" << endl;
+		cout << "2. Title" << endl;
+		cout << "3. Author" << endl;
+		cout << "4. Publisher" << endl;
+		cout << "5. Quantity-On-Hand" << endl;
+		cout << "6. Retail Price" << endl;
+		cout << "7. Return to the previous menu." << endl;
+		cout << "Enter your Choice: ";
+		cin >> choice;
+		cout << endl;
+
+		switch (choice)
+		{
+		case 1:
+		{
+			unsigned int isbn;
+			cout << "Enter the new ISBN: ";
+			cin >> isbn;
+			cin.clear();
+			bookList[location].setISBN(isbn);
+			writeList(bookList);
+			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			cout << endl;
+			break;
+		}
+		case 2:
+		{
+			char title[100];
+			cout << "Enter the new title: ";
+			cin.ignore();
+			cin.getline(title, 100);
+			bookList[location].setTitle(title);
+			writeList(bookList);
+			cout << endl << "Title has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			break;
+		}
+		case 3:
+		{
+			char author[100];
+			cout << "Enter the new author: ";
+			cin.ignore();
+			cin.getline(author, 100);
+			bookList[location].setAuthor(author);
+			writeList(bookList);
+			cout << endl << "Author has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			cout << endl;
+			break;
+		}
+		case 4:
+		{
+			char publisher[100];
+			cout << "Enter the new publisher: ";
+			cin.ignore();
+			cin.getline(publisher, 100);
+			bookList[location].setPublisher(publisher);
+			writeList(bookList);
+			cout << endl << "Author has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			cout << endl;
+			break;
+		}
+		case 5:
+		{
+			unsigned int quantity;
+			cout << "Enter the new quantity-on-hand: ";
+			cin >> quantity;
+			cin.clear();
+			bookList[location].setQuantity(quantity);
+			writeList(bookList);
+			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			cout << endl;
+			break;
+		}
+		case 6:
+		{
+			double retail;
+			cout << "Enter the new retail price: ";
+			cin >> retail;
+			cin.clear();
+			bookList[location].setRetail(retail);
+			writeList(bookList);
+			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
+			bookList[location].print();
+			cout << endl;
+			break;
+		}
+		case 7:
+			break;
+		default:
+			cout << "You did not enter a valid option(1, 2, 3, 4, 5, 6, or 7). Please try again." << endl << endl;
+		}
+	} while (choice != 7);
 }
 
 vector<Book> Inventory::readList()
@@ -286,145 +829,4 @@ void Inventory::writeList(vector<Book> list)
 		ofs.write(reinterpret_cast<char *>(&list[i]), sizeof(list[i]));
 	}
 	ofs.close();
-}
-
-
-void Inventory::addBook()
-{
-	unsigned int isbn, quantity;
-	char title[100], author[100], publisher[100], dateAdded[100] = "";
-	double wholesaleCost = 0;
-	double retailPrice = 0;
-
-	time_t rawtime;
-	struct tm * timeinfo;
-	time(&rawtime);
-	timeinfo = localtime(&rawtime);
-	strftime(dateAdded, 100, "%m/%d/%y", timeinfo);
-	//cout << dateAdded;
-
-	cout << "Please enter the following infornamtion." << endl << "(Enter '0' to return to Inventory Menu.)" << endl;
-	cout << "ISBN:" << endl;
-	cin >> isbn;
-	if (isbn != 0)
-	{
-		cout << "Title:" << endl;
-		cin.ignore();
-		cin.getline(title, 100);
-		cout << "Author:" << endl;
-		cin.getline(author, 100);
-		cout << "Publisher:" << endl;
-		cin.getline(publisher, 100);
-		cout << "Quantity-On-Hand:" << endl;
-		cin >> quantity;
-		cout << "Wholesale Cost:" << endl;
-		cin >> wholesaleCost;
-		cout << "Retail Price:" << endl;
-		cin >> retailPrice;
-		cout << endl;
-
-
-
-		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, dateAdded);
-
-		vector<Book> booklist = readList();
-
-		booklist.push_back(book);
-		writeList(booklist);
-		cout << "The book has been successfully added." << endl << endl;
-	}
-}
-
-void Inventory::editBook(char title[])
-{
-	int choice;
-	unsigned int isbn, quantity;
-	char title2[100], author[100], publisher[100], dateAdded[100] = "";
-	vector<Book> bookList = readList();
-	double wholesaleCost = 0;
-	double retailPrice = 0;
-
-	do{
-		cout << "Which information would you like to edit?" << endl;
-		cout << "1. ISBN" << endl;
-		cout << "2. Title" << endl;
-		cout << "3. Author" << endl;
-		cout << "4. Publisher" << endl;
-		cout << "5. Quantity-On-Hand" << endl;
-		cout << "6. Wholesale Cost" << endl;
-		cout << "7. Retail Price" << endl;
-		cout << "8. Return to the previous menu." << endl;
-		cout << "Enter your Choice: ";
-		cin >> choice;
-		cout << endl;
-
-		switch (choice)
-		{
-		case 1:
-			cout << "To edit ISBN, please enter the new ISBN: ";
-			cin >> isbn;
-			for (unsigned int i = 0; i < bookList.size(); i++)
-			{
-				if (title == bookList[i].getTitle())
-					bookList[i].setISBN(isbn);
-			}
-			writeList(bookList);
-			cout << endl << "ISBN has been successfully edited: " << endl;
-			lookUpBook(title);
-			break;
-		case 2:
-			/*		cout << "To edit title, please enter the new title: ";
-			cin >> title2;
-			for (unsigned int i = 0; i < bookList.size(); i++)
-			{
-			if (title == bookList[i].getTitle())
-			bookList[i].set
-			}
-			writeList(bookList);
-			cout << endl << "ISBN has been successfully edited: " << endl;
-			lookUpBook(title);
-			break;*/
-		case 3:
-		{
-
-		}
-			break;
-		case 4:
-		{
-
-		}
-			break;
-		case 5:
-		{
-					/*		cout << "To edit quantity of the book, please enter the new quantity: ";
-					cin >> isbn;
-					for (unsigned int i = 0; i < bookList.size(); i++)
-					{
-					if (title == bookList[i].getTitle())
-					bookList[i].setISBN(isbn);
-					}
-					writeList(bookList);
-					cout << endl << "ISBN has been successfully edited: " << endl;
-					lookUpBook(title);
-					*/
-		}
-			break;
-		case 6:
-			break;
-		case 7:
-		{
-
-		}
-			break;
-		case 8:
-		{
-
-		}
-			break;
-
-
-		default:
-			cout << "You did not enter a valid option(1, 2, 3, 4, 5, 6, 7, or 8). Please try again." << endl << endl;
-		}
-	} while (choice != 8);
 }

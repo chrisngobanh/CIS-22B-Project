@@ -118,7 +118,7 @@ vector<Book> Cashier::addToSale(char title[], vector<Book> salelist, unsigned in
 	{
 		if (title == booklist[i].getTitle())
 		{
-			booklist[i].setStock(number);
+			booklist[i].setRetail(number);
 			salelist.push_back(booklist[i]);
 		}
 	}

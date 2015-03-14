@@ -18,17 +18,24 @@ private:
 public:
 	Book(){}
 	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, char date[]);
-	string getTitle();
+
 	unsigned int getISBN();
+	string getTitle();
+	string getAuthor();
+	string getPublisher();
 	unsigned int getQuantity();
 	double getWholesale();
 	double getRetail();
+
 	void setISBN(unsigned int);
-	void setPrice(double retail);
-	void setStock(unsigned int);
-	void addStock(unsigned int addition = 1);
-	void subStock(unsigned int subtraction = 1);
+	void setTitle(char[]);
+	void setAuthor(char[]);
+	void setPublisher(char[]);
+	void setQuantity(unsigned int);
+	void setRetail(double);
+
 	void print();
+
 	~Book();
 };
 #endif

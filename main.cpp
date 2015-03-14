@@ -36,11 +36,11 @@ int main()
 		for (int i = 0; i < 80; i++)
 			cout << current[i];
 		cout << "Serendipity Booksellers\n";
-		cout << "Main Menu\n\n";
+		cout << "Main Menu\n";
 		cout << "1. Cashier Module\n";
 		cout << "2. Inventory Database Module\n";
 		cout << "3. Report Module\n";
-		cout << "4. Exit\n\n";
+		cout << "4. Exit\n";
 		cout << "Enter your choice: ";
 		cin >> choice;
 		if (!cin){

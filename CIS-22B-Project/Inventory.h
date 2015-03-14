@@ -10,18 +10,20 @@ class Inventory
 private:
 
 public:
-	void setPrice(Book target, double retail);
-	void addStock(Book target, unsigned int addition = 1);
-	void subStock(Book target, unsigned int subtraction = 1);
 	void inventoryMenu();
-	Book lookUpBookISBN(unsigned int);
-	Book lookUpBook(char[]);
-	void addBook();
-	void editBook(char[]);
-	void deleteBook();
+
+	void sortByName(vector<Book>&);
+
+	vector<int> lookUpBookISBN(unsigned int, vector<Book>&);
+	vector<int> lookUpBookTitle(char[], vector<Book>&);
+	vector<int> lookUpBookAuthor(char[], vector<Book>&);
+	vector<int> lookUpBookPublisher(char[], vector<Book>&);
+
+	void addBook(vector<Book>&);
+	void editBook(int, vector<Book>&);
+
 	vector<Book> readList();
 	void writeList(vector<Book>);
-	void sortByName(vector<Book>&);
 
 	~Inventory(){}
 

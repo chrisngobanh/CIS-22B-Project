@@ -19,40 +19,9 @@ Book::Book(unsigned int isbn, char title[], char author[], char publisher[], uns
 	sWholesale = wholesale;
 }
 
-void Book::setPrice(double retail)
+unsigned int Book::getISBN()
 {
-	sRetail = retail;
-}
-
-void Book::addStock(unsigned int addition)
-{
-	sQuantity += addition;
-}
-
-void Book::subStock(unsigned int subtraction)
-{
-	sQuantity -= subtraction;
-}
-
-void Book::print()
-{
-	cout << "ISBN: " << sISBN << endl;
-	cout << "Title: " << sTitle << endl;
-	cout << "Author: " << sAuthor << endl;
-	cout << "Publisher: " << sPublisher << endl;
-	cout << "Quantity: " << sQuantity << endl;
-	cout << "Wholesale Price: $" << sWholesale << endl;
-	cout << "Retail Price: $" << sRetail << endl;
-	cout << "Date Added: " << sDate << endl;
-}
-void Book::setISBN(unsigned int s)
-{
-	sISBN = s;
-}
-
-void Book::setStock(unsigned int num)
-{
-	sQuantity = num;
+	return sISBN;
 }
 
 string Book::getTitle()
@@ -60,9 +29,14 @@ string Book::getTitle()
 	return sTitle;
 }
 
-unsigned int Book::getISBN()
+string Book::getAuthor()
 {
-	return sISBN;
+	return sAuthor;
+}
+
+string Book::getPublisher()
+{
+	return sPublisher;
 }
 
 unsigned int Book::getQuantity()
@@ -78,6 +52,48 @@ double Book::getWholesale()
 double Book::getRetail()
 {
 	return sRetail;
+}
+
+void Book::setISBN(unsigned int isbn)
+{
+	sISBN = isbn;
+}
+
+void Book::setTitle(char title[])
+{
+	for (int i = 0; i < 100; i++) sTitle[i] = title[i];
+}
+
+void Book::setAuthor(char author[])
+{
+	for (int i = 0; i < 100; i++) sAuthor[i] = author[i];
+}
+
+void Book::setPublisher(char publisher[])
+{
+	for (int i = 0; i < 100; i++) sPublisher[i] = publisher[i];
+}
+
+void Book::setQuantity(unsigned int quantity)
+{
+	sQuantity = quantity;
+}
+
+void Book::setRetail(double retail)
+{
+	sRetail = retail;
+}
+
+void Book::print()
+{
+	cout << "ISBN: " << sISBN << endl;
+	cout << "Title: " << sTitle << endl;
+	cout << "Author: " << sAuthor << endl;
+	cout << "Publisher: " << sPublisher << endl;
+	cout << "Quantity: " << sQuantity << endl;
+	printf("Wholesale Price: $%.2f\n", sWholesale);
+	printf("Retail Price: $%.2f\n", sRetail);
+	cout << "Date Added: " << sDate << endl;
 }
 
 Book::~Book()
