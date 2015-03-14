@@ -12,8 +12,6 @@ using namespace std;
 void Inventory::inventoryMenu()
 {
 	int inventoryChoice = 0;
-	Book i, t;
-	//	bool validFunction;
 
 	Inventory inventory;
 	do
