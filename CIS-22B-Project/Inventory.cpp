@@ -4,8 +4,6 @@
 #include "Book.h"
 #include <vector>
 #include <fstream>
-#include <ctime>
-#include <iostream>
 
 using namespace std;
 
@@ -17,6 +15,14 @@ void Inventory::inventoryMenu()
 	do
 	{
 		system("CLS");
+
+		time_t menutime;
+		struct tm * timeInfo;
+		char current[80] = "";
+		time(&menutime);
+		timeInfo = localtime(&menutime);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+		puts(current);
 
 		vector<Book> booklist = readList();
 
@@ -41,6 +47,12 @@ void Inventory::inventoryMenu()
 			int choice;
 			do{
 				system("CLS");
+
+				time(&menutime);
+				timeInfo = localtime(&menutime);
+				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+				puts(current);
+				
 				cout << "Serendipity Booksellers" << endl << "How would you like to look up a book?" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
@@ -133,6 +145,12 @@ void Inventory::inventoryMenu()
 			bool validChoice = false;
 			do{
 				system("CLS");
+
+				time(&menutime);
+				timeInfo = localtime(&menutime);
+				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+				puts(current);
+
 				cout << "Serendipity Booksellers" << endl << "What book would you like to edit? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
@@ -297,6 +315,12 @@ void Inventory::inventoryMenu()
 			bool validChoice = false;
 			do{
 				system("CLS");
+
+				time(&menutime);
+				timeInfo = localtime(&menutime);
+				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+				puts(current);
+
 				cout << "Serendipity Booksellers" << endl << "What book would you like to delete? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
@@ -641,17 +665,19 @@ vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& bookl
 void Inventory::addBook(vector<Book>& booklist)
 {
 	system("CLS");
+
 	unsigned int isbn, quantity;
-	char title[100], author[100], publisher[100], dateAdded[100] = "";
+	char title[100], author[100], publisher[100]; // , dateAdded[100] = "";
 	double wholesaleCost = 0;
 	double retailPrice = 0;
-
 	time_t rawtime;
-	struct tm * timeinfo;
 	time(&rawtime);
-	timeinfo = localtime(&rawtime);
-	strftime(dateAdded, 100, "%m/%d/%y", timeinfo);
-	//cout << dateAdded;
+
+	struct tm * timeInfo;
+	char current[80] = "";
+	timeInfo = localtime(&rawtime);
+	strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+	puts(current);
 
 	cout << "Serendipity Booksellers" << endl << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
 	cout << "ISBN: ";
@@ -673,7 +699,7 @@ void Inventory::addBook(vector<Book>& booklist)
 		cin >> retailPrice;
 		cout << endl;
 
-		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, dateAdded);
+		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, rawtime);
 
 		booklist.push_back(book);
 		writeList(booklist);

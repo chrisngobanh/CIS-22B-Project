@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Book::Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, char date[])
+Book::Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date) //char date[])
 {
 	sISBN = isbn;
 	for (int i = 0; i < 100; i++)
@@ -12,11 +12,12 @@ Book::Book(unsigned int isbn, char title[], char author[], char publisher[], uns
 		sTitle[i] = title[i];
 		sAuthor[i] = author[i];
 		sPublisher[i] = publisher[i];
-		sDate[i] = date[i];
+		// sDate[i] = date[i];
 	}
 	sRetail = retail;
 	sQuantity = quantity;
 	sWholesale = wholesale;
+	sDate = date;
 }
 
 unsigned int Book::getISBN()
@@ -52,6 +53,11 @@ double Book::getWholesale()
 double Book::getRetail()
 {
 	return sRetail;
+}
+
+time_t Book::getDate()
+{
+	return sDate;
 }
 
 void Book::setISBN(unsigned int isbn)
@@ -93,7 +99,11 @@ void Book::print()
 	cout << "Quantity: " << sQuantity << endl;
 	printf("Wholesale Price: $%.2f\n", sWholesale);
 	printf("Retail Price: $%.2f\n", sRetail);
-	cout << "Date Added: " << sDate << endl;
+	char buffer[100] = "";
+	struct tm *timeinfo;
+	timeinfo = localtime(&sDate);
+	strftime(buffer, 100, "Date Added: %m/%d/%Y", timeinfo);
+	puts(buffer);
 }
 
 Book::~Book()

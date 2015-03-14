@@ -29,7 +29,7 @@ void Cashier::menu()
 
 		time(&rawtime);
 		timeinfo = localtime(&rawtime);
-		strftime(current, 80, "%m/%d/%y %I:%M%p", timeinfo);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
 
 		for (int i = 0; i < 80; i++)
 			cout << current[i];

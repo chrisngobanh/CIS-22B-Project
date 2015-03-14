@@ -17,14 +17,6 @@ int main()
 	Report report;
 	int choice=0;
 	fstream bookList;
-	time_t rawtime;
-	struct tm * timeinfo;
-	char current[80] = "";
-
-	time(&rawtime);
-	timeinfo = localtime(&rawtime);
-
-	strftime(current, 80, "%m/%d/%y %I:%M%p", timeinfo);
 
 	bookList.open("booklist.txt", ios::in);
 	bookList.open("booklist.txt", ios::out);
@@ -32,6 +24,13 @@ int main()
 	while (choice != 4)
 	{
 		system("CLS");
+
+		time_t rawtime;
+		struct tm * timeinfo;
+		char current[80] = "";
+		time(&rawtime);
+		timeinfo = localtime(&rawtime);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
 
 		for (int i = 0; i < 80; i++)
 			cout << current[i];
