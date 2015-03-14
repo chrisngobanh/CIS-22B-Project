@@ -1,9 +1,10 @@
 #ifndef CASHIER_H
 #define CASHIER_H
-#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <string>
 #include "Book.h"
+
 using namespace std;
 
 //not done.
@@ -19,8 +20,8 @@ private:
 public:
 	void menu();
 	
-	vector<Book> addToSale(char[], vector<Book>, unsigned int);
-//	void Checkout(vector<Book>)
+	void addToSale(int, vector<Book>&, vector<Book>&);
+	void Checkout(vector<Book>);
 
 };
 #endif
