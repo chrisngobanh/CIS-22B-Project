@@ -9,13 +9,14 @@ using namespace std;
 
 void Report::menu() 
 {
-	system("CLS");
 
 	//declare array/vector of book objects
 	int choice = 0;
 
 	while (choice != 7)
 	{
+		system("CLS");
+
 		cout << "Serendipity Booksellers\n";
 		cout << "Reports\n";
 		cout << "1. Inventory Listing\n";
@@ -27,6 +28,12 @@ void Report::menu()
 		cout << "7. Return to Main Menu\n";
 		cout << "Enter your choice: " << endl;
 		cin >> choice;
+		if (!cin){
+			cin.clear();
+			choice = 0;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+
 		cout << endl;
 
 		vector<Book> booklist = readList();
@@ -132,7 +139,8 @@ void Report::menu()
 
 		case 6:
 			cout << "Listing by Age" << endl << endl;
-
+			sortByAge(booklist);
+			printList(booklist);
 			break;
 		case 7:
 
@@ -145,8 +153,7 @@ void Report::menu()
 		}
 
 		system("pause");
-		system("CLS");
-	}// while (choice != 5);
+	}
 }
 	
 
@@ -193,6 +200,23 @@ void Report::sortByCost(vector<Book>& booklist)
 		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getRetail() > booklist[j].getRetail()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Report::sortByAge(vector<Book>& booklist)
+{
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getDate() > booklist[j].getDate()){
 				Book temp1 = booklist[j], temp2 = booklist[i];
 				booklist.erase(booklist.begin() + j);
 				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);

@@ -75,11 +75,13 @@ void Inventory::inventoryMenu()
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					}
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+
 					if (searchResults.size() == 0){
 						cout << "No books found using search criteria." << endl;
 						system("pause");
 					}
 					else system("pause");
+
 					break;
 				}
 				case 2:
@@ -129,8 +131,8 @@ void Inventory::inventoryMenu()
 				default:
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
 					system("pause");
-					break;
 				}
+				break;
 			} while (choice != 5);
 			break;
 		}

@@ -1,3 +1,6 @@
+#ifndef REPORTS_H
+#define REPORTS_H
+
 #include "Inventory.h"
 #include "Book.h"
 using namespace std;
@@ -6,9 +9,7 @@ class Report: public Inventory
 {
 private:
 
-
 public:
-
 	void menu();
 	void printList(vector<Book>&);
 	void sortByName(vector<Book>&);
@@ -17,3 +18,5 @@ public:
 	void sortByAge(vector<Book>&);
 
 };
+
+#endif

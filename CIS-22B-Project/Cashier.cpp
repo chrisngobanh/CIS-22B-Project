@@ -16,8 +16,7 @@ void Cashier::menu()
 	Inventory inventory;
 	vector<Book> booklist = inventory.readList(), salelist;
 	int choice = 0, n = 0;
-
-	while (choice != 3)
+	do
 	{
 		system("CLS");
 
@@ -39,14 +38,18 @@ void Cashier::menu()
 		cout << "2. Proceed to checkout\n";
 		cout << "3. Return to main menu\n";
 		cout << "Enter your choice: ";
+
 		cin >> choice;
-		while (choice < 1 || choice > 2)
-		{
-			cout << "Please enter 1 or 2: ";
-			cin >> choice;
+
+		if (!cin){
+			cin.clear();
+			choice = 0;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 
-		if (choice == 1)
+		switch (choice){
+
+		case 1:
 		{
 			int choice;
 			bool validChoice = false;
@@ -92,7 +95,7 @@ void Cashier::menu()
 						}
 
 						cout << endl;
-						if (bookChoice != 0) 
+						if (bookChoice != 0)
 							addToSale(searchResults[bookChoice - 1], booklist, salelist);
 						cout << endl;
 					}
@@ -126,7 +129,7 @@ void Cashier::menu()
 						}
 
 						cout << endl;
-						if (bookChoice != 0) 
+						if (bookChoice != 0)
 							addToSale(searchResults[bookChoice - 1], booklist, salelist);
 						cout << endl;
 					}
@@ -160,7 +163,7 @@ void Cashier::menu()
 						}
 
 						cout << endl;
-						if (bookChoice != 0) 
+						if (bookChoice != 0)
 							addToSale(searchResults[bookChoice - 1], booklist, salelist);
 						cout << endl;
 					}
@@ -194,7 +197,7 @@ void Cashier::menu()
 						}
 
 						cout << endl;
-						if (bookChoice != 0) 
+						if (bookChoice != 0)
 							addToSale(searchResults[bookChoice - 1], booklist, salelist);
 						cout << endl;
 					}
@@ -212,9 +215,22 @@ void Cashier::menu()
 				}
 				break;
 			} while (choice != 5);
+			break;
 		}
-		else if(choice = 2) Checkout(salelist);
-	}
+		case 2:
+		{
+			Checkout(salelist);
+			break;
+		}
+		case 3:
+			break;
+		default:
+			cout << "You did not enter a valid option (1, 2, or 3). Please try again." << endl;
+			system("pause");
+		}
+		
+		
+	}while (choice != 3);
 }
 
 
