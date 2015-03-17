@@ -4,9 +4,10 @@
 #include <string>
 #include <iostream>
 #include "Book.h"
+#include "Menu.h"
 
 using namespace std;
-class Inventory
+class Inventory: public Menu
 {
 private:
 

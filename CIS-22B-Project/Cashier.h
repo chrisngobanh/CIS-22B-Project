@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include "Book.h"
+#include "Menu.h"
 
 using namespace std;
 
 //not done.
 
-class Cashier
+class Cashier: public Menu
 {
 private:
 	string bookName;
