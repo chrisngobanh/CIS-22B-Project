@@ -56,20 +56,20 @@ void Report::menu()
 
 			cout << "Inventory Wholesale Listing" << endl << endl;
 
-			cout << setw(24) << left << "Title";
+			cout << setw(30) << left << "Title";
 			cout << setw(10) << left << "Quantity";
 			cout << setw(11) << left << "Wholesale";
 			cout << setw(5) << left << "Cost";
 
 			cout << endl;
 
-			cout << "-------------------------------------------------" << endl;
+			cout << "---------------------------------------------------------" << endl;
 			double total = 0;
 
 			for (unsigned int i = 0; i < booklist.size(); i++)
 			{
 				double cost = booklist[i].getWholesale() * booklist[i].getQuantity();
-				cout << setw(24) << left << booklist[i].getTitle();
+				cout << setw(30) << left << booklist[i].getTitle();
 				cout << setw(10) << left << booklist[i].getQuantity();
 				cout << "$" << setw(10) << left << booklist[i].getWholesale();
 				cout << "$" << setw(5) << left << cost;
@@ -77,7 +77,7 @@ void Report::menu()
 
 				total += cost;
 			}
-			cout << "-------------------------------------------------" << endl;
+			cout << "---------------------------------------------------------" << endl;
 			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
 
 			break;
@@ -90,14 +90,14 @@ void Report::menu()
 		{
 				  cout << "Inventory Retail Listing" << endl << endl;
 					
-				  cout << setw(24) << left << "Title";
+				  cout << setw(30) << left << "Title";
 				  cout << setw(10) << left << "Quantity";
 				  cout << setw(11) << left << "Retail";
 				  cout << setw(5) << left << "Cost";
 
 				  cout << endl;
 
-				  cout << "-------------------------------------------------" << endl;
+				  cout << "---------------------------------------------------------" << endl;
 
 				  double total = 0;
 
@@ -105,7 +105,7 @@ void Report::menu()
 				  {
 
 					  double cost = booklist[i].getRetail() * booklist[i].getQuantity();
-					  cout << setw(24) << left << booklist[i].getTitle();
+					  cout << setw(30) << left << booklist[i].getTitle();
 					  cout << setw(10) << left << booklist[i].getQuantity();
 					  cout << "$" << setw(10) << left << booklist[i].getRetail();
 					  cout << "$" << setw(5) << left << cost;
@@ -113,7 +113,7 @@ void Report::menu()
 
 					  total += cost;
 				  }
-				  cout << "-------------------------------------------------" << endl;
+				  cout << "---------------------------------------------------------" << endl;
 				  cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
 
 				  break;
