@@ -289,14 +289,14 @@ void Cashier::Checkout(vector<Book> salelist)
 
 	cout << "\nSerendipity Booksellers\n\n";
 
-	cout << setw(4) << "Qty" << setw(14) << "ISBN" << setw(20) << "Title" << setw(10) << "Price" << setw(10) << "Total";
-	cout << "\n===========================================================\n";
+	cout << setw(4) << "Qty" << setw(16) << "ISBN" << setw(30) << "Title" << setw(10) << "Price" << setw(10) << "Total";
+	cout << "\n========================================================================\n";
 
 	for (unsigned int i = 0; i < salelist.size(); i++)
 	{
 		total += (salelist[i].getRetail()*salelist[i].getQuantity());
-		cout << setw(4) << salelist[i].getQuantity() << setw(14) << salelist[i].getISBN();
-		cout << setw(20) << salelist[i].getTitle() << setw(10) << setprecision(2) << fixed << salelist[i].getRetail();
+		cout << setw(4) << salelist[i].getQuantity() << setw(16) << salelist[i].getISBN();
+		cout << setw(30) << salelist[i].getTitle() << setw(10) << setprecision(2) << fixed << salelist[i].getRetail();
 		cout << setw(10) << setprecision(2)  << (salelist[i].getRetail()*salelist[i].getQuantity()) << endl;
 	}
 
