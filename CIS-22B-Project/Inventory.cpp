@@ -61,27 +61,28 @@ void Inventory::inventoryMenu()
 				cout << "5. Return to the Inventory Menu." << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
+				if (!cin){
+					cin.clear();
+					choice = 0;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
 				cout << endl;
 
 				switch (choice){
 				case 1:
 				{
-					unsigned int isbn;
+					char isbn[13];
 					cout << "ISBN: ";
-					cin >> isbn;
-					if (!cin){
-						cin.clear();
-						isbn = 0;
-						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					}
-					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+					cin.ignore();
+					cin.getline(isbn, 13);
+					cin.clear();
 
+					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() == 0){
 						cout << "No books found using search criteria." << endl;
 						system("pause");
 					}
 					else system("pause");
-
 					break;
 				}
 				case 2:
@@ -90,6 +91,8 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() == 0){
 						cout << "No books found using search criteria." << endl;
@@ -104,6 +107,8 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() == 0){
 						cout << "No books found using search criteria." << endl;
@@ -118,6 +123,8 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
+
 					vector<int> searchResults= lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() == 0){
 						cout << "No books found using search criteria." << endl;
@@ -132,7 +139,6 @@ void Inventory::inventoryMenu()
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
 					system("pause");
 				}
-				break;
 			} while (choice != 5);
 			break;
 		}
@@ -161,19 +167,21 @@ void Inventory::inventoryMenu()
 				cout << "5. Return to the Inventory Menu." << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
+				if (!cin){
+					cin.clear();
+					choice = 0;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
 				cout << endl;
 
 				switch (choice){
 				case 1:
 				{
-					unsigned int isbn;
+					char isbn[13];
 					cout << "ISBN: ";
-					cin >> isbn;
-					if (!cin){
-						cin.clear();
-						isbn = 0;
-						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					}
+					cin.ignore();
+					cin.getline(isbn, 13);
+					cin.clear();
 
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
@@ -208,6 +216,8 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
@@ -241,6 +251,8 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
@@ -274,6 +286,8 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
@@ -331,19 +345,21 @@ void Inventory::inventoryMenu()
 				cout << "5. Return to the Inventory Menu." << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
+				if (!cin){
+					cin.clear();
+					choice = 0;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
 				cout << endl;
 
 				switch (choice){
 				case 1:
 				{
-					unsigned int isbn;
+					char isbn[13];
 					cout << "ISBN: ";
-					cin >> isbn;
-					if (!cin){
-						cin.clear();
-						isbn = 0;
-						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					}
+					cin.ignore();
+					cin.getline(isbn, 13);
+					cin.clear();
 
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
@@ -398,6 +414,8 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
@@ -451,6 +469,8 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
@@ -504,6 +524,8 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
+
 					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
@@ -584,7 +606,7 @@ void Inventory::sortByName(vector<Book>& booklist)
 	}
 }
 
-vector<int> Inventory::lookUpBookISBN(unsigned int isbn, vector<Book>& booklist)
+vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 {
 	cout << "Search results:" << endl << endl;
 
@@ -668,8 +690,9 @@ void Inventory::addBook(vector<Book>& booklist)
 {
 	system("CLS");
 
-	unsigned int isbn, quantity;
-	char title[100], author[100], publisher[100]; // , dateAdded[100] = "";
+	bool validChoice = false;
+	char isbn[13], title[100], author[100], publisher[100];
+	int quantity;
 	double wholesaleCost = 0;
 	double retailPrice = 0;
 	time_t rawtime;
@@ -683,22 +706,63 @@ void Inventory::addBook(vector<Book>& booklist)
 
 	cout << "Serendipity Booksellers" << endl << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
 	cout << "ISBN: ";
-	cin >> isbn;
-	if (isbn != 0)
+	cin.ignore();
+	cin.getline(isbn, 13);
+	cin.clear();
+
+	if (strcmp(isbn, "0") != 0)
 	{
 		cout << "Title: ";
-		cin.ignore();
 		cin.getline(title, 100);
+		cin.clear();
 		cout << "Author: ";
 		cin.getline(author, 100);
+		cin.clear();
 		cout << "Publisher: ";
 		cin.getline(publisher, 100);
+		cin.clear();
 		cout << "Quantity-On-Hand: ";
-		cin >> quantity;
+		validChoice = false;
+		while (validChoice != true){
+			cin >> quantity;
+			if (!cin){
+				cin.clear();
+				quantity = -1;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if (quantity < 0) cout << "Invalid input. Please try again: ";
+			else validChoice = true;
+		}
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Wholesale Cost: ";
-		cin >> wholesaleCost;
+		validChoice = false;
+		while (validChoice != true){
+			cin >> wholesaleCost;
+			if (!cin){
+				cin.clear();
+				wholesaleCost = -1;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if (wholesaleCost < 0) cout << "Invalid input. Please try again: ";
+			else validChoice = true;
+		}
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Retail Price: ";
-		cin >> retailPrice;
+		validChoice = false;
+		while (validChoice != true){
+			cin >> retailPrice;
+			if (!cin){
+				cin.clear();
+				retailPrice = -1;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if (retailPrice < 0) cout << "Invalid input. Please try again: ";
+			else validChoice = true;
+		}
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << endl;
 
 		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, rawtime);
@@ -712,6 +776,7 @@ void Inventory::addBook(vector<Book>& booklist)
 
 void Inventory::editBook(int location, vector<Book>& bookList)
 {
+	bool validChoice;
 	int choice;
 	do{
 		cout << "Serendipity Booksellers" << endl << "Which information would you like to edit?" << endl;
@@ -724,15 +789,20 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		cout << "7. Return to the previous menu." << endl;
 		cout << "Enter your Choice: ";
 		cin >> choice;
+		if (!cin){
+			cin.clear();
+			choice = 0;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << endl;
 
 		switch (choice)
 		{
 		case 1:
 		{
-			unsigned int isbn;
+			char isbn[13];
 			cout << "Enter the new ISBN: ";
-			cin >> isbn;
+			cin.getline(isbn, 13);
 			cin.clear();
 			bookList[location].setISBN(isbn);
 			writeList(bookList);
@@ -747,6 +817,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new title: ";
 			cin.ignore();
 			cin.getline(title, 100);
+			cin.clear();
 			bookList[location].setTitle(title);
 			writeList(bookList);
 			cout << endl << "Title has been successfully edited. New book information:" << endl << endl;
@@ -759,6 +830,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new author: ";
 			cin.ignore();
 			cin.getline(author, 100);
+			cin.clear();
 			bookList[location].setAuthor(author);
 			writeList(bookList);
 			cout << endl << "Author has been successfully edited. New book information:" << endl << endl;
@@ -772,6 +844,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new publisher: ";
 			cin.ignore();
 			cin.getline(publisher, 100);
+			cin.clear();
 			bookList[location].setPublisher(publisher);
 			writeList(bookList);
 			cout << endl << "Publisher has been successfully edited. New book information:" << endl << endl;
@@ -781,10 +854,21 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		}
 		case 5:
 		{
-			unsigned int quantity;
+			int quantity;
 			cout << "Enter the new quantity-on-hand: ";
-			cin >> quantity;
+			validChoice = false;
+			while (validChoice != true){
+				cin >> quantity;
+				if (!cin){
+					cin.clear();
+					quantity = -1;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+				if (quantity < 0) cout << "Invalid input. Please try again: ";
+				else validChoice = true;
+			}
 			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setQuantity(quantity);
 			writeList(bookList);
 			cout << endl << "Quantity-on-hand has been successfully edited. New book information:" << endl << endl;
@@ -796,8 +880,19 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		{
 			double retail;
 			cout << "Enter the new retail price: ";
-			cin >> retail;
+			validChoice = false;
+			while (validChoice != true){
+				cin >> retail;
+				if (!cin){
+					cin.clear();
+					retail = -1;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+				if (retail < 0) cout << "Invalid input. Please try again: ";
+				else validChoice = true;
+			}
 			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setRetail(retail);
 			writeList(bookList);
 			cout << endl << "Retail price has been successfully edited. New book information:" << endl << endl;

@@ -16,7 +16,7 @@ public:
 
 	void sortByName(vector<Book>&);
 
-	vector<int> lookUpBookISBN(unsigned int, vector<Book>&);
+	vector<int> lookUpBookISBN(char[], vector<Book>&);
 	vector<int> lookUpBookTitle(char[], vector<Book>&);
 	vector<int> lookUpBookAuthor(char[], vector<Book>&);
 	vector<int> lookUpBookPublisher(char[], vector<Book>&);

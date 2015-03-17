@@ -68,14 +68,10 @@ void Cashier::menu()
 				switch (choice){
 				case 1:
 				{
-					unsigned int isbn;
+					char isbn[13];
 					cout << "ISBN: ";
-					cin >> isbn;
-					if (!cin){
-						cin.clear();
-						isbn = 0;
-						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					}
+					cin.getline(isbn, 13);
+					cin.clear();
 
 					vector<int> searchResults = inventory.lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){

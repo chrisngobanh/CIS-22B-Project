@@ -1,7 +1,7 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include <string>
+#include <cstring>
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -11,7 +11,7 @@ using namespace std;
 class Book
 {
 private:
-	unsigned int sISBN;
+	char sISBN[13];
 	char sTitle[100];
 	char sAuthor[100];
 	char sPublisher[100];
@@ -22,9 +22,9 @@ private:
 
 public:
 	Book(){}
-	Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date); //char date[]);
+	Book(char isbn[], char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date); //char date[]);
 
-	unsigned int getISBN();
+	string getISBN();
 	string getTitle();
 	string getAuthor();
 	string getPublisher();
@@ -33,7 +33,7 @@ public:
 	double getRetail();
 	time_t getDate();
 
-	void setISBN(unsigned int);
+	void setISBN(char[]);
 	void setTitle(char[]);
 	void setAuthor(char[]);
 	void setPublisher(char[]);

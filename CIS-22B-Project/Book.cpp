@@ -4,23 +4,19 @@
 
 using namespace std;
 
-Book::Book(unsigned int isbn, char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date) //char date[])
+Book::Book(char isbn[], char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date) //char date[])
 {
-	sISBN = isbn;
-	for (int i = 0; i < 100; i++)
-	{
-		sTitle[i] = title[i];
-		sAuthor[i] = author[i];
-		sPublisher[i] = publisher[i];
-		// sDate[i] = date[i];
-	}
+	strcpy(sISBN, isbn);
+	strcpy(sTitle, title);
+	strcpy(sAuthor, author);
+	strcpy(sPublisher, publisher);
 	sRetail = retail;
 	sQuantity = quantity;
 	sWholesale = wholesale;
 	sDate = date;
 }
 
-unsigned int Book::getISBN()
+string Book::getISBN()
 {
 	return sISBN;
 }
@@ -60,24 +56,24 @@ time_t Book::getDate()
 	return sDate;
 }
 
-void Book::setISBN(unsigned int isbn)
+void Book::setISBN(char isbn[])
 {
-	sISBN = isbn;
+	strcpy(sISBN, isbn);
 }
 
 void Book::setTitle(char title[])
 {
-	for (int i = 0; i < 100; i++) sTitle[i] = title[i];
+	strcpy(sTitle, title);
 }
 
 void Book::setAuthor(char author[])
 {
-	for (int i = 0; i < 100; i++) sAuthor[i] = author[i];
+	strcpy(sAuthor, author);
 }
 
 void Book::setPublisher(char publisher[])
 {
-	for (int i = 0; i < 100; i++) sPublisher[i] = publisher[i];
+	strcpy(sPublisher, publisher);
 }
 
 void Book::setQuantity(unsigned int quantity)
