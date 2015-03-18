@@ -17,8 +17,17 @@ void Report::menu()
 	{
 		system("CLS");
 
+		time_t menutime;
+		struct tm * timeInfo;
+		char current[80] = "";
+		time(&menutime);
+		timeInfo = localtime(&menutime);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+		puts(current);
+
 		cout << "Serendipity Booksellers\n";
-		cout << "Reports\n";
+		cout << "Reports Menu - Main \n\n";
+		cout << "What would you like to do?\n";
 		cout << "1. Inventory Listing\n";
 		cout << "2. Inventory Wholesale Listing\n";
 		cout << "3. Inventory Retail Value\n";
@@ -40,21 +49,30 @@ void Report::menu()
 		sortByName(booklist);
 
 		system("CLS");
-		switch (choice)
-		{
-
+		switch (choice){
 		case 1:
 		{
-				  cout << "Inventory Listing" << endl << endl;
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
 
-				  printList(booklist);
-				  break;
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Inventory Listing" << endl << endl;
+
+			system("pause");
+			printList(booklist);
+			break;
 		}
-
 		case 2:
-		{					
+		{
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
 
-			cout << "Inventory Wholesale Listing" << endl << endl;
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Inventory Wholesale Listing" << endl << endl;
 
 			cout << setw(30) << left << "Title";
 			cout << setw(10) << left << "Quantity";
@@ -80,79 +98,104 @@ void Report::menu()
 			cout << "---------------------------------------------------------" << endl;
 			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
 
+			system("pause");
 			break;
 	//		inventory.addBook();
 
 		}
-
-
 		case 3:
 		{
-				  cout << "Inventory Retail Listing" << endl << endl;
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
+
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Inventory Retail Listing" << endl << endl;
 					
-				  cout << setw(30) << left << "Title";
-				  cout << setw(10) << left << "Quantity";
-				  cout << setw(11) << left << "Retail";
-				  cout << setw(5) << left << "Cost";
+			cout << setw(30) << left << "Title";
+			cout << setw(10) << left << "Quantity";
+			cout << setw(11) << left << "Retail";
+			cout << setw(5) << left << "Cost";
 
-				  cout << endl;
+			cout << endl;
 
-				  cout << "---------------------------------------------------------" << endl;
+			cout << "---------------------------------------------------------" << endl;
 
-				  double total = 0;
+			double total = 0;
 
-				  for (unsigned int i = 0; i < booklist.size(); i++)
-				  {
+			for (unsigned int i = 0; i < booklist.size(); i++)
+			{
 
-					  double cost = booklist[i].getRetail() * booklist[i].getQuantity();
-					  cout << setw(30) << left << booklist[i].getTitle();
-					  cout << setw(10) << left << booklist[i].getQuantity();
-					  cout << "$" << setw(10) << left << booklist[i].getRetail();
-					  cout << "$" << setw(5) << left << cost;
-					  cout << endl;
+				double cost = booklist[i].getRetail() * booklist[i].getQuantity();
+				cout << setw(30) << left << booklist[i].getTitle();
+				cout << setw(10) << left << booklist[i].getQuantity();
+				cout << "$" << setw(10) << left << booklist[i].getRetail();
+				cout << "$" << setw(5) << left << cost;
+				cout << endl;
 
-					  total += cost;
-				  }
-				  cout << "---------------------------------------------------------" << endl;
-				  cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
+				total += cost;
+			}
+			cout << "---------------------------------------------------------" << endl;
+			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
 
-				  break;
-
+			system("pause");
+			break;
 		}
 		case 4:
+		{
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
 
-			cout << "Listing by Quantity" << endl << endl;
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Listing by Quantity" << endl << endl;
 
 			sortByQuantity(booklist);
 
 			printList(booklist);
 
+			system("pause");
 			break;
-
-
+		}
 		case 5:
-			cout << "Listing by Cost" << endl << endl;
+		{
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
+
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Listing by Cost" << endl << endl;
 
 			sortByCost(booklist);
 			printList(booklist);
-			break;
 
+			system("pause");
+			break;
+		}
 		case 6:
-			cout << "Listing by Age" << endl << endl;
+		{
+			time(&menutime);
+			timeInfo = localtime(&menutime);
+			strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+			puts(current);
+
+			cout << "Serendipity Booksellers" << endl;
+			cout << "Reports Menu - Listing by Age" << endl << endl;
 			sortByAge(booklist);
 			printList(booklist);
+
+			system("pause");
 			break;
-		case 7:
-
-			break;
-
-		default: cout << "You did not enter a valid option. Please try again." << endl << endl;
-
-
-
 		}
-
-		system("pause");
+		case 7:
+			break;
+		default:
+			cout << "You did not enter a valid option. Please try again." << endl << endl;
+			system("pause");
+		}
 	}
 }
 	
