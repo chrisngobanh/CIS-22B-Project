@@ -46,7 +46,7 @@ void Report::menu()
 		cout << endl;
 
 		vector<Book> booklist = readList();	//uses function inherited from parent class
-		sortByName(booklist);	//sorts the list by name each time, so the "inventory listing" will be sorted by name
+		sortByTitle(booklist);	//sorts the list by name each time, so the "inventory listing" will be sorted by name
 
 		system("CLS");	//clear screen
 
@@ -214,6 +214,7 @@ void Report::menu()
 	}
 }
 
+/*
 void Report::sortByQuantity(vector<Book>& booklist)
 {
 
@@ -266,6 +267,7 @@ void Report::sortByAge(vector<Book>& booklist)
 		}
 	}
 }
+*/
 
 void Report::printList(vector<Book>& booklist)
 {
@@ -274,7 +276,7 @@ void Report::printList(vector<Book>& booklist)
 	{
 
 		booklist[i].print();
-		cout << "----------------------------------------------" << endl << endl;
+		cout << endl << "----------------------------------------------" << endl << endl;
 	}
 
 }

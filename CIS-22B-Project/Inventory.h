@@ -14,7 +14,10 @@ private:
 public:
 	void menu();
 
-	void sortByName(vector<Book>&);
+	void sortByTitle(vector<Book>&);
+	void sortByQuantity(vector<Book>&);
+	void sortByCost(vector<Book>&);
+	void sortByAge(vector<Book>&);
 
 	vector<int> lookUpBookISBN(char[], vector<Book>&);
 	vector<int> lookUpBookTitle(char[], vector<Book>&);

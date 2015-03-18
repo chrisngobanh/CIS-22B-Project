@@ -616,15 +616,71 @@ void Inventory::menu()
 	} while (inventoryChoice != 5);
 }
 
-void Inventory::sortByName(vector<Book>& booklist)
+void Inventory::sortByTitle(vector<Book>& booklist)
 {
-	for (unsigned int i = 0; i < booklist.size(); i++){
-		for (unsigned int j = i + 1; j < booklist.size(); j++)
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getTitle() > booklist[j].getTitle()){
-				Book temp = booklist[i];
-				booklist[i] = booklist[j];
-				booklist[j] = temp;
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Inventory::sortByQuantity(vector<Book>& booklist)
+{
+
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getQuantity() > booklist[j].getQuantity()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Inventory::sortByCost(vector<Book>& booklist)
+{
+
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getRetail() > booklist[j].getRetail()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
+			}
+		}
+	}
+}
+
+void Inventory::sortByAge(vector<Book>& booklist)
+{
+	for (size_t i = 0; i < booklist.size(); i++){
+		for (size_t j = i + 1; j < booklist.size(); j++)
+		{
+			if (booklist[i].getDate() > booklist[j].getDate()){
+				Book temp1 = booklist[j], temp2 = booklist[i];
+				booklist.erase(booklist.begin() + j);
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
+				else booklist.push_back(temp2);
+				booklist.insert(booklist.begin() + i, temp1);
+				booklist.erase(booklist.begin() + i + 1);
 			}
 		}
 	}
