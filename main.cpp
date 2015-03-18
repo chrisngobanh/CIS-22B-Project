@@ -74,7 +74,7 @@ int main()
 			//open cashier module
 			break;
 		case 2:
-			inventory.inventoryMenu();
+			inventory.menu();
 			//open inventory module
 			break;
 		case 3:

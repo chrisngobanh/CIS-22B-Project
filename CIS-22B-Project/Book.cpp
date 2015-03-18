@@ -88,6 +88,7 @@ void Book::setRetail(double retail)
 
 void Book::print()
 {
+
 	cout << "ISBN: " << sISBN << endl;
 	cout << "Title: " << sTitle << endl;
 	cout << "Author: " << sAuthor << endl;

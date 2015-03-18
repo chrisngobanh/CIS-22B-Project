@@ -12,7 +12,7 @@ class Inventory: public Menu
 private:
 
 public:
-	void inventoryMenu();
+	void menu();
 
 	void sortByName(vector<Book>&);
 

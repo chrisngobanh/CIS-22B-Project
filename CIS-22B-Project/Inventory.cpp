@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void Inventory::inventoryMenu()
+void Inventory::menu()
 {
 	int inventoryChoice = 0;
 

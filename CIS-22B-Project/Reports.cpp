@@ -60,8 +60,8 @@ void Report::menu()
 			cout << "Serendipity Booksellers" << endl;
 			cout << "Reports Menu - Inventory Listing" << endl << endl;
 
-			system("pause");
 			printList(booklist);
+			system("pause");
 			break;
 		}
 		case 2:
@@ -87,7 +87,15 @@ void Report::menu()
 			for (unsigned int i = 0; i < booklist.size(); i++)
 			{
 				double cost = booklist[i].getWholesale() * booklist[i].getQuantity();
-				cout << setw(30) << left << booklist[i].getTitle();
+
+				string tmp = booklist[i].getTitle();
+
+				if (tmp.length() > 25) {
+					tmp = tmp.substr(0, 25) + "...";
+				}
+
+				cout << setprecision(2) << fixed;
+				cout << setw(30) << left << tmp;
 				cout << setw(10) << left << booklist[i].getQuantity();
 				cout << "$" << setw(10) << left << booklist[i].getWholesale();
 				cout << "$" << setw(5) << left << cost;
@@ -100,7 +108,6 @@ void Report::menu()
 
 			system("pause");
 			break;
-	//		inventory.addBook();
 
 		}
 		case 3:
@@ -195,25 +202,6 @@ void Report::menu()
 		default:
 			cout << "You did not enter a valid option. Please try again." << endl << endl;
 			system("pause");
-		}
-	}
-}
-	
-
-void Report::sortByName(vector<Book>& booklist)
-{
-
-	for (size_t i = 0; i < booklist.size(); i++){
-		for (size_t j = i + 1; j < booklist.size(); j++)
-		{
-			if (booklist[i].getTitle() > booklist[j].getTitle()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
-			}
 		}
 	}
 }
