@@ -8,19 +8,15 @@
 
 using namespace std;
 
-//not done.
-
 class Cashier: public Menu
 {
 private:
-	string bookName;
-	double bookPrice;
 	int quantity;
 	const double taxrate = .0875;
+	vector<Book> salelist;
 
 public:
 	void menu();
-	
 	void addToSale(int, vector<Book>&, vector<Book>&);
 	void Checkout(vector<Book>);
 

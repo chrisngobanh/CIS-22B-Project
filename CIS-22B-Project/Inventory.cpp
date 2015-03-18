@@ -870,6 +870,13 @@ void Inventory::addBook(vector<Book>& booklist)
 	}
 }
 
+//template used for setting sQuantity and sRetail
+template <class T1, class T2>
+void Inventory::setValue(T1& dest, T2 source)
+{
+	dest = source;
+}
+
 void Inventory::editBook(int location, vector<Book>& bookList)
 {
 	bool validChoice;
@@ -915,7 +922,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(isbn, 13);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setISBN(isbn);
+			strcpy(bookList[location].sISBN, isbn);
 			writeList(bookList);
 			cout << endl << "ISBN has been successfully edited." << endl << endl;
 			system("pause");
@@ -928,7 +935,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(title, 100);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setTitle(title);
+			strcpy(bookList[location].sTitle, title);
 			writeList(bookList);
 			cout << endl << "Title has been successfully edited." << endl << endl;
 			system("pause");
@@ -941,7 +948,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(author, 100);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setAuthor(author);
+			strcpy(bookList[location].sAuthor, author);
 			writeList(bookList);
 			cout << endl << "Author has been successfully edited." << endl << endl;
 			system("pause");
@@ -954,7 +961,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(publisher, 100);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setPublisher(publisher);
+			strcpy(bookList[location].sPublisher, publisher);
 			writeList(bookList);
 			cout << endl << "Publisher has been successfully edited." << endl << endl;
 			system("pause");
@@ -977,7 +984,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			}
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setQuantity(quantity);
+			setValue(bookList[location].sQuantity, quantity);
 			writeList(bookList);
 			cout << endl << "Quantity-on-hand has been successfully edited." << endl << endl;
 			system("pause");
@@ -1000,7 +1007,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			}
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			bookList[location].setRetail(retail);
+			setValue(bookList[location].sRetail, retail);
 			writeList(bookList);
 			cout << endl << "Retail price has been successfully edited." << endl << endl;
 			system("pause");
@@ -1048,7 +1055,7 @@ vector<Book> Inventory::readList()
 
 void Inventory::writeList(vector<Book> list)
 {
-	ofstream ofs("bookList.txt", ios::out | ios::binary);	//
+	ofstream ofs("bookList.txt", ios::out | ios::binary);
 	int numBooks = list.size();
 	ofs.write(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
 	for (int i = 0; i < numBooks; i++)

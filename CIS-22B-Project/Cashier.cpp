@@ -12,7 +12,7 @@ void Cashier::menu()
 {
 	Book book;
 	Inventory inventory;
-	vector<Book> booklist = inventory.readList(), salelist;
+	vector<Book> booklist = inventory.readList();
 	int choice = 0, n = 0;
 	do
 	{
@@ -307,10 +307,10 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 		for (unsigned int i = 0; i < salelist.size(); i++)
 		{
 			if (salelist[i].getISBN() == booklist[location].getISBN())
-				salelist[i].setQuantity(number);
+				salelist[i].sQuantity = number;
 		}
 
-		booklist[location].setQuantity(quantity - number);
+		booklist[location].sQuantity = (quantity - number);
 
 		inventory.writeList(booklist);
 	}

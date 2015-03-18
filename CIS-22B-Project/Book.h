@@ -10,12 +10,13 @@ using namespace std;
 
 class Book
 {
+	friend class Inventory;
+	friend class Cashier;
 private:
 	char sISBN[13];
 	char sTitle[100];
 	char sAuthor[100];
 	char sPublisher[100];
-	// char sDate[100];
 	unsigned int sQuantity;
 	double sWholesale, sRetail;
 	time_t sDate;
@@ -33,12 +34,13 @@ public:
 	double getRetail();
 	time_t getDate();
 
+	/*
 	void setISBN(char[]);
 	void setTitle(char[]);
 	void setAuthor(char[]);
 	void setPublisher(char[]);
-	void setQuantity(unsigned int);
-	void setRetail(double);
+	*/
+	//using friend class to set sISBN, sTitle, sAuthor, sPublisher instead of mutator functions
 
 	void print();
 

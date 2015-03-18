@@ -214,7 +214,7 @@ void Report::menu()
 	}
 }
 
-/*
+/*	The following functions are being inherited from Inventory now
 void Report::sortByQuantity(vector<Book>& booklist)
 {
 

@@ -25,6 +25,8 @@ public:
 	vector<int> lookUpBookPublisher(char[], vector<Book>&);
 
 	void addBook(vector<Book>&);
+	template<class T1, class T2>
+	void setValue(T1&, T2);
 	void editBook(int, vector<Book>&);
 
 	vector<Book> readList();

@@ -56,6 +56,7 @@ time_t Book::getDate()
 	return sDate;
 }
 
+/*
 void Book::setISBN(char isbn[])
 {
 	strcpy(sISBN, isbn);
@@ -75,16 +76,8 @@ void Book::setPublisher(char publisher[])
 {
 	strcpy(sPublisher, publisher);
 }
-
-void Book::setQuantity(unsigned int quantity)
-{
-	sQuantity = quantity;
-}
-
-void Book::setRetail(double retail)
-{
-	sRetail = retail;
-}
+*/
+//using friend class to set sQuantity and sRetail instead of mutator functions
 
 void Book::print()
 {
