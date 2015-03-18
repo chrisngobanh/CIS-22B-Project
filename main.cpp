@@ -20,6 +20,11 @@ int main()
 	Cashier cashier;
 	Inventory inventory;
 	Report report;
+
+	Menu* cashpoint = &cashier;
+	Menu* invpoint = &inventory;
+	Menu* reppoint = &report;
+
 	int choice=0;
 	fstream bookList;
 
@@ -69,16 +74,18 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			cashier.menu();
-
+			cashpoint->menu();
+			//cashier.menu();
 			//open cashier module
 			break;
 		case 2:
-			inventory.menu();
+			invpoint->menu();
+			//inventory.menu();
 			//open inventory module
 			break;
 		case 3:
-			report.menu();
+			reppoint->menu();
+			//report.menu();
 			//open report module
 			break;
 		case 4:
