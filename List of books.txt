@@ -2,97 +2,96 @@ ISBN: 1594633665
 Title: The Girl on the Train
 Author: Paula Hawkins
 Publisher: Riverhead Books
-Date Added: January 13, 2015
-Quantity-On-Hand: 5
+Quantity: 5
 Wholesale Cost: 13.67
 Retail Price: 19.99
+Date Added: 01/13/2015
 
 
 ISBN: 1476746583
 Title: All the Light We Cannot See
 Author: Anthony Doerr 
 Publisher: Scribner
-Date Added: May 6, 2014
-Quantity-On-Hand: 4
+Quantity: 4
 Wholesale Cost: 14.21
 Retail Price: 20.99
+Date Added: 05/06/2014
 
 
 ISBN: 161109979X
 Title: When I Found You
 Author: Catherine Ryan Hyde
 Publisher: Lake Union Publishing
-Date Added: April 23, 2013
-Quantity-On-Hand: 6
+Quantity: 6
 Wholesale Cost: 8.45
 Retail Price: 12.49
+Date Added: 04/23/2013
 
 
 ISBN: 0812974492
 Title: Unbroken: A World War II Story of Survival, Resilience, and Redemption
 Author: Laura Hillenbrand
 Publisher: Random House Trade Paperbacks
-Date Added: July 29, 2014
-Quantity-On-Hand: 8
+Quantity: 8
 Wholesale Cost: 8.60
 Retail Price: 12.59
-
-ISBN: 0312577222
-Title: The Nightingale
-Author: Kristin Hannah
-Publisher: St. Martin's Press
-Date Added: February 3, 2015
-Quantity-On-Hand: 10
-Wholesale Cost: 14.79
-Retail Price: 20.99
+Date Added: 07/29/2014
 
 
 ISBN: 0758278454
 Title: What She Left Behind
 Author: Ellen Marie Wiseman
 Publisher: Kensington
-Date Added: December 31, 2013
-Quantity-On-Hand: 2
+Quantity: 2
 Wholesale Cost: 8.99
 Retail Price: 13.49
+Date Added: 12/31/2013
+
+ISBN: 0312577222
+Title: The Nightingale
+Author: Kristin Hannah
+Publisher: St. Martin's Press
+Quantity: 10
+Wholesale Cost: 14.79
+Retail Price: 20.99
+Date Added: 02/03/2015
 
 
 ISBN: 0615590586
 Title: The Pecan Man
 Author: Cassie Dandridge Selleck
 Publisher: The Pecan Man
-Date Added: January 1, 2012
-Quantity-On-Hand: 3
+Quantity: 3
 Wholesale Cost: 8.26
 Retail Price: 13.49
+Date Added: 01/01/2012
 
 
 ISBN: 1400030900
 Title: Bridge of Sighs
 Author: Richard Russo
 Publisher: Vintage
-Date Added: August 12, 2008
-Quantity-On-Hand: 1
+Quantity: 1
 Wholesale Cost: 9.64
 Retail Price: 14.29
+Date Added: 08/12/2008
 
 
 ISBN: 0399169520
 Title: My Sunshine Away
 Author: M.O. Walsh
 Publisher: G.P. Putnam's Sons
-Date Added: February 10, 2015
-Quantity-On-Hand: 14
+Quantity: 14
 Wholesale Cost: 14.17
 Retail Price: 18.99
+Date Added: 02/10/2015
 
 
 ISBN: 0062116150
 Title: Savage Harvest
 Author: Carl Hoffman
 Publisher: William Morrow
-Date Added: March 18, 2014
-Quantity-On-Hand: 5
+Quantity: 5
 Wholesale Cost: 16.33
 Retail Price: 23.99
-
+Date Added: 03/19/2014

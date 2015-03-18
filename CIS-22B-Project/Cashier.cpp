@@ -34,6 +34,8 @@ void Cashier::menu()
 			cout << current[i];
 
 		cout << "Serendipity Booksellers\n";
+		cout << "Cashier Menu - Main\n\n";
+		cout << "What would you like to do?\n";
 		cout << "1. Add a book to the sale\n";
 		cout << "2. Proceed to checkout\n";
 		cout << "3. Return to main menu\n";
@@ -55,7 +57,8 @@ void Cashier::menu()
 			bool validChoice = false;
 			do{
 				system("CLS");
-				cout << "Serendipity Booksellers" << endl << "What book would you like to add to sale? Search the book by" << endl;
+				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Add Book" << endl << endl;
+				cout << "What book would you like to add to sale ? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
@@ -283,7 +286,7 @@ void Cashier::Checkout(vector<Book> salelist)
 	for (int i = 0; i < 80; i++)
 		cout << current[i];
 
-	cout << "\nSerendipity Booksellers\n\n";
+	cout << "\nSerendipity Booksellers\nCashier Menu - Checkout\n";
 
 	cout << setw(4) << "Qty" << setw(16) << "ISBN" << setw(30) << "Title" << setw(10) << "Price" << setw(10) << "Total";
 	cout << "\n========================================================================\n";

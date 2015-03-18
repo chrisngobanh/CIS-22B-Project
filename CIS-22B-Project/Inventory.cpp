@@ -26,7 +26,8 @@ void Inventory::inventoryMenu()
 
 		vector<Book> booklist = readList();
 
-		cout << "Serendipity Booksellers" << endl << "Inventory Database" << endl;
+		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Main" << endl << endl;
+		cout << "What would you like to do?" << endl;
 		cout << "1. Look Up a Book" << endl;
 		cout << "2. Add a Book" << endl;
 		cout << "3. Edit a Book's Record" << endl;
@@ -53,7 +54,8 @@ void Inventory::inventoryMenu()
 				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 				puts(current);
 				
-				cout << "Serendipity Booksellers" << endl << "How would you like to look up a book?" << endl;
+				cout << "Serendipity Booksellers" << endl << "Inventory Menu - Look Up Book" << endl << endl;
+				cout << "How would you like to look up a book?" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
@@ -75,7 +77,7 @@ void Inventory::inventoryMenu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() == 0){
@@ -91,7 +93,7 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() == 0){
@@ -107,7 +109,7 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() == 0){
@@ -123,7 +125,7 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults= lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() == 0){
@@ -159,7 +161,8 @@ void Inventory::inventoryMenu()
 				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 				puts(current);
 
-				cout << "Serendipity Booksellers" << endl << "What book would you like to edit? Search the book by" << endl;
+				cout << "Serendipity Booksellers" << endl << "Inventory Menu - Edit Book" << endl << endl;
+				cout << "What book would you like to edit? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
@@ -181,7 +184,7 @@ void Inventory::inventoryMenu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
@@ -216,7 +219,7 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() != 0){
@@ -251,7 +254,7 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() != 0){
@@ -286,7 +289,7 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() != 0){
@@ -337,7 +340,8 @@ void Inventory::inventoryMenu()
 				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 				puts(current);
 
-				cout << "Serendipity Booksellers" << endl << "What book would you like to delete? Search the book by" << endl;
+				cout << "Serendipity Booksellers" << endl << "Inventory Menu - Delete Book" << endl << endl;
+				cout << "What book would you like to delete? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
@@ -359,7 +363,7 @@ void Inventory::inventoryMenu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
@@ -414,7 +418,7 @@ void Inventory::inventoryMenu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() != 0){
@@ -469,7 +473,7 @@ void Inventory::inventoryMenu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() != 0){
@@ -524,7 +528,7 @@ void Inventory::inventoryMenu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
-					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() != 0){
@@ -704,23 +708,24 @@ void Inventory::addBook(vector<Book>& booklist)
 	strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 	puts(current);
 
-	cout << "Serendipity Booksellers" << endl << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
+	cout << "Serendipity Booksellers" << endl << "Inventory Menu - Add Book" << endl << endl;
+	cout << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
 	cout << "ISBN: ";
 	cin.ignore();
 	cin.getline(isbn, 13);
-	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	if (strcmp(isbn, "0") != 0)
 	{
 		cout << "Title: ";
 		cin.getline(title, 100);
-		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Author: ";
 		cin.getline(author, 100);
-		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Publisher: ";
 		cin.getline(publisher, 100);
-		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Quantity-On-Hand: ";
 		validChoice = false;
 		while (validChoice != true){
@@ -735,6 +740,7 @@ void Inventory::addBook(vector<Book>& booklist)
 		}
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << endl;
 		cout << "Wholesale Cost: ";
 		validChoice = false;
 		while (validChoice != true){
@@ -749,6 +755,7 @@ void Inventory::addBook(vector<Book>& booklist)
 		}
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << endl;
 		cout << "Retail Price: ";
 		validChoice = false;
 		while (validChoice != true){
@@ -779,7 +786,21 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 	bool validChoice;
 	int choice;
 	do{
-		cout << "Serendipity Booksellers" << endl << "Which information would you like to edit?" << endl;
+		system("CLS");
+
+		time_t menutime;
+		struct tm * timeInfo;
+		char current[80] = "";
+		time(&menutime);
+		timeInfo = localtime(&menutime);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
+		puts(current);
+
+		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Edit Book" << endl << endl;
+		cout << "Current book information:" << endl << endl;
+		bookList[location].print();
+		
+		cout << endl << "Which information would you like to edit?" << endl;
 		cout << "1. ISBN" << endl;
 		cout << "2. Title" << endl;
 		cout << "3. Author" << endl;
@@ -802,13 +823,13 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		{
 			char isbn[13];
 			cout << "Enter the new ISBN: ";
+			cin.ignore();
 			cin.getline(isbn, 13);
-			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setISBN(isbn);
 			writeList(bookList);
-			cout << endl << "ISBN has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
-			cout << endl;
+			cout << endl << "ISBN has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 2:
@@ -817,11 +838,11 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new title: ";
 			cin.ignore();
 			cin.getline(title, 100);
-			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setTitle(title);
 			writeList(bookList);
-			cout << endl << "Title has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
+			cout << endl << "Title has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 3:
@@ -830,12 +851,11 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new author: ";
 			cin.ignore();
 			cin.getline(author, 100);
-			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setAuthor(author);
 			writeList(bookList);
-			cout << endl << "Author has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
-			cout << endl;
+			cout << endl << "Author has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 4:
@@ -844,12 +864,11 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new publisher: ";
 			cin.ignore();
 			cin.getline(publisher, 100);
-			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setPublisher(publisher);
 			writeList(bookList);
-			cout << endl << "Publisher has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
-			cout << endl;
+			cout << endl << "Publisher has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 5:
@@ -871,9 +890,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setQuantity(quantity);
 			writeList(bookList);
-			cout << endl << "Quantity-on-hand has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
-			cout << endl;
+			cout << endl << "Quantity-on-hand has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 6:
@@ -895,9 +913,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bookList[location].setRetail(retail);
 			writeList(bookList);
-			cout << endl << "Retail price has been successfully edited. New book information:" << endl << endl;
-			bookList[location].print();
-			cout << endl;
+			cout << endl << "Retail price has been successfully edited." << endl << endl;
+			system("pause");
 			break;
 		}
 		case 7:
