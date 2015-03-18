@@ -23,21 +23,21 @@ int main()
 	int choice=0;
 	fstream bookList;
 
-	bookList.open("booklist.txt", ios::in);
+	bookList.open("booklist.txt", ios::in);	//open booklist for both input and output
 	bookList.open("booklist.txt", ios::out);
 
-	while (choice != 4)
+	while (choice != 4)	//main menu loops until user exits program
 	{
-		system("CLS");
+		system("CLS");	//clear screen each time user returns to main menu
 
 		time_t rawtime;
-		struct tm * timeinfo;
+		struct tm * timeinfo;	//use ctime to get current date and time
 		char current[80] = "";
 		time(&rawtime);
 		timeinfo = localtime(&rawtime);
-		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
+		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);	//format the date and time
 
-		for (int i = 0; i < 80; i++)
+		for (int i = 0; i < 80; i++)	//display date and time
 			cout << current[i];
 		cout << "Serendipity Booksellers\n";
 		cout << "Main Menu\n\n";
@@ -55,12 +55,12 @@ int main()
 		}
 
 
-		while (choice < 1 || choice > 4)
+		while (choice < 1 || choice > 4) //can only enter 1-4
 		{
-			cout << "Enter 1 - 4: ";
+			cout << "You did not enter a valid option(1, 2, 3, or 4). Please try again: ";
 			cin >> choice;
-			if (!cin){
-				cin.clear();
+			if (!cin){			//used in case someone enters letters instead of an int
+				cin.clear();	
 				choice = 0;
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}

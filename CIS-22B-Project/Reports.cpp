@@ -9,8 +9,6 @@ using namespace std;
 
 void Report::menu() 
 {
-
-	//declare array/vector of book objects
 	int choice = 0;
 
 	while (choice != 7)
@@ -35,8 +33,10 @@ void Report::menu()
 		cout << "5. Listing by Cost\n";
 		cout << "6. Listing by Age\n";
 		cout << "7. Return to Main Menu\n";
-		cout << "Enter your choice: " << endl;
-		cin >> choice;
+		cout << "Enter your choice: " << endl;	//ask for choice
+
+		cin >> choice;	//get choice
+
 		if (!cin){
 			cin.clear();
 			choice = 0;
@@ -45,10 +45,11 @@ void Report::menu()
 
 		cout << endl;
 
-		vector<Book> booklist = readList();
-		sortByName(booklist);
+		vector<Book> booklist = readList();	//uses function inherited from parent class
+		sortByName(booklist);	//sorts the list by name each time, so the "inventory listing" will be sorted by name
 
-		system("CLS");
+		system("CLS");	//clear screen
+
 		switch (choice){
 		case 1:
 		{
@@ -84,7 +85,7 @@ void Report::menu()
 			cout << "---------------------------------------------------------" << endl;
 			double total = 0;
 
-			for (unsigned int i = 0; i < booklist.size(); i++)
+			for (unsigned int i = 0; i < booklist.size(); i++)	//print each book's information
 			{
 				double cost = booklist[i].getWholesale() * booklist[i].getQuantity();
 
@@ -97,14 +98,14 @@ void Report::menu()
 				cout << setprecision(2) << fixed;
 				cout << setw(30) << left << tmp;
 				cout << setw(10) << left << booklist[i].getQuantity();
-				cout << "$" << setw(10) << left << booklist[i].getWholesale();
+				cout << "$" << setw(10) << left << setprecision(2) << fixed << booklist[i].getWholesale();
 				cout << "$" << setw(5) << left << cost;
 				cout << endl;
 
-				total += cost;
+				total += cost;	//add each book's wholesale cost to the total variable
 			}
 			cout << "---------------------------------------------------------" << endl;
-			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
+			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;	//display total
 
 			system("pause");
 			break;

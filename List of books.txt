@@ -18,7 +18,7 @@ Retail Price: 20.99
 Date Added: 05/06/2014
 
 
-ISBN: 161109979X
+ISBN: 1611099709
 Title: When I Found You
 Author: Catherine Ryan Hyde
 Publisher: Lake Union Publishing
@@ -28,7 +28,7 @@ Retail Price: 12.49
 Date Added: 04/23/2013
 
 
-ISBN: 0812974492
+ISBN: 2812974492
 Title: Unbroken: A World War II Story of Survival, Resilience, and Redemption
 Author: Laura Hillenbrand
 Publisher: Random House Trade Paperbacks
@@ -38,7 +38,18 @@ Retail Price: 12.59
 Date Added: 07/29/2014
 
 
-ISBN: 0758278454
+ISBN: 3125772202
+Title: The Nightingale
+Author: Kristin Hannah
+Publisher: St. Martin's Press
+Date Added: February 3, 2015
+Quantity-On-Hand: 10
+Wholesale Cost: 14.79
+Retail Price: 20.99
+
+
+
+ISBN: 758278454
 Title: What She Left Behind
 Author: Ellen Marie Wiseman
 Publisher: Kensington

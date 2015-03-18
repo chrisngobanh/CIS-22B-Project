@@ -10,8 +10,6 @@ using namespace std;
 
 void Cashier::menu()
 {
-
-	bool found = false;
 	Book book;
 	Inventory inventory;
 	vector<Book> booklist = inventory.readList(), salelist;
@@ -19,8 +17,6 @@ void Cashier::menu()
 	do
 	{
 		system("CLS");
-
-		found = false;
 
 		time_t rawtime;
 		struct tm * timeinfo;
@@ -95,7 +91,19 @@ void Cashier::menu()
 
 						cout << endl;
 						if (bookChoice != 0)
-							addToSale(searchResults[bookChoice - 1], booklist, salelist);
+						{
+							try
+							{
+								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+							}
+							catch (char* error)
+							{
+								cout << endl << "Error: " << error;
+							}
+							cout << endl;
+							system("pause");
+
+						}
 						cout << endl;
 					}
 					else{
@@ -129,7 +137,19 @@ void Cashier::menu()
 
 						cout << endl;
 						if (bookChoice != 0)
-							addToSale(searchResults[bookChoice - 1], booklist, salelist);
+						{
+							try
+							{
+								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+							}
+							catch (char* error)
+							{
+								cout << endl << "Error: " << error;
+							}
+							cout << endl;
+							system("pause");
+
+						}
 						cout << endl;
 					}
 					else{
@@ -163,7 +183,20 @@ void Cashier::menu()
 
 						cout << endl;
 						if (bookChoice != 0)
-							addToSale(searchResults[bookChoice - 1], booklist, salelist);
+						{
+							try
+							{
+								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+							}
+							catch (char* error)
+							{
+								cout << endl << "Error: " << error;
+							}
+
+							cout << endl;
+							system("pause");
+						}
+							
 						cout << endl;
 					}
 					else{
@@ -197,7 +230,20 @@ void Cashier::menu()
 
 						cout << endl;
 						if (bookChoice != 0)
-							addToSale(searchResults[bookChoice - 1], booklist, salelist);
+						{
+							try
+							{
+								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+							}
+							catch (char* error)
+							{
+								cout << endl << "Error: " << error;
+							}
+
+							cout << endl;
+							system("pause");
+						}
+
 						cout << endl;
 					}
 					else{
@@ -242,8 +288,7 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 
 	if (quantity == 0)
 	{
-		cout << "Sorry, there are no more '" << booklist[location].getTitle() << "' left in the inventory.\n";
-		system("pause");
+		throw "There are no more copies of that book left in the inventory.";
 	}
 	else
 	{

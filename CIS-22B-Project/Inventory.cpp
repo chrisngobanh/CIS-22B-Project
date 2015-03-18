@@ -79,60 +79,80 @@ void Inventory::menu()
 					cin.getline(isbn, 13);
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
-					if (searchResults.size() == 0){
-						cout << "No books found using search criteria." << endl;
-						system("pause");
+					try
+					{
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					}
-					else system("pause");
+					catch (char* error)
+					{
+						cout << endl << "Error: " << error << endl;
+					}
+					
+					system("pause");
 					break;
 				}
 				case 2:
 				{
 					char title[100];
+
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookTitle(title, booklist);
-					if (searchResults.size() == 0){
-						cout << "No books found using search criteria." << endl;
-						system("pause");
+
+					try
+					{
+						vector<int> searchResults = lookUpBookTitle(title, booklist);
 					}
-					else system("pause");
+					catch (char* error)
+					{
+						cout << endl << "Error: " << error << endl;
+					}
+
+					system("pause");
 					break;
 				}
 				case 3:
 				{
 					char author[100];
+
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookAuthor(author, booklist);
-					if (searchResults.size() == 0){
-						cout << "No books found using search criteria." << endl;
-						system("pause");
+					try
+					{
+						vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					}
-					else system("pause");
+					catch (char* error)
+					{
+						cout << endl << "Error: " << error << endl;
+					}
+
+					system("pause");
 					break;
 				}
 				case 4:
 				{
 					char publisher[100];
+
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults= lookUpBookPublisher(publisher, booklist);
-					if (searchResults.size() == 0){
-						cout << "No books found using search criteria." << endl;
-						system("pause");
+					try
+					{
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					}
-					else system("pause");
+					catch (char* error)
+					{
+						cout << endl << "Error: " << error << endl;
+					}
+
+					system("pause");
 					break;
 				}
 				case 5:
@@ -610,6 +630,7 @@ void Inventory::sortByName(vector<Book>& booklist)
 	}
 }
 
+
 vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 {
 	cout << "Search results:" << endl << endl;
@@ -625,6 +646,9 @@ vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 			booklist[i].print();
 			cout << endl;
 		}
+	}
+	if (foundBooks.size() == 0){
+		throw "No books found using search criteria.";
 	}
 
 	return foundBooks;
@@ -646,6 +670,9 @@ vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
 			cout << endl;
 		}
 	}
+	if (foundBooks.size() == 0){
+		throw "No books found using search criteria.";
+	}
 
 	return foundBooks;
 }
@@ -666,6 +693,9 @@ vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
 			cout << endl;
 		}
 	}
+	if (foundBooks.size() == 0){
+		throw "No books found using search criteria.";
+	}
 
 	return foundBooks;
 }
@@ -685,6 +715,9 @@ vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& bookl
 			booklist[i].print();
 			cout << endl;
 		}
+	}
+	if (foundBooks.size() == 0){
+		throw "No books found using search criteria.";
 	}
 
 	return foundBooks;
@@ -927,39 +960,39 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 
 vector<Book> Inventory::readList()
 {
-	int numBooks;
+	int numBooks;	//the first thing in the booklist file
 	vector<Book> booklist;
-	vector<Book> *a;
-	ifstream ifs("bookList.txt", ios::in | ios::binary);
+	vector<Book> *a;	//just to make sure that the booklist vector is created properly
+	ifstream ifs("bookList.txt", ios::in | ios::binary);	//opens input file
 
 	if (ifs)
 	{
-		ifs.read(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
+		ifs.read(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));	//read number of Book objects in the file, stored at beginning of file, into numBooks variable
 
 		a = new vector<Book>;
 
-		if (a == nullptr)
+		if (a == nullptr)	//if memory couldnt be allocated, exits
 		{
 			cout << "Memory could not be allocated..." << endl << endl;
 			system("pause");
 			exit(-1);
 		}
 
-		for (int i = 0; i < numBooks; i++)
+		for (int i = 0; i < numBooks; i++)	//goes through the file reading the number of Book objects that the file said it containted into the booklist vector
 		{
-			Book newbook;
-			ifs.read(reinterpret_cast<char *>(&newbook), sizeof(newbook));
-			booklist.push_back(newbook);
+			Book newbook;	//temp Book object
+			ifs.read(reinterpret_cast<char *>(&newbook), sizeof(newbook));	//reads a single object from file
+			booklist.push_back(newbook);	//puts the Book at the END of the vector
 
 		}
 	}
-	ifs.close();
-	return booklist;
+	ifs.close();	//close input file
+	return booklist;	//returns vector of Book class objects
 }
 
 void Inventory::writeList(vector<Book> list)
 {
-	ofstream ofs("bookList.txt", ios::out | ios::binary);
+	ofstream ofs("bookList.txt", ios::out | ios::binary);	//
 	int numBooks = list.size();
 	ofs.write(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
 	for (int i = 0; i < numBooks; i++)
