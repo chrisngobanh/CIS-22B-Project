@@ -11,8 +11,8 @@ using namespace std;
 void Cashier::menu()
 {
 	Book book;
-	Inventory inventory;
-	vector<Book> booklist = inventory.readList();
+
+	vector<Book> booklist = readList();
 	int choice = 0, n = 0;
 	do
 	{
@@ -72,7 +72,7 @@ void Cashier::menu()
 					cin.ignore();
 					cin.getline(isbn, 13, '\n');
 
-					vector<int> searchResults = inventory.lookUpBookISBN(isbn, booklist);
+					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
 
@@ -118,7 +118,7 @@ void Cashier::menu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
-					vector<int> searchResults = inventory.lookUpBookTitle(title, booklist);
+					vector<int> searchResults = lookUpBookTitle(title, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
 
@@ -164,7 +164,7 @@ void Cashier::menu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
-					vector<int> searchResults = inventory.lookUpBookAuthor(author, booklist);
+					vector<int> searchResults = lookUpBookAuthor(author, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
 
@@ -211,7 +211,7 @@ void Cashier::menu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
-					vector<int> searchResults = inventory.lookUpBookPublisher(publisher, booklist);
+					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 					if (searchResults.size() != 0){
 						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
 
@@ -281,7 +281,6 @@ void Cashier::menu()
 
 void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& salelist)
 {
-	Inventory inventory;
 	unsigned int number = 0, quantity = 0;
 	quantity = booklist[location].getQuantity();
 
@@ -295,9 +294,10 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 		cout << "How many of '" << booklist[location].getTitle() << "' would you like to add?\n";
 		cin >> number;
 
-		while (number > quantity)
+		while (number > quantity || number <= 0)
 		{
-			cout << "There are less than " << number << " of '" << booklist[location].getTitle() << "' available in the inventory. \nPlease enter a different number: ";
+			if (number > quantity) cout << "\nThere are less than " << number << " of '" << booklist[location].getTitle() << "' available in the inventory. \nPlease enter a different number: ";
+			else if (number <= 0) cout << "\nYou can not add a negative number of books to the cart.\nPlease enter a different number: ";
 			cin.ignore();
 			cin >> number;
 		}
@@ -312,8 +312,33 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 
 		booklist[location].sQuantity = (quantity - number);
 
-		inventory.writeList(booklist);
+		writeList(booklist);
 	}
+}
+
+void Cashier::subFromSale(int location, vector<Book>& booklist, vector<Book>& salelist)
+{
+	unsigned int number = 0, quantity = 0;
+	quantity = salelist[location].getQuantity();
+
+	cout << "How many of '" << salelist[location].getTitle() << "' would you like to remove?\n";
+	cin >> number;
+
+	if (number > quantity)
+	{
+		number = quantity;
+	}
+
+	for (unsigned int i = 0; i < booklist.size(); i++)
+	{
+		if (salelist[location].getISBN() == booklist[i].getISBN())
+			booklist[i].sQuantity += number;
+	}
+
+	salelist[location].sQuantity -= number;
+	if (salelist[location].sQuantity == 0) salelist.erase(salelist.begin() + location);
+
+	writeList(booklist);
 }
 
 void Cashier::Checkout(vector<Book> salelist)
