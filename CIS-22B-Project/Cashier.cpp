@@ -69,8 +69,8 @@ void Cashier::menu()
 				{
 					char isbn[13];
 					cout << "ISBN: ";
-					cin.getline(isbn, 13);
-					cin.clear();
+					cin.ignore();
+					cin.getline(isbn, 13, '\n');
 
 					vector<int> searchResults = inventory.lookUpBookISBN(isbn, booklist);
 					if (searchResults.size() != 0){
@@ -270,7 +270,7 @@ void Cashier::menu()
 		case 3:
 			break;
 		default:
-			cout << "You did not enter a valid option (1, 2, or 3). Please try again." << endl;
+			cout << "You did not enter a valid option (1, 2, or 3). Please try again.";
 			system("pause");
 		}
 		
@@ -298,6 +298,7 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 		while (number > quantity)
 		{
 			cout << "There are less than " << number << " of '" << booklist[location].getTitle() << "' available in the inventory. \nPlease enter a different number: ";
+			cin.ignore();
 			cin >> number;
 		}
 
@@ -340,8 +341,8 @@ void Cashier::Checkout(vector<Book> salelist)
 	{
 		total += (salelist[i].getRetail()*salelist[i].getQuantity());
 		cout << setw(4) << salelist[i].getQuantity() << setw(16) << salelist[i].getISBN();
-		cout << setw(30) << salelist[i].getTitle() << setw(10) << setprecision(2) << fixed << salelist[i].getRetail();
-		cout << setw(10) << setprecision(2)  << (salelist[i].getRetail()*salelist[i].getQuantity()) << endl;
+		cout << setw(30) << salelist[i].getTitle() << "    $" << setw(10) << setprecision(2) << fixed << left << salelist[i].getRetail();
+		cout << "    $" << setw(10) << setprecision(2) << left << (salelist[i].getRetail()*salelist[i].getQuantity()) << endl;
 	}
 
 	cout << endl << "Subtotal: " << setprecision(2)  << total << endl;
