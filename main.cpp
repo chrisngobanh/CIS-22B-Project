@@ -93,6 +93,8 @@ int main()
 		}
 		
 	}
+	cout << endl << "Thank you for using Serendipity Booksellers!" << endl;
+	system("pause");
 	return 0;
 }
 

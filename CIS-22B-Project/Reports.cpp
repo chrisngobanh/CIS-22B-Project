@@ -132,17 +132,24 @@ void Report::menu()
 
 			double total = 0;
 
-			for (unsigned int i = 0; i < booklist.size(); i++)
+			for (unsigned int i = 0; i < booklist.size(); i++)	//print each book's information
 			{
-
 				double cost = booklist[i].getRetail() * booklist[i].getQuantity();
-				cout << setw(30) << left << booklist[i].getTitle();
+
+				string tmp = booklist[i].getTitle();
+
+				if (tmp.length() > 25) {
+					tmp = tmp.substr(0, 25) + "...";
+				}
+
+				cout << setprecision(2) << fixed;
+				cout << setw(30) << left << tmp;
 				cout << setw(10) << left << booklist[i].getQuantity();
-				cout << "$" << setw(10) << left << booklist[i].getRetail();
+				cout << "$" << setw(10) << left << setprecision(2) << fixed << booklist[i].getRetail();
 				cout << "$" << setw(5) << left << cost;
 				cout << endl;
 
-				total += cost;
+				total += cost;	//add each book's retail cost to the total variable
 			}
 			cout << "---------------------------------------------------------" << endl;
 			cout << setw(33) << left << "" << "Total Cost: $" << total << endl << endl;
