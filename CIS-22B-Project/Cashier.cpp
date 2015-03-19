@@ -14,7 +14,7 @@ void Cashier::menu()
 	Book book;
 
 	vector<Book> booklist = readList();
-	int choice = 0, n = 0;
+	int choice = 0;
 	do
 	{
 		system("CLS");
@@ -373,7 +373,7 @@ void Cashier::menu()
 			}
 			break;
 		default:
-			cout << "You did not enter a valid option (1, 2, or 3). Please try again." << endl;
+			cout << "You did not enter a valid option (1, 2, 3, or 4). Please try again." << endl;
 			system("pause");
 		}
 	} while (choice != 4);

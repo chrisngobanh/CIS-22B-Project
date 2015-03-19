@@ -8,7 +8,7 @@
 using namespace std;
 
 // main reports menu tree
-void Report::menu() 
+void Report::menu()
 {
 	int choice = 0;
 
