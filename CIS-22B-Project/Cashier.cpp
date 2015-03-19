@@ -59,7 +59,7 @@ void Cashier::menu()
 				puts(current);
 
 				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Add Book" << endl << endl; // allows user to add books to shopping cart
-				cout << "What book would you like to add to sale? Search the book by" << endl;
+				cout << "What book would you like to add to cart? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
@@ -87,7 +87,7 @@ void Cashier::menu()
 					try
 					{
 						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
-						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
+						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
 						validChoice = false;
@@ -138,7 +138,7 @@ void Cashier::menu()
 					try
 					{
 						vector<int> searchResults = lookUpBookTitle(title, booklist);
-						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
+						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
 						validChoice = false;
@@ -189,7 +189,7 @@ void Cashier::menu()
 					try
 					{
 						vector<int> searchResults = lookUpBookAuthor(author, booklist);
-						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
+						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
 						validChoice = false;
@@ -241,7 +241,7 @@ void Cashier::menu()
 					try
 					{
 						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
-						cout << "Which book do you want to add to sale? Or enter 0 to cancel: ";
+						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
 						validChoice = false;
@@ -515,12 +515,12 @@ void Cashier::Checkout()
 	cout << setw(4) << "Qty" << setw(16) << "ISBN" << setw(30) << "Title" << setw(10) << "Price" << setw(10) << "Total";
 	cout << "\n========================================================================\n";
 
-	for (unsigned int i = 0; i < salelist.size(); i++)
+	for (unsigned int i = 0; i < salelist.size(); i++)	
 	{
-		total += (salelist[i].getRetail()*cartQuantity[i]);
-		cout << setw(4) << cartQuantity[i] << setw(16) << salelist[i].getISBN();
+		total += (salelist[i].getRetail()*cartQuantity[i]);	//hold total cost of sale
+		cout << setw(4) << cartQuantity[i] << setw(16) << salelist[i].getISBN();	//print every item in cart
 		cout << setw(30) << salelist[i].getTitle() << "     " << "$" << setw(9) << setprecision(2) << fixed << left << salelist[i].getRetail();
-		cout << "$" << setw(10) << setprecision(2) << left << (salelist[i].getRetail()*salelist[i].getQuantity()) << endl;
+		cout << "$" << setw(10) << setprecision(2) << left << (salelist[i].getRetail()*cartQuantity[i]) << endl;
 	}
 
 	cout << endl << "Subtotal:\t$" << setprecision(2)  << total << endl;
