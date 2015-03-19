@@ -306,7 +306,7 @@ void Cashier::menu()
 				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Edit Cart" << endl << endl; // allows user to remove books from shopping cart
 				cout << "Currently in your cart:" << endl << endl;
 
-				for (unsigned int i = 0; i < salelist.size(); i++){
+				for (unsigned int i = 0; i < salelist.size(); i++){ // lists all books in shopping cart
 					printf("%d.\n", i+1);
 					cout << salelist[i].getTitle() << endl << cartQuantity[i] << " in cart" << endl << "$" << salelist[i].getRetail() << " each" << endl << endl;
 				}
@@ -441,14 +441,14 @@ void Cashier::addToSale(int location, vector<Book>& booklist)
 
 		int inCart = -1;
 		for (unsigned int i = 0; i < salelist.size(); i++){
-			if (strcmp(salelist[i].getISBN(), booklist[location].getISBN()) == 0) inCart = i;
+			if (strcmp(salelist[i].getISBN(), booklist[location].getISBN()) == 0) inCart = i; // notes location of a book in cart if already in it
 		}
-		if (inCart < 0){
-			salelist.push_back(booklist[location]); // notes which new book was added to the cart
-			cartQuantity.push_back(number);
-			bookLocation.push_back(location);
+		if (inCart < 0){ // if the book isn't already in the cart
+			salelist.push_back(booklist[location]); // notes which new book is added to the cart
+			cartQuantity.push_back(number); // denotes how many of that book is in the cart
+			bookLocation.push_back(location); // denotes the location of the book in the inventory
 		}
-		else cartQuantity[inCart] += number;
+		else cartQuantity[inCart] += number; // adds to already existing quantity of books in cart
 
 		booklist[location].sQuantity = (quantity - number);
 		
