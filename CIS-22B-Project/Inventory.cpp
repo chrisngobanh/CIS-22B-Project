@@ -157,6 +157,7 @@ void Inventory::menu()
 					break;
 				}
 				case 5:
+					// returns to inventory main menu
 					break;
 				default:
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
@@ -351,6 +352,7 @@ void Inventory::menu()
 					break;
 				}
 				case 5:
+					// returns to inventory main menu
 					break;
 				default:
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
@@ -634,6 +636,7 @@ void Inventory::menu()
 					break;
 				}
 				case 5:
+					// returns to inventory main menu
 					break;
 				default:
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
@@ -643,6 +646,7 @@ void Inventory::menu()
 			break;
 		}
 		case 5:
+			// returns to program main menu
 			break;
 		default:
 			cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;

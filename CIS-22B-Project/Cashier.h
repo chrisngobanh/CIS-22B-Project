@@ -15,12 +15,14 @@ private:
 	int quantity;
 	const double taxrate = .0875;
 	vector<Book> salelist;
+	vector<int> cartQuantity;
+	vector<int> bookLocation;
 
 public:
 	void menu();
-	void addToSale(int, vector<Book>&, vector<Book>&);
-	void subFromSale(int, vector<Book>&, vector<Book>&);
-	void Checkout(vector<Book>);
+	void addToSale(int, vector<Book>&);
+	void subFromSale(int, vector<Book>&);
+	void Checkout();
 
 };
 #endif

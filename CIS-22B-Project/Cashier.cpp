@@ -106,7 +106,7 @@ void Cashier::menu()
 						{
 							try
 							{
-								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+								addToSale(searchResults[bookChoice - 1], booklist);
 							}
 							catch (char* error)
 							{
@@ -121,6 +121,7 @@ void Cashier::menu()
 					catch (char* error)
 					{
 						cout << error << endl;
+						system("pause");
 					}
 					break;
 				}
@@ -156,7 +157,7 @@ void Cashier::menu()
 						{
 							try
 							{
-								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+								addToSale(searchResults[bookChoice - 1], booklist);
 							}
 							catch (char* error)
 							{
@@ -171,6 +172,7 @@ void Cashier::menu()
 					catch (char* error)
 					{
 						cout << error << endl;
+						system("pause");
 					}
 					break;
 				}
@@ -206,7 +208,7 @@ void Cashier::menu()
 						{
 							try
 							{
-								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+								addToSale(searchResults[bookChoice - 1], booklist);
 							}
 							catch (char* error)
 							{
@@ -222,6 +224,7 @@ void Cashier::menu()
 					catch (char* error)
 					{
 						cout << error << endl;
+						system("pause");
 					}
 					break;
 				}
@@ -257,7 +260,7 @@ void Cashier::menu()
 						{
 							try
 							{
-								addToSale(searchResults[bookChoice - 1], booklist, salelist);
+								addToSale(searchResults[bookChoice - 1], booklist);
 							}
 							catch (char* error)
 							{
@@ -273,6 +276,7 @@ void Cashier::menu()
 					catch (char* error)
 					{
 						cout << error << endl;
+						system("pause");
 					}
 					break;
 				}
@@ -282,15 +286,20 @@ void Cashier::menu()
 					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
 					system("pause");
 				}
-				break;
 			} while (choice != 5);
 			break;
 		}
 		case 2:
 		{
-			Checkout(salelist); // takes user to the checkout screen
-			salelist.clear(); // empties shopping cart
-			writeList(booklist); // saves altered booklist to inventory now that checkout is complete
+			if (salelist.size() == 0){
+				cout << "Your shopping cart is empty!" << endl;
+				system("pause");
+			}
+			else{
+				Checkout(); // takes user to the checkout screen
+				salelist.clear(); // empties shopping cart
+				writeList(booklist); // saves altered booklist to inventory now that checkout is complete
+			}
 			break;
 		}
 		case 3:
@@ -300,13 +309,11 @@ void Cashier::menu()
 			cout << "You did not enter a valid option (1, 2, or 3). Please try again." << endl;
 			system("pause");
 		}
-		
-		
-	}while (choice != 3);
+	} while (choice != 3);
 }
 
-
-void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& salelist)
+// allows user to add a certain number of a chosen book to the cart
+void Cashier::addToSale(int location, vector<Book>& booklist)
 {
 	int number = -1, quantity = 0;
 	quantity = booklist[location].getQuantity(); // sets local variable quantity to how many of a book is currently on hand
@@ -367,12 +374,16 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 		}
 
 		salelist.push_back(booklist[location]);
+		cartQuantity.push_back(number);
+		bookLocation.push_back(location);
 
+		/*
 		for (unsigned int i = 0; i < salelist.size(); i++)
 		{
 			if (salelist[i].getISBN() == booklist[location].getISBN())
-				salelist[i].sQuantity = number;
+				setValue(salelist[location].sQuantity, number);
 		}
+		*/
 
 		booklist[location].sQuantity = (quantity - number);
 		
@@ -381,10 +392,10 @@ void Cashier::addToSale(int location, vector<Book>& booklist, vector<Book>& sale
 	}
 }
 
-void Cashier::subFromSale(int location, vector<Book>& booklist, vector<Book>& salelist)
+void Cashier::subFromSale(int location, vector<Book>& booklist)
 {
 	unsigned int number = 0, quantity = 0;
-	quantity = salelist[location].getQuantity();
+	quantity = cartQuantity[location];
 
 	cout << "How many of '" << salelist[location].getTitle() << "' would you like to remove?\n";
 	cin >> number;
@@ -406,7 +417,7 @@ void Cashier::subFromSale(int location, vector<Book>& booklist, vector<Book>& sa
 	writeList(booklist);
 }
 
-void Cashier::Checkout(vector<Book> salelist)
+void Cashier::Checkout()
 {
 	double total = 0;
 
@@ -414,30 +425,30 @@ void Cashier::Checkout(vector<Book> salelist)
 	struct tm * timeinfo;
 	char current[80] = "";
 
-	system("cls");
+	system("CLS");
 
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	strftime(current, 80, "%m/%d/%y %I:%M%p", timeinfo);
+	strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
 	for (int i = 0; i < 80; i++)
 		cout << current[i];
 
-	cout << "\nSerendipity Booksellers\nCashier Menu - Checkout\n"; // prints out a reciept for user
-
+	cout << "Serendipity Booksellers\nCashier Menu - Checkout\n\n"; // prints out a reciept for user
+	cout << fixed << right;
 	cout << setw(4) << "Qty" << setw(16) << "ISBN" << setw(30) << "Title" << setw(10) << "Price" << setw(10) << "Total";
 	cout << "\n========================================================================\n";
 
 	for (unsigned int i = 0; i < salelist.size(); i++)
 	{
-		total += (salelist[i].getRetail()*salelist[i].getQuantity());
-		cout << setw(4) << salelist[i].getQuantity() << setw(16) << salelist[i].getISBN();
-		cout << setw(30) << salelist[i].getTitle() << "     $" << setw(10) << setprecision(2) << fixed << left << salelist[i].getRetail();
+		total += (salelist[i].getRetail()*cartQuantity[i]);
+		cout << setw(4) << cartQuantity[i] << setw(16) << salelist[i].getISBN();
+		cout << setw(30) << salelist[i].getTitle() << "     " << "$" << setw(9) << setprecision(2) << fixed << left << salelist[i].getRetail();
 		cout << "$" << setw(10) << setprecision(2) << left << (salelist[i].getRetail()*salelist[i].getQuantity()) << endl;
 	}
 
-	cout << endl << "Subtotal: " << setprecision(2)  << total << endl;
-	cout << "Tax: " << setprecision(2) << (taxrate*total);
-	cout << endl << "Total: " << setprecision(2) << (total + (taxrate*total)) << endl;
+	cout << endl << "Subtotal:\t$" << setprecision(2)  << total << endl;
+	cout << "Tax:\t\t$" << setprecision(2) << (taxrate*total);
+	cout << endl << "Total:\t\t$" << setprecision(2) << (total + (taxrate*total)) << endl;
 	cout << endl << "Thank you for shopping at Serendipity!\n\n";
 
 	system("pause");
