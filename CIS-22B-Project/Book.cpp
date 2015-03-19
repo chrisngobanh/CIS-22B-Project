@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Book::Book(char isbn[], char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date) //char date[])
+// Book constructor
+Book::Book(char isbn[], char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date)
 {
 	strcpy(sISBN, isbn);
 	strcpy(sTitle, title);
@@ -16,22 +17,22 @@ Book::Book(char isbn[], char title[], char author[], char publisher[], unsigned 
 	sDate = date;
 }
 
-string Book::getISBN()
+char* Book::getISBN()
 {
 	return sISBN;
 }
 
-string Book::getTitle()
+char* Book::getTitle()
 {
 	return sTitle;
 }
 
-string Book::getAuthor()
+char* Book::getAuthor()
 {
 	return sAuthor;
 }
 
-string Book::getPublisher()
+char* Book::getPublisher()
 {
 	return sPublisher;
 }
@@ -79,9 +80,9 @@ void Book::setPublisher(char publisher[])
 */
 //using friend class to set sQuantity and sRetail instead of mutator functions
 
+// prints book object to output for user to see
 void Book::print()
 {
-
 	cout << "ISBN: " << sISBN << endl;
 	cout << "Title: " << sTitle << endl;
 	cout << "Author: " << sAuthor << endl;

@@ -166,9 +166,9 @@ void Report::menu()
 
 			cout << "Serendipity Booksellers" << endl;
 			cout << "Reports Menu - Listing by Quantity" << endl << endl;
+			cout << "----------------------------------------------" << endl << endl;
 
 			sortByQuantity(booklist);
-
 			printList(booklist);
 
 			system("pause");
@@ -183,6 +183,7 @@ void Report::menu()
 
 			cout << "Serendipity Booksellers" << endl;
 			cout << "Reports Menu - Listing by Cost" << endl << endl;
+			cout << "----------------------------------------------" << endl << endl;
 
 			sortByCost(booklist);
 			printList(booklist);
@@ -199,6 +200,8 @@ void Report::menu()
 
 			cout << "Serendipity Booksellers" << endl;
 			cout << "Reports Menu - Listing by Age" << endl << endl;
+			cout << "----------------------------------------------" << endl << endl;
+
 			sortByAge(booklist);
 			printList(booklist);
 
@@ -271,12 +274,16 @@ void Report::sortByAge(vector<Book>& booklist)
 
 void Report::printList(vector<Book>& booklist)
 {
-
-	for (unsigned int i = 0; i < booklist.size(); i++)
-	{
-
-		booklist[i].print();
+	if (booklist.size() == 0){
+		cout << "There are no books in the inventory." << endl;
 		cout << endl << "----------------------------------------------" << endl << endl;
 	}
+	else{
+		for (unsigned int i = 0; i < booklist.size(); i++)
+		{
 
+			booklist[i].print();
+			cout << endl << "----------------------------------------------" << endl << endl;
+		}
+	}
 }

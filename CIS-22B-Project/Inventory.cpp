@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// main inventory menu choice tree
 void Inventory::menu()
 {
 	int inventoryChoice = 0;
@@ -24,7 +25,7 @@ void Inventory::menu()
 		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 		puts(current);
 
-		vector<Book> booklist = readList();
+		vector<Book> booklist = readList(); // loads inventory file for usage during the entire time in the inventory menu
 
 		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Main" << endl << endl;
 		cout << "What would you like to do?" << endl;
@@ -37,7 +38,7 @@ void Inventory::menu()
 		cin >> inventoryChoice;
 		if (!cin){
 			cin.clear();
-			inventoryChoice = 0;
+			inventoryChoice = 0; // defaults choice to 0 if user attempts to enter a non-number
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		cout << endl;
@@ -65,7 +66,7 @@ void Inventory::menu()
 				cin >> choice;
 				if (!cin){
 					cin.clear();
-					choice = 0;
+					choice = 0; // defaults choice to 0 if user attempts to enter a non-number
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				}
 				cout << endl;
@@ -77,6 +78,7 @@ void Inventory::menu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					try
@@ -85,9 +87,8 @@ void Inventory::menu()
 					}
 					catch (char* error)
 					{
-						cout << endl << "Error: " << error << endl;
+						cout << error << endl;
 					}
-					
 					system("pause");
 					break;
 				}
@@ -98,6 +99,7 @@ void Inventory::menu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 
@@ -107,9 +109,8 @@ void Inventory::menu()
 					}
 					catch (char* error)
 					{
-						cout << endl << "Error: " << error << endl;
+						cout << error << endl;
 					}
-
 					system("pause");
 					break;
 				}
@@ -120,6 +121,7 @@ void Inventory::menu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					try
@@ -128,9 +130,8 @@ void Inventory::menu()
 					}
 					catch (char* error)
 					{
-						cout << endl << "Error: " << error << endl;
+						cout << error << endl;
 					}
-
 					system("pause");
 					break;
 				}
@@ -141,6 +142,7 @@ void Inventory::menu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 					try
@@ -149,9 +151,8 @@ void Inventory::menu()
 					}
 					catch (char* error)
 					{
-						cout << endl << "Error: " << error << endl;
+						cout << error << endl;
 					}
-
 					system("pause");
 					break;
 				}
@@ -192,7 +193,7 @@ void Inventory::menu()
 				cin >> choice;
 				if (!cin){
 					cin.clear();
-					choice = 0;
+					choice = 0; // defaults choice to 0 if user attempts to enter a non-number
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				}
 				cout << endl;
@@ -204,10 +205,12 @@ void Inventory::menu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -217,6 +220,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -225,10 +229,10 @@ void Inventory::menu()
 
 						cout << endl;
 						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
-						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -239,10 +243,11 @@ void Inventory::menu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-					vector<int> searchResults = lookUpBookTitle(title, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookTitle(title, booklist);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -252,6 +257,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -260,10 +266,10 @@ void Inventory::menu()
 
 						cout << endl;
 						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
-						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -274,10 +280,12 @@ void Inventory::menu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookAuthor(author, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookAuthor(author, booklist);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -287,6 +295,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -295,10 +304,10 @@ void Inventory::menu()
 
 						cout << endl;
 						if (bookChoice != 0) searchResults[bookChoice - 1], booklist;
-						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -309,10 +318,12 @@ void Inventory::menu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -322,6 +333,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -330,10 +342,10 @@ void Inventory::menu()
 
 						cout << endl;
 						if (bookChoice != 0) editBook(searchResults[bookChoice - 1], booklist);
-						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -371,7 +383,7 @@ void Inventory::menu()
 				cin >> choice;
 				if (!cin){
 					cin.clear();
-					choice = 0;
+					choice = 0; // defaults choice to 0 if user attempts to enter a non-number
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				}
 				cout << endl;
@@ -383,10 +395,12 @@ void Inventory::menu()
 					cout << "ISBN: ";
 					cin.ignore();
 					cin.getline(isbn, 13);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookISBN(isbn, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -396,6 +410,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -413,21 +428,24 @@ void Inventory::menu()
 								if (!cin){
 									cin.clear();
 									confirmation = -1;
+									// defaults choice to -1 if user attemts to enter a non-number
 									cin.ignore(numeric_limits<streamsize>::max(), '\n');
 								}
 								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								// demands that user input only 0 or 1 to continue
 								else validChoice = true;
 							}
 
-							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
-							writeList(booklist);
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]); // deletes book from book list
+							writeList(booklist); // saves altered book list to inventory file
 							cout << endl << "Deletion complete." << endl;
 							system("pause");
 						}
 						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -438,10 +456,12 @@ void Inventory::menu()
 					cout << "Title: ";
 					cin.ignore();
 					cin.getline(title, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookTitle(title, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookTitle(title, booklist);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -451,6 +471,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -468,21 +489,24 @@ void Inventory::menu()
 								if (!cin){
 									cin.clear();
 									confirmation = -1;
+									// defaults choice to -1 if user attempts to input a non-number
 									cin.ignore(numeric_limits<streamsize>::max(), '\n');
 								}
 								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								// demands that user input only 0 or 1 to continue
 								else validChoice = true;
 							}
 
-							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
-							writeList(booklist);
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]); // deletes book from book list
+							writeList(booklist); // saves altered book list to inventory file
 							cout << endl << "Deletion complete." << endl;
 							system("pause");
 						}
 						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -493,10 +517,12 @@ void Inventory::menu()
 					cout << "Author: ";
 					cin.ignore();
 					cin.getline(author, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookAuthor(author, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookAuthor(author, booklist);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -506,6 +532,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -523,21 +550,24 @@ void Inventory::menu()
 								if (!cin){
 									cin.clear();
 									confirmation = -1;
+									// defaults choice to -1 if user attempts to input a non-number
 									cin.ignore(numeric_limits<streamsize>::max(), '\n');
 								}
 								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								// demands that user input only 0 or 1 to continue
 								else validChoice = true;
 							}
 
-							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
-							writeList(booklist);
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]); // deletes book from book list
+							writeList(booklist); // saves altered book list to inventory file
 							cout << endl << "Deletion complete." << endl;
 							system("pause");
 						}
 						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -548,10 +578,12 @@ void Inventory::menu()
 					cout << "Publisher: ";
 					cin.ignore();
 					cin.getline(publisher, 100);
+					cin.clear();
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-					vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
-					if (searchResults.size() != 0){
+					try
+					{
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -561,6 +593,7 @@ void Inventory::menu()
 							if (!cin){
 								cin.clear();
 								bookChoice = searchResults.size() + 1;
+								// defaults choice to more than array size if user attempts to input a non-unsigned int
 								cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							}
 							if (bookChoice > searchResults.size()) cout << "Invalid selection. Please try again: ";
@@ -578,21 +611,24 @@ void Inventory::menu()
 								if (!cin){
 									cin.clear();
 									confirmation = -1;
+									// defaults choice to -1 if user inputs a non-number
 									cin.ignore(numeric_limits<streamsize>::max(), '\n');
 								}
 								if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+								// demands that user input only 0 or 1 to continue
 								else validChoice = true;
 							}
 
-							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]);
-							writeList(booklist);
+							booklist.erase(booklist.begin() + searchResults[bookChoice - 1]); // deletes book from book list
+							writeList(booklist); // saves altered book list to inventory file
 							cout << endl << "Deletion complete." << endl;
 							system("pause");
 						}
 						cout << endl;
 					}
-					else{
-						cout << "No books found using search criteria." << endl;
+					catch (char* error)
+					{
+						cout << error << endl;
 						system("pause");
 					}
 					break;
@@ -600,8 +636,8 @@ void Inventory::menu()
 				case 5:
 					break;
 				default:
-					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
-					system("pause");
+cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+system("pause");
 				}
 			} while (choice != 5);
 			break;
@@ -616,18 +652,20 @@ void Inventory::menu()
 	} while (inventoryChoice != 5);
 }
 
+// the next four functions sort a list of books by sTitle attributes in descending ASCII order
+
 void Inventory::sortByTitle(vector<Book>& booklist)
 {
 	for (size_t i = 0; i < booklist.size(); i++){
 		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getTitle() > booklist[j].getTitle()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
+				Book temp1 = booklist[j], temp2 = booklist[i]; // create temporary Book objects for later insertions
+				booklist.erase(booklist.begin() + j); // remove Book at position j from booklist
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2); // insert i-Book into j-position
+				else booklist.push_back(temp2); // or push i-Book to the end if j-position happened to be the last object in booklist
+				booklist.insert(booklist.begin() + i, temp1); // insert j-Book into i-position
+				booklist.erase(booklist.begin() + i + 1); // remove Book at position after newly inserted book
 			}
 		}
 	}
@@ -640,12 +678,12 @@ void Inventory::sortByQuantity(vector<Book>& booklist)
 		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getQuantity() > booklist[j].getQuantity()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
+				Book temp1 = booklist[j], temp2 = booklist[i]; // create temporary Book objects for later insertions
+				booklist.erase(booklist.begin() + j); // remove Book at position j from booklist
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2); // insert i-Book into j-position
+				else booklist.push_back(temp2); // or push i-Book to the end if j-position happened to be the last object in booklist
+				booklist.insert(booklist.begin() + i, temp1); // insert j-Book into i-position
+				booklist.erase(booklist.begin() + i + 1); // remove Book at position after newly inserted book
 			}
 		}
 	}
@@ -658,12 +696,12 @@ void Inventory::sortByCost(vector<Book>& booklist)
 		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getRetail() > booklist[j].getRetail()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
+				Book temp1 = booklist[j], temp2 = booklist[i]; // create temporary Book objects for later insertions
+				booklist.erase(booklist.begin() + j); // remove Book at position j from booklist
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2); // insert i-Book into j-position
+				else booklist.push_back(temp2); // or push i-Book to the end if j-position happened to be the last object in booklist
+				booklist.insert(booklist.begin() + i, temp1); // insert j-Book into i-position
+				booklist.erase(booklist.begin() + i + 1); // remove Book at position after newly inserted book
 			}
 		}
 	}
@@ -675,17 +713,19 @@ void Inventory::sortByAge(vector<Book>& booklist)
 		for (size_t j = i + 1; j < booklist.size(); j++)
 		{
 			if (booklist[i].getDate() > booklist[j].getDate()){
-				Book temp1 = booklist[j], temp2 = booklist[i];
-				booklist.erase(booklist.begin() + j);
-				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2);
-				else booklist.push_back(temp2);
-				booklist.insert(booklist.begin() + i, temp1);
-				booklist.erase(booklist.begin() + i + 1);
+				Book temp1 = booklist[j], temp2 = booklist[i]; // create temporary Book objects for later insertions
+				booklist.erase(booklist.begin() + j); // remove Book at position j from booklist
+				if (booklist.begin() + j != booklist.end()) booklist.insert(booklist.begin() + j, temp2); // insert i-Book into j-position
+				else booklist.push_back(temp2); // or push i-Book to the end if j-position happened to be the last object in booklist
+				booklist.insert(booklist.begin() + i, temp1); // insert j-Book into i-position
+				booklist.erase(booklist.begin() + i + 1); // remove Book at position after newly inserted book
 			}
 		}
 	}
 }
 
+// the next four functions search a list of books for a particular search criteria
+// returns a vector of ints marking the iterator of where the book is found in the book list
 
 vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 {
@@ -695,16 +735,23 @@ vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 	int count = 0;
 	for (unsigned int i = 0; i < booklist.size(); i++)
 	{
-		if (isbn == booklist[i].getISBN())
+		char lookFor[13];
+		strcpy(lookFor, booklist[i].getISBN()); // copies data from book into temporary object for function
+		for (unsigned int n = 0; n < 100; n++){ // makes all strings involved lowercase
+			isbn[n] = tolower(isbn[n]);
+			lookFor[n] = tolower(lookFor[n]);
+		}
+
+		if (strcmp(isbn, lookFor) == 0)
 		{
-			foundBooks.push_back(i);
-			printf("%d.\n", ++count);
-			booklist[i].print();
+			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
+			printf("%d.\n", ++count); // prints the current number of found books to output
+			booklist[i].print(); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
 	if (foundBooks.size() == 0){
-		throw "No books found using search criteria.";
+		throw "No books found using search criteria."; // throws an error if no books are found
 	}
 
 	return foundBooks;
@@ -718,16 +765,23 @@ vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
 	int count = 0;
 	for (unsigned int i = 0; i < booklist.size(); i++)
 	{
-		if (title == booklist[i].getTitle())
+		char lookFor[100];
+		strcpy(lookFor, booklist[i].getTitle()); // copies data from book into temporary object for function
+		for (unsigned int n = 0; n < 100; n++){ // makes all strings involved lowercase
+			title[n] = tolower(title[n]);
+			lookFor[n] = tolower(lookFor[n]);
+		}
+
+		if (strcmp(title, lookFor) == 0)
 		{
-			foundBooks.push_back(i);
-			printf("%d.\n", ++count);
-			booklist[i].print();
+			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
+			printf("%d.\n", ++count); // prints the current number of found books to output
+			booklist[i].print(); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
 	if (foundBooks.size() == 0){
-		throw "No books found using search criteria.";
+		throw "No books found using search criteria."; // throws an error if no books are found
 	}
 
 	return foundBooks;
@@ -741,16 +795,23 @@ vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
 	int count = 0;
 	for (unsigned int i = 0; i < booklist.size(); i++)
 	{
-		if (author == booklist[i].getAuthor())
+		char lookFor[100];
+		strcpy(lookFor, booklist[i].getAuthor()); // copies data from book into temporary object for function
+		for (unsigned int n = 0; n < 100; n++){ // makes all strings involved lowercase
+			author[n] = tolower(author[n]);
+			lookFor[n] = tolower(lookFor[n]);
+		}
+
+		if (strcmp(author, lookFor) == 0)
 		{
-			foundBooks.push_back(i);
-			printf("%d.\n", ++count);
-			booklist[i].print();
+			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
+			printf("%d.\n", ++count); // prints the current number of found books to output
+			booklist[i].print(); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
 	if (foundBooks.size() == 0){
-		throw "No books found using search criteria.";
+		throw "No books found using search criteria."; // throws an error if no books are found
 	}
 
 	return foundBooks;
@@ -764,21 +825,29 @@ vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& bookl
 	int count = 0;
 	for (unsigned int i = 0; i < booklist.size(); i++)
 	{
-		if (publisher == booklist[i].getPublisher())
+		char lookFor[100];
+		strcpy(lookFor, booklist[i].getPublisher()); // copies data from book into temporary object for function
+		for (unsigned int n = 0; n < 100; n++){ // makes all strings involved lowercase
+			publisher[n] = tolower(publisher[n]);
+			lookFor[n] = tolower(lookFor[n]);
+		}
+
+		if (strcmp(publisher, lookFor) == 0)
 		{
-			foundBooks.push_back(i);
-			printf("%d.\n", ++count);
-			booklist[i].print();
+			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
+			printf("%d.\n", ++count); // prints the current number of found books to output
+			booklist[i].print(); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
 	if (foundBooks.size() == 0){
-		throw "No books found using search criteria.";
+		throw "No books found using search criteria."; // throws an error if no books are found
 	}
 
 	return foundBooks;
 }
 
+// adds a book to the complete database
 void Inventory::addBook(vector<Book>& booklist)
 {
 	system("CLS");
@@ -804,6 +873,9 @@ void Inventory::addBook(vector<Book>& booklist)
 	cin.getline(isbn, 13);
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+	// expect the possibility of the user accidentally accessing the add book menu
+	// entering only '0' allows for a quick exit
+	// if anything else is entered, user continues to add more data about a new book
 	if (strcmp(isbn, "0") != 0)
 	{
 		cout << "Title: ";
@@ -861,7 +933,7 @@ void Inventory::addBook(vector<Book>& booklist)
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << endl;
 
-		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, rawtime);
+		Book book(isbn, title, author, publisher, quantity, wholesaleCost, retailPrice, rawtime); // current time is automatically used
 
 		booklist.push_back(book);
 		writeList(booklist);
@@ -877,6 +949,8 @@ void Inventory::setValue(T1& dest, T2 source)
 	dest = source;
 }
 
+// allows user to edit a book's data in the database
+// does not allow alterations to the wholesale cost or the date added
 void Inventory::editBook(int location, vector<Book>& bookList)
 {
 	bool validChoice;
@@ -908,7 +982,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		cin >> choice;
 		if (!cin){
 			cin.clear();
-			choice = 0;
+			choice = 0; // defaults choice to 0 if user attempts to enter a non-number
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		cout << endl;
@@ -922,8 +996,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(isbn, 13);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			strcpy(bookList[location].sISBN, isbn);
-			writeList(bookList);
+			strcpy(bookList[location].sISBN, isbn); // overrites book's data with new data
+			writeList(bookList); // saves altered book list
 			cout << endl << "ISBN has been successfully edited." << endl << endl;
 			system("pause");
 			break;
@@ -935,8 +1009,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(title, 100);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			strcpy(bookList[location].sTitle, title);
-			writeList(bookList);
+			strcpy(bookList[location].sTitle, title); // overrites book's data with new data
+			writeList(bookList); // saves altered book list
 			cout << endl << "Title has been successfully edited." << endl << endl;
 			system("pause");
 			break;
@@ -961,8 +1035,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(publisher, 100);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			strcpy(bookList[location].sPublisher, publisher);
-			writeList(bookList);
+			strcpy(bookList[location].sPublisher, publisher); // overrites book's data with new data
+			writeList(bookList); // saves altered book list
 			cout << endl << "Publisher has been successfully edited." << endl << endl;
 			system("pause");
 			break;
@@ -984,8 +1058,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			}
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			setValue(bookList[location].sQuantity, quantity);
-			writeList(bookList);
+			setValue(bookList[location].sQuantity, quantity); // overrites book's data with new data
+			writeList(bookList); // saves altered book list
 			cout << endl << "Quantity-on-hand has been successfully edited." << endl << endl;
 			system("pause");
 			break;
@@ -1007,8 +1081,8 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			}
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			setValue(bookList[location].sRetail, retail);
-			writeList(bookList);
+			setValue(bookList[location].sRetail, retail); // overrites book's data with new data
+			writeList(bookList); // saves altered book list
 			cout << endl << "Retail price has been successfully edited." << endl << endl;
 			system("pause");
 			break;
@@ -1056,11 +1130,11 @@ vector<Book> Inventory::readList()
 void Inventory::writeList(vector<Book> list)
 {
 	ofstream ofs("bookList.txt", ios::out | ios::binary);
-	int numBooks = list.size();
-	ofs.write(reinterpret_cast<char *>(&numBooks), sizeof(numBooks));
+	int numBooks = list.size(); // finds out how many books are in the list
+	ofs.write(reinterpret_cast<char *>(&numBooks), sizeof(numBooks)); // writes to file the number of books in list, will be the first data to be read from file
 	for (int i = 0; i < numBooks; i++)
 	{
-		ofs.write(reinterpret_cast<char *>(&list[i]), sizeof(list[i]));
+		ofs.write(reinterpret_cast<char *>(&list[i]), sizeof(list[i])); // writes to file each book object in the list
 	}
-	ofs.close();
+	ofs.close(); // closes output file
 }

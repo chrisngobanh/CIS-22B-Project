@@ -21,6 +21,7 @@ int main()
 	Inventory inventory;
 	Report report;
 
+	// create pointers for the individual modules
 	Menu* cashpoint = &cashier;
 	Menu* invpoint = &inventory;
 	Menu* reppoint = &report;
@@ -62,30 +63,27 @@ int main()
 
 		while (choice < 1 || choice > 4) //can only enter 1-4
 		{
-			cout << "You did not enter a valid option(1, 2, 3, or 4). Please try again: ";
+			cout << "You did not enter a valid option (1, 2, 3, or 4). Please try again: ";
 			cin >> choice;
-			if (!cin){			//used in case someone enters letters instead of an int
+			if (!cin){
 				cin.clear();	
-				choice = 0;
+				choice = 0; // defaults choice to 0 if user attempts to enter a non-number
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
 		}
 		
-		switch (choice)
+		switch (choice) // accesses the desired menu by calling the virtual function, demonstrating polymorphism
 		{
 		case 1:
 			cashpoint->menu();
-			//cashier.menu();
 			//open cashier module
 			break;
 		case 2:
 			invpoint->menu();
-			//inventory.menu();
 			//open inventory module
 			break;
 		case 3:
 			reppoint->menu();
-			//report.menu();
 			//open report module
 			break;
 		case 4:

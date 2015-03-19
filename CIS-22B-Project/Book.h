@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <cctype>
 
 using namespace std;
 
@@ -25,10 +26,10 @@ public:
 	Book(){}
 	Book(char isbn[], char title[], char author[], char publisher[], unsigned int quantity, double wholesale, double retail, time_t date); //char date[]);
 
-	string getISBN();
-	string getTitle();
-	string getAuthor();
-	string getPublisher();
+	char* getISBN();
+	char* getTitle();
+	char* getAuthor();
+	char* getPublisher();
 	unsigned int getQuantity();
 	double getWholesale();
 	double getRetail();
