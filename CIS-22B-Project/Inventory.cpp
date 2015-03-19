@@ -886,7 +886,7 @@ void Inventory::addBook(vector<Book>& booklist)
 		while (isCopy){
 			isCopy = false;
 			for (unsigned int i = 0; i < booklist.size(); i++){
-				if (strcmp(isbn, booklist[i].getISBN()) == 0){
+				if (strcmp(isbn, booklist[i].getISBN()) == 0){ // checks if user is attempting to enter an ISBN that matches a book in the database
 					isCopy = true;
 					break;
 				}
@@ -896,7 +896,7 @@ void Inventory::addBook(vector<Book>& booklist)
 				cin.getline(isbn, 13);
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
-			if (strcmp(isbn, "0") == 0) return;
+			if (strcmp(isbn, "0") == 0) return; // immediately ends the function if user wishes to quit
 		}
 		cout << "Title: ";
 		cin.getline(title, 100);
@@ -913,10 +913,10 @@ void Inventory::addBook(vector<Book>& booklist)
 			cin >> quantity;
 			if (!cin){
 				cin.clear();
-				quantity = -1;
+				quantity = -1; // defaults value to an negative number if user attempts to enter a non-number
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
-			if (quantity < 0) cout << "Invalid input. Please try again: ";
+			if (quantity < 0) cout << "Invalid input. Please try again: "; // value must be a positive number
 			else validChoice = true;
 		}
 		cin.clear();
@@ -928,10 +928,10 @@ void Inventory::addBook(vector<Book>& booklist)
 			cin >> wholesaleCost;
 			if (!cin){
 				cin.clear();
-				wholesaleCost = -1;
+				wholesaleCost = -1; // defaults value to an negative number if user attempts to enter a non-number
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
-			if (wholesaleCost < 0) cout << "Invalid input. Please try again: ";
+			if (wholesaleCost < 0) cout << "Invalid input. Please try again: "; // value must be a positive number
 			else validChoice = true;
 		}
 		cin.clear();
@@ -943,10 +943,10 @@ void Inventory::addBook(vector<Book>& booklist)
 			cin >> retailPrice;
 			if (!cin){
 				cin.clear();
-				retailPrice = -1;
+				retailPrice = -1; // defaults value to an negative number if user attempts to enter a non-number
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
-			if (retailPrice < 0) cout << "Invalid input. Please try again: ";
+			if (retailPrice < 0) cout << "Invalid input. Please try again: "; // value must be a positive number
 			else validChoice = true;
 		}
 		cin.clear();
@@ -986,7 +986,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		strftime(current, 80, "%m/%d/%Y %I:%M%p", timeInfo);
 		puts(current);
 
-		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Edit Book" << endl << endl;
+		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Edit Book" << endl << endl; // allows user to edit the information about a chosen book
 		cout << "Current book information:" << endl << endl;
 		bookList[location].print(false);
 		
@@ -1019,7 +1019,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			bool isCopy = true;
 			while (isCopy){
 				isCopy = false;
-				for (unsigned int i = 0; i < bookList.size(); i++){
+				for (unsigned int i = 0; i < bookList.size(); i++){ // checks if user is attempting to enter an ISBN that matches a book in the database
 					if (strcmp(isbn, bookList[i].getISBN()) == 0 && i != location){
 						isCopy = true;
 						break;
