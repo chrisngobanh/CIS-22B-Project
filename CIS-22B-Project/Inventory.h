@@ -20,10 +20,10 @@ public:
 	void sortByCost(vector<Book>&);
 	void sortByAge(vector<Book>&);
 
-	vector<int> lookUpBookISBN(char[], vector<Book>&);
-	vector<int> lookUpBookTitle(char[], vector<Book>&);
-	vector<int> lookUpBookAuthor(char[], vector<Book>&);
-	vector<int> lookUpBookPublisher(char[], vector<Book>&);
+	vector<int> lookUpBookISBN(char[], vector<Book>&, bool);
+	vector<int> lookUpBookTitle(char[], vector<Book>&, bool);
+	vector<int> lookUpBookAuthor(char[], vector<Book>&, bool);
+	vector<int> lookUpBookPublisher(char[], vector<Book>&, bool);
 
 	void addBook(vector<Book>&);
 	template<class T1, class T2>

@@ -81,20 +81,22 @@ void Book::setPublisher(char publisher[])
 //using friend class to set sQuantity and sRetail instead of mutator functions
 
 // prints book object to output for user to see
-void Book::print()
+void Book::print(bool isCash)
 {
 	cout << "ISBN: " << sISBN << endl;
 	cout << "Title: " << sTitle << endl;
 	cout << "Author: " << sAuthor << endl;
 	cout << "Publisher: " << sPublisher << endl;
 	cout << "Quantity: " << sQuantity << endl;
-	printf("Wholesale Price: $%.2f\n", sWholesale);
+	if (isCash == false) printf("Wholesale Price: $%.2f\n", sWholesale);
 	printf("Retail Price: $%.2f\n", sRetail);
-	char buffer[100] = "";
-	struct tm *timeinfo;
-	timeinfo = localtime(&sDate);
-	strftime(buffer, 100, "Date Added: %m/%d/%Y", timeinfo);
-	puts(buffer);
+	if (isCash == false){
+		char buffer[100] = "";
+		struct tm *timeinfo;
+		timeinfo = localtime(&sDate);
+		strftime(buffer, 100, "Date Added: %m/%d/%Y", timeinfo);
+		puts(buffer);
+	}
 }
 
 Book::~Book()

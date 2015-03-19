@@ -86,7 +86,7 @@ void Cashier::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist, true);
 						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -137,7 +137,7 @@ void Cashier::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookTitle(title, booklist);
+						vector<int> searchResults = lookUpBookTitle(title, booklist, true);
 						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -188,7 +188,7 @@ void Cashier::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookAuthor(author, booklist);
+						vector<int> searchResults = lookUpBookAuthor(author, booklist, true);
 						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -240,7 +240,7 @@ void Cashier::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist, true);
 						cout << "Which book do you want to add to cart? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -297,42 +297,50 @@ void Cashier::menu()
 				system("pause");
 			}
 			else{
-				system("CLS");
+				unsigned int bookChoice = 1;
+				while (bookChoice != 0){
+					system("CLS");
 
-				time(&rawtime);
-				timeinfo = localtime(&rawtime);
-				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
-				puts(current);
+					time(&rawtime);
+					timeinfo = localtime(&rawtime);
+					strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
+					puts(current);
 
-				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Edit Cart" << endl << endl; // allows user to remove books from shopping cart
-				cout << "Currently in your cart:" << endl << endl;
+					cout << "Serendipity Booksellers" << endl << "Cashier Menu - Edit Cart" << endl << endl; // allows user to remove books from shopping cart
+					cout << "Currently in your cart:" << endl << endl;
 
-				for (unsigned int i = 0; i < salelist.size(); i++){ // lists all books in shopping cart
-					printf("%d.\n", i+1);
-					cout << salelist[i].getTitle() << endl << cartQuantity[i] << " in cart" << endl << "$" << salelist[i].getRetail() << " each" << endl << endl;
-				}
-				
-				cout << "Which book do you want to remove some number of from the cart?\nOr enter 0 to return to previous menu: ";
-
-				unsigned int bookChoice;
-				bool validChoice = false;
-				while (validChoice != true){
-					cin >> bookChoice;
-					if (!cin){
-						cin.clear();
-						bookChoice = salelist.size() + 1;
-						// defaults choice to more than array size if user attempts to input a non-unsigned int
-						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					if (salelist.size() == 0){
+						cout << "Your shopping cart is empty!" << endl;
+						system("pause");
+						break;
 					}
-					if (bookChoice > salelist.size()) cout << "Invalid selection. Please try again: ";
-					else validChoice = true;
-				}
 
-				cout << endl;
-				if (bookChoice != 0){
-					subFromSale(bookChoice - 1, booklist);
+					for (unsigned int i = 0; i < salelist.size(); i++){ // lists all books in shopping cart
+						printf("%d.\n", i + 1);
+						cout << salelist[i].getTitle() << endl << cartQuantity[i] << " in cart" << endl << "$" << salelist[i].getRetail() << " each" << endl << endl;
+					}
+
+					cout << "Which book do you want to remove some number of from the cart?\nOr enter 0 to return to previous menu: ";
+
+					bool validChoice = false;
+					while (validChoice != true){
+						cin >> bookChoice;
+						if (!cin){
+							cin.clear();
+							bookChoice = salelist.size() + 1;
+							// defaults choice to more than array size if user attempts to input a non-unsigned int
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						if (bookChoice > salelist.size()) cout << "Invalid selection. Please try again: ";
+						else validChoice = true;
+					}
 					cout << endl;
-					system("pause");
+
+					if (bookChoice != 0){
+						subFromSale(bookChoice - 1, booklist);
+						cout << endl;
+						system("pause");
+					}
 				}
 			}
 			break;
@@ -517,6 +525,7 @@ void Cashier::Checkout()
 
 	for (unsigned int i = 0; i < salelist.size(); i++)	
 	{
+		cout << fixed << right;
 		total += (salelist[i].getRetail()*cartQuantity[i]);	//hold total cost of sale
 		cout << setw(4) << cartQuantity[i] << setw(16) << salelist[i].getISBN();	//print every item in cart
 		cout << setw(30) << salelist[i].getTitle() << "     " << "$" << setw(9) << setprecision(2) << fixed << left << salelist[i].getRetail();

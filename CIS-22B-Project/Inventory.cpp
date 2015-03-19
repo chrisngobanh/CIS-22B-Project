@@ -83,7 +83,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookISBN(isbn, booklist); // shows books found
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist, false); // shows books found
 					}
 					catch (char* error)
 					{
@@ -105,7 +105,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookTitle(title, booklist); // shows books found
+						vector<int> searchResults = lookUpBookTitle(title, booklist, false); // shows books found
 					}
 					catch (char* error)
 					{
@@ -126,7 +126,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookAuthor(author, booklist); // shows books found
+						vector<int> searchResults = lookUpBookAuthor(author, booklist, false); // shows books found
 					}
 					catch (char* error)
 					{
@@ -147,7 +147,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookPublisher(publisher, booklist); // shows books found
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist, false); // shows books found
 					}
 					catch (char* error)
 					{
@@ -211,7 +211,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist, false);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -248,7 +248,7 @@ void Inventory::menu()
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					try
 					{
-						vector<int> searchResults = lookUpBookTitle(title, booklist);
+						vector<int> searchResults = lookUpBookTitle(title, booklist, false);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -286,7 +286,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookAuthor(author, booklist);
+						vector<int> searchResults = lookUpBookAuthor(author, booklist, false);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -324,7 +324,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist, false);
 						cout << "Which book do you want to edit? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -402,7 +402,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist, false);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -463,7 +463,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookTitle(title, booklist);
+						vector<int> searchResults = lookUpBookTitle(title, booklist, false);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -524,7 +524,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookAuthor(author, booklist);
+						vector<int> searchResults = lookUpBookAuthor(author, booklist, false);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -585,7 +585,7 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist, false);
 						cout << "Which book do you want to delete? Or enter 0 to cancel: ";
 
 						unsigned int bookChoice;
@@ -731,7 +731,7 @@ void Inventory::sortByAge(vector<Book>& booklist)
 // the next four functions search a list of books for a particular search criteria
 // returns a vector of ints marking the iterator of where the book is found in the book list
 
-vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
+vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist, bool isCash)
 {
 	cout << "Search results:" << endl << endl;
 
@@ -750,7 +750,7 @@ vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 		{
 			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
 			printf("%d.\n", ++count); // prints the current number of found books to output
-			booklist[i].print(); // prints the book to output for user to see
+			booklist[i].print(isCash); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
@@ -761,7 +761,7 @@ vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 	return foundBooks;
 }
 
-vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
+vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist, bool isCash)
 {
 	cout << "Search results:" << endl << endl;
 
@@ -780,7 +780,7 @@ vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
 		{
 			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
 			printf("%d.\n", ++count); // prints the current number of found books to output
-			booklist[i].print(); // prints the book to output for user to see
+			booklist[i].print(isCash); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
@@ -791,7 +791,7 @@ vector<int> Inventory::lookUpBookTitle(char title[], vector<Book>& booklist)
 	return foundBooks;
 }
 
-vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
+vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist, bool isCash)
 {
 	cout << "Search results:" << endl << endl;
 
@@ -810,7 +810,7 @@ vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
 		{
 			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
 			printf("%d.\n", ++count); // prints the current number of found books to output
-			booklist[i].print(); // prints the book to output for user to see
+			booklist[i].print(isCash); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
@@ -821,7 +821,7 @@ vector<int> Inventory::lookUpBookAuthor(char author[], vector<Book>& booklist)
 	return foundBooks;
 }
 
-vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& booklist)
+vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& booklist, bool isCash)
 {
 	cout << "Search results:" << endl << endl;
 
@@ -840,7 +840,7 @@ vector<int> Inventory::lookUpBookPublisher(char publisher[], vector<Book>& bookl
 		{
 			foundBooks.push_back(i); // pushes the location of a book in booklist into a vector as an int
 			printf("%d.\n", ++count); // prints the current number of found books to output
-			booklist[i].print(); // prints the book to output for user to see
+			booklist[i].print(isCash); // prints the book to output for user to see
 			cout << endl;
 		}
 	}
@@ -882,6 +882,22 @@ void Inventory::addBook(vector<Book>& booklist)
 	// if anything else is entered, user continues to add more data about a new book
 	if (strcmp(isbn, "0") != 0)
 	{
+		bool isCopy = true;
+		while (isCopy){
+			isCopy = false;
+			for (unsigned int i = 0; i < booklist.size(); i++){
+				if (strcmp(isbn, booklist[i].getISBN()) == 0){
+					isCopy = true;
+					break;
+				}
+			}
+			if (isCopy){
+				cout << "ISBN is already in database.\nPlease enter a different ISBN, or '0' to cancel: ";
+				cin.getline(isbn, 13);
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			if (strcmp(isbn, "0") == 0) return;
+		}
 		cout << "Title: ";
 		cin.getline(title, 100);
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -972,7 +988,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 
 		cout << "Serendipity Booksellers" << endl << "Inventory Menu - Edit Book" << endl << endl;
 		cout << "Current book information:" << endl << endl;
-		bookList[location].print();
+		bookList[location].print(false);
 		
 		cout << endl << "Which information would you like to edit?" << endl;
 		cout << "1. ISBN" << endl;
@@ -1000,6 +1016,21 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cin.ignore();
 			cin.getline(isbn, 13);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			bool isCopy = true;
+			while (isCopy){
+				isCopy = false;
+				for (unsigned int i = 0; i < bookList.size(); i++){
+					if (strcmp(isbn, bookList[i].getISBN()) == 0 && i != location){
+						isCopy = true;
+						break;
+					}
+				}
+				if (isCopy){
+					cout << "ISBN is already in database.\nPlease enter a different ISBN: ";
+					cin.getline(isbn, 13);
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+			}
 			strcpy(bookList[location].sISBN, isbn); // overrites book's data with new data
 			writeList(bookList); // saves altered book list
 			cout << endl << "ISBN has been successfully edited." << endl << endl;

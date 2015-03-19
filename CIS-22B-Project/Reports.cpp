@@ -228,7 +228,7 @@ void Report::printList(vector<Book>& booklist) // takes a list of books and prin
 	else{
 		for (unsigned int i = 0; i < booklist.size(); i++) // prints each book
 		{
-			booklist[i].print();
+			booklist[i].print(false);
 			cout << endl << "----------------------------------------------" << endl << endl;
 		}
 	}

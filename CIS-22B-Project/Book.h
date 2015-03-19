@@ -43,7 +43,7 @@ public:
 	*/
 	//using friend class to set sISBN, sTitle, sAuthor, sPublisher instead of mutator functions
 
-	void print();
+	void print(bool);
 
 	~Book();
 };
