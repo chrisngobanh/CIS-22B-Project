@@ -875,6 +875,7 @@ void Inventory::addBook(vector<Book>& booklist)
 	cout << "ISBN: ";
 	cin.ignore();
 	cin.getline(isbn, 13);
+	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	// expect the possibility of the user accidentally accessing the add book menu
@@ -894,18 +895,22 @@ void Inventory::addBook(vector<Book>& booklist)
 			if (isCopy){
 				cout << "ISBN is already in database.\nPlease enter a different ISBN, or '0' to cancel: ";
 				cin.getline(isbn, 13);
+				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
 			if (strcmp(isbn, "0") == 0) return; // immediately ends the function if user wishes to quit
 		}
 		cout << "Title: ";
 		cin.getline(title, 100);
+		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Author: ";
 		cin.getline(author, 100);
+		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Publisher: ";
 		cin.getline(publisher, 100);
+		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Quantity-On-Hand: ";
 		validChoice = false;
@@ -1015,6 +1020,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new ISBN: ";
 			cin.ignore();
 			cin.getline(isbn, 13);
+			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			bool isCopy = true;
 			while (isCopy){
@@ -1043,6 +1049,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new title: ";
 			cin.ignore();
 			cin.getline(title, 100);
+			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			strcpy(bookList[location].sTitle, title); // overrites book's data with new data
 			writeList(bookList); // saves altered book list
@@ -1056,6 +1063,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new author: ";
 			cin.ignore();
 			cin.getline(author, 100);
+			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			strcpy(bookList[location].sAuthor, author);
 			writeList(bookList);
@@ -1069,6 +1077,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 			cout << "Enter the new publisher: ";
 			cin.ignore();
 			cin.getline(publisher, 100);
+			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			strcpy(bookList[location].sPublisher, publisher); // overrites book's data with new data
 			writeList(bookList); // saves altered book list
