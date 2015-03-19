@@ -33,7 +33,7 @@ void Inventory::menu()
 		cout << "2. Add a Book" << endl;
 		cout << "3. Edit a Book's Record" << endl;
 		cout << "4. Delete a Book" << endl;
-		cout << "5. Return to the Main Menu" << endl;
+		cout << "5. Return to Main Menu" << endl;
 		cout << "Enter your Choice: ";
 		cin >> inventoryChoice;
 		if (!cin){
@@ -61,7 +61,7 @@ void Inventory::menu()
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
 				cout << "4. Publisher" << endl;
-				cout << "5. Return to the Inventory Menu." << endl;
+				cout << "5. Return to Previous Menu" << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
 				if (!cin){
@@ -189,7 +189,7 @@ void Inventory::menu()
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
 				cout << "4. Publisher" << endl;
-				cout << "5. Return to the Inventory Menu." << endl;
+				cout << "5. Return to Previous Menu" << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
 				if (!cin){
@@ -380,7 +380,7 @@ void Inventory::menu()
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
 				cout << "4. Publisher" << endl;
-				cout << "5. Return to the Inventory Menu." << endl;
+				cout << "5. Return to Previous Menu" << endl;
 				cout << "Enter your Choice: ";
 				cin >> choice;
 				if (!cin){
@@ -741,7 +741,7 @@ vector<int> Inventory::lookUpBookISBN(char isbn[], vector<Book>& booklist)
 	{
 		char lookFor[13];
 		strcpy(lookFor, booklist[i].getISBN()); // copies data from book into temporary object for function
-		for (unsigned int n = 0; n < 100; n++){ // makes all strings involved lowercase
+		for (unsigned int n = 0; n < 13; n++){ // makes all strings involved lowercase
 			isbn[n] = tolower(isbn[n]);
 			lookFor[n] = tolower(lookFor[n]);
 		}
@@ -871,7 +871,7 @@ void Inventory::addBook(vector<Book>& booklist)
 	puts(current);
 
 	cout << "Serendipity Booksellers" << endl << "Inventory Menu - Add Book" << endl << endl;
-	cout << "Please enter the following information." << endl << "(Enter only '0' to return to the Inventory Menu)" << endl << endl;
+	cout << "Please enter the following information." << endl << "(Enter only '0' to return to the previous menu)" << endl << endl;
 	cout << "ISBN: ";
 	cin.ignore();
 	cin.getline(isbn, 13);
@@ -981,7 +981,7 @@ void Inventory::editBook(int location, vector<Book>& bookList)
 		cout << "4. Publisher" << endl;
 		cout << "5. Quantity-On-Hand" << endl;
 		cout << "6. Retail Price" << endl;
-		cout << "7. Return to the previous menu." << endl;
+		cout << "7. Return to Previous Menu" << endl;
 		cout << "Enter your Choice: ";
 		cin >> choice;
 		if (!cin){

@@ -31,9 +31,10 @@ void Cashier::menu()
 		cout << "Serendipity Booksellers\n";
 		cout << "Cashier Menu - Main\n\n";
 		cout << "What would you like to do?\n";
-		cout << "1. Add a book to the sale\n";
-		cout << "2. Proceed to checkout\n";
-		cout << "3. Return to main menu\n";
+		cout << "1. Add a Book to Cart\n";
+		cout << "2. Edit Cart\n";
+		cout << "3. Proceed to Checkout\n";
+		cout << "4. Return to Main Menu\n";
 		cout << "Enter your choice: ";
 		cin >> choice;
 		if (!cin){
@@ -58,13 +59,13 @@ void Cashier::menu()
 				puts(current);
 
 				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Add Book" << endl << endl; // allows user to add books to shopping cart
-				cout << "What book would you like to add to sale ? Search the book by" << endl;
+				cout << "What book would you like to add to sale? Search the book by" << endl;
 				cout << "1. ISBN" << endl;
 				cout << "2. Title" << endl;
 				cout << "3. Author" << endl;
 				cout << "4. Publisher" << endl;
-				cout << "5. Return to the Cashier Menu." << endl;
-				cout << "Enter your Choice: ";
+				cout << "5. Return to Previous Menu" << endl;
+				cout << "Enter your choice: ";
 				cin >> choice;
 				if (!cin){
 					cin.clear();
@@ -293,6 +294,52 @@ void Cashier::menu()
 		{
 			if (salelist.size() == 0){
 				cout << "Your shopping cart is empty!" << endl;
+			}
+			else{
+				system("CLS");
+
+				time(&rawtime);
+				timeinfo = localtime(&rawtime);
+				strftime(current, 80, "%m/%d/%Y %I:%M%p", timeinfo);
+				puts(current);
+
+				cout << "Serendipity Booksellers" << endl << "Cashier Menu - Edit Cart" << endl << endl; // allows user to remove books from shopping cart
+				cout << "Currently in your cart:" << endl << endl;
+
+				for (unsigned int i = 0; i < salelist.size(); i++){
+					printf("%d.\n", i+1);
+					cout << salelist[i].getTitle() << endl << cartQuantity[i] << " in cart" << endl << "$" << salelist[i].getRetail() << " each" << endl << endl;
+				}
+				
+				cout << "Which book do you want to remove some number of from the cart?\nOr enter 0 to return to previous menu: ";
+
+				unsigned int bookChoice;
+				bool validChoice = false;
+				while (validChoice != true){
+					cin >> bookChoice;
+					if (!cin){
+						cin.clear();
+						bookChoice = salelist.size() + 1;
+						// defaults choice to more than array size if user attempts to input a non-unsigned int
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
+					if (bookChoice > salelist.size()) cout << "Invalid selection. Please try again: ";
+					else validChoice = true;
+				}
+
+				cout << endl;
+				if (bookChoice != 0){
+					subFromSale(bookChoice - 1, booklist);
+					cout << endl;
+				}
+			}
+			system("pause");
+			break;
+		}
+		case 3:
+		{
+			if (salelist.size() == 0){
+				cout << "Your shopping cart is empty!" << endl;
 				system("pause");
 			}
 			else{
@@ -302,14 +349,33 @@ void Cashier::menu()
 			}
 			break;
 		}
-		case 3:
-			salelist.clear(); // empties shopping cart, then exist cashier menu
+		case 4:
+			if (salelist.size() != 0){
+				cout << "You still have books in your shopping cart! Are you sure you want to quit?" << endl << "Enter 1 for yes, or 0 for no: ";
+				int confirmation;
+				bool validChoice = false;
+				while (validChoice != true){
+					cin >> confirmation;
+					if (!cin){
+						cin.clear();
+						confirmation = -1;
+						// defaults choice to -1 if user attemts to enter a non-number
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
+					if (confirmation < 0 || confirmation > 1) cout << "Invalid choice. Please try again: ";
+					// demands that user input only 0 or 1 to continue
+					else validChoice = true;
+				}
+
+				if (confirmation == 1) salelist.clear(); // empties shopping cart before exiting cashier menu
+				else choice = 0;
+			}
 			break;
 		default:
 			cout << "You did not enter a valid option (1, 2, or 3). Please try again." << endl;
 			system("pause");
 		}
-	} while (choice != 3);
+	} while (choice != 4);
 }
 
 // allows user to add a certain number of a chosen book to the cart
@@ -325,7 +391,7 @@ void Cashier::addToSale(int location, vector<Book>& booklist)
 	}
 	else
 	{
-		cout << "How many copies of '" << booklist[location].getTitle() << "' would you like to add to the cart?\n";
+		cout << "How many copies of\n'" << booklist[location].getTitle() << "'\nwould you like to add to the cart? ";
 
 		while (number < 0)
 		{
@@ -361,60 +427,70 @@ void Cashier::addToSale(int location, vector<Book>& booklist)
 				}
 				else if (confirmation == 0){
 					number = -1;
-					cout << "\nHow many copies of '" << booklist[location].getTitle() << "' would you like to add to the cart?\n";
+					cout << "\nHow many copies of '" << booklist[location].getTitle() << "' would you like to add to the cart? ";
 					cin.clear();
 					cin.ignore();
 				}
 			}
-			else if (number < 0){
+			else if (number < 0){ // when user attempts to add a negative number of books to the cart
 				cout << "\nYou can not add a negative number of books to the cart.\nPlease enter a different number: ";
 				cin.clear();
 				cin.ignore();
 			}
 		}
 
-		salelist.push_back(booklist[location]);
-		cartQuantity.push_back(number);
-		bookLocation.push_back(location);
-
-		/*
-		for (unsigned int i = 0; i < salelist.size(); i++)
-		{
-			if (salelist[i].getISBN() == booklist[location].getISBN())
-				setValue(salelist[location].sQuantity, number);
+		int inCart = -1;
+		for (unsigned int i = 0; i < salelist.size(); i++){
+			if (strcmp(salelist[i].getISBN(), booklist[location].getISBN()) == 0) inCart = i;
 		}
-		*/
+		if (inCart < 0){
+			salelist.push_back(booklist[location]); // notes which new book was added to the cart
+			cartQuantity.push_back(number);
+			bookLocation.push_back(location);
+		}
+		else cartQuantity[inCart] += number;
 
 		booklist[location].sQuantity = (quantity - number);
 		
-		if (number == 1) cout << endl << number << " copy of " << booklist[location].getTitle() << " added to cart." << endl;
-		else cout << endl << number << " copies of " << booklist[location].getTitle() << " added to cart." << endl;
+		if (number == 1) cout << endl << "Added to cart: " <<  number << " copy of " << booklist[location].getTitle();
+		else cout << endl << "Added to cart: " <<  number << " copies of " << booklist[location].getTitle();
 	}
 }
 
 void Cashier::subFromSale(int location, vector<Book>& booklist)
 {
-	unsigned int number = 0, quantity = 0;
-	quantity = cartQuantity[location];
+	int number = -1, quantity = cartQuantity[location];
 
 	cout << "How many of '" << salelist[location].getTitle() << "' would you like to remove?\n";
-	cin >> number;
-
-	if (number > quantity)
+	while (number < 0)
 	{
-		number = quantity;
+		cin >> number; // user informs program how many will be removed
+		while (!cin){ // if user attempts to enter a non-number
+			cin.clear();
+			cout << "Invalid input. Please try again: ";
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cin >> number;
+		}
+
+		if (number >= quantity) number = quantity;
+		else if (number < 0){ // when user attempts to remove a negative number of books from the cart
+			cout << "\nPlease enter a positive number: ";
+			cin.clear();
+			cin.ignore();
+		}
 	}
 
-	for (unsigned int i = 0; i < booklist.size(); i++)
-	{
-		if (salelist[location].getISBN() == booklist[i].getISBN())
-			booklist[i].sQuantity += number;
+	booklist[bookLocation[location]].sQuantity += number; // adds back the number of books to inventory list from cart
+	cartQuantity[location] -= number; // reduces the number of books in cart
+
+	if (number == 1) cout << endl << "Removed from cart: " << number << " copy of " << salelist[location].getTitle();
+	else cout << endl << "Removed from cart: " << number << " copies of " << salelist[location].getTitle();
+
+	if (cartQuantity[location] == 0){ // removes item from cart completely if no more of it is in cart
+		salelist.erase(salelist.begin() + location);
+		bookLocation.erase(bookLocation.begin() + location);
+		cartQuantity.erase(cartQuantity.begin() + location);
 	}
-
-	salelist[location].sQuantity -= number;
-	if (salelist[location].sQuantity == 0) salelist.erase(salelist.begin() + location);
-
-	writeList(booklist);
 }
 
 void Cashier::Checkout()
