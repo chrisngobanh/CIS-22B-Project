@@ -294,6 +294,7 @@ void Cashier::menu()
 		{
 			if (salelist.size() == 0){
 				cout << "Your shopping cart is empty!" << endl;
+				system("pause");
 			}
 			else{
 				system("CLS");
@@ -331,9 +332,9 @@ void Cashier::menu()
 				if (bookChoice != 0){
 					subFromSale(bookChoice - 1, booklist);
 					cout << endl;
+					system("pause");
 				}
 			}
-			system("pause");
 			break;
 		}
 		case 3:
@@ -461,7 +462,7 @@ void Cashier::subFromSale(int location, vector<Book>& booklist)
 {
 	int number = -1, quantity = cartQuantity[location];
 
-	cout << "How many of '" << salelist[location].getTitle() << "' would you like to remove?\n";
+	cout << "How many of '" << salelist[location].getTitle() << "' would you like to remove? ";
 	while (number < 0)
 	{
 		cin >> number; // user informs program how many will be removed
