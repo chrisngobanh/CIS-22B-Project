@@ -14,6 +14,7 @@ private:
 public:
 	void menu();
 
+	// used by Reports
 	void sortByTitle(vector<Book>&);
 	void sortByQuantity(vector<Book>&);
 	void sortByCost(vector<Book>&);

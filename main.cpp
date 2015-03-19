@@ -98,28 +98,28 @@ int main()
 
 void splashScreen() {
 
-	cout << "Serendipity Booksellers Program." << endl << endl;
+	cout << "- Welcome to Serendipity Booksellers -" << endl << endl;
 	cout << "Loading..." << endl << endl;
 
 	cout <<"             ..ee$$$$$ee..							";
     cout <<"         .e$*\"\"    $    \"\"*$e.					"<< endl;
 	cout <<"       z$\"*.       $         $$c                   "<< endl;   
 	cout <<"     z$\"   *.      $       .P  ^$c                 "<< endl;   
-	cout <<"    d\"      *      $      z\"     \"b      Come        "<< endl;    
-	cout <<"   $\"        b     $     4%       ^$     On        "<< endl;   
-	cout <<"  d%         *     $     P         '$    And       "<< endl;  
-	cout <<" .$          'F    $    J\"          $r   Slam        "<< endl;  
-	cout <<" 4L...........b....$....$...........J$   And		"<< endl;
-	cout <<" $F           F    $    $           4$	 Welcome		"<< endl;
-	cout <<" 4F          4F    $    4r          4P	 To		"<< endl;
-	cout <<" ^$          $     $     b          $%	 The		"<< endl;
-	cout <<"  3L       .F      $     'r        JP	 Jam		"<< endl;         
+	cout <<"    d\"      *      $      z\"     \"b      Come	"<< endl;    
+	cout <<"   $\"        b     $     4%       ^$      On		"<< endl;   
+	cout <<"  d%         *     $     P         '$      And		"<< endl;  
+	cout <<" .$          'F    $    J\"          $r      Slam   "<< endl;  
+	cout <<" 4L...........b....$....$...........J$     And		"<< endl;
+	cout <<" $F           F    $    $           4$	 Welcome	"<< endl;
+	cout <<" 4F          4F    $    4r          4P	  To  		"<< endl;
+	cout <<" ^$          $     $     b          $%	   The		"<< endl;
+	cout <<"  3L       .F      $     'r        JP	    Jam		"<< endl;         
 	cout <<"  *c       $       $      3.      z$				"<< endl;
 	cout <<"   *b     J\"       $       3r    dP                "<< endl;
 	cout <<"     ^$c  z%       $        \"c z$\"				"<< endl;
 	cout <<"       \"*$L        $        .d$\"					"<< endl;
 	cout <<"          \"*$ee..  $  ..ze$P\" 					"<< endl;
-	cout <<"              \"\"*******\"\"						"<< endl;
+	cout << "              \"\"*******\"\"						" << endl << endl;
                                                           
 
 

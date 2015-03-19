@@ -83,11 +83,11 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookISBN(isbn, booklist);
+						vector<int> searchResults = lookUpBookISBN(isbn, booklist); // shows books found
 					}
 					catch (char* error)
 					{
-						cout << error << endl;
+						cout << error << endl; // otherwise no books found
 					}
 					system("pause");
 					break;
@@ -105,11 +105,11 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookTitle(title, booklist);
+						vector<int> searchResults = lookUpBookTitle(title, booklist); // shows books found
 					}
 					catch (char* error)
 					{
-						cout << error << endl;
+						cout << error << endl; // otherwise no books found
 					}
 					system("pause");
 					break;
@@ -126,11 +126,11 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookAuthor(author, booklist);
+						vector<int> searchResults = lookUpBookAuthor(author, booklist); // shows books found
 					}
 					catch (char* error)
 					{
-						cout << error << endl;
+						cout << error << endl; // otherwise no books found
 					}
 					system("pause");
 					break;
@@ -147,11 +147,11 @@ void Inventory::menu()
 
 					try
 					{
-						vector<int> searchResults = lookUpBookPublisher(publisher, booklist);
+						vector<int> searchResults = lookUpBookPublisher(publisher, booklist); // shows books found
 					}
 					catch (char* error)
 					{
-						cout << error << endl;
+						cout << error << endl; // otherwise no books found
 					}
 					system("pause");
 					break;
@@ -636,8 +636,8 @@ void Inventory::menu()
 				case 5:
 					break;
 				default:
-cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
-system("pause");
+					cout << "You did not enter a valid option (1, 2, 3, 4, or 5). Please try again." << endl;
+					system("pause");
 				}
 			} while (choice != 5);
 			break;
